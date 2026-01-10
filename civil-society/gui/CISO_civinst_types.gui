@@ -1,0 +1,168 @@
+# COPY-PASTED FOR NOW
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+types bpmCS_civinst_types
+{
+	type bpm_state_panel_civinst_item = widget {
+		#visible = "[Not(PoliticalMovement.IsInsurrectionary)]"
+
+		block "button_size" {
+			size = { 500 60 }
+		}
+
+		button = {
+			parentanchor = center
+			size = { 100% 100% }
+			#onclick = "[InformationPanelBar.OpenPoliticalMovementPanel(PoliticalMovement.AccessSelf)]"
+			#onrightclick = "[RightClickMenuManager.ShowForPoliticalMovement(PoliticalMovement.AccessSelf)]"
+			using = default_button
+
+			hbox = {
+				layoutpolicy_horizontal = expanding
+
+				hbox = {
+					layoutpolicy_horizontal = expanding
+					margin_left = 10
+					spacing = 10
+
+					icon = {
+						size = { 40 40 }
+
+						icon = {
+							#visible = "[Not(PoliticalMovement.HasSeparateUprisingDefinition)]"
+							parentanchor = center
+							size = { 60 60 }
+							texture = "[GetInstitutionType(Concatenate(Scope.GetFlagName, '_icon')).GetIcon]"
+						}
+					}
+
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						size = { 0 20 }
+						align = nobaseline
+						elide = right
+						fontsize_min = 12
+						text = "[Localize(Concatenate(Scope.GetFlagName, '_name')))]"
+					}
+				}
+
+				expand = {}
+
+				hbox = {
+					layoutpolicy_horizontal = expanding
+					margin_right = 10
+
+					block "right_text_max_width" {
+						max_width = 160
+					}
+
+					vbox = {
+						layoutpolicy_horizontal = expanding
+						layoutpolicy_vertical = preferred
+						margin = { 0 5 }
+
+						hbox = {
+							layoutpolicy_horizontal = expanding
+
+							icon = {
+								size = { 25 25 }
+								texture = "gfx/interface/icons/generic_icons/population.dds"
+							}
+
+							block "additional_support_label" {}
+
+							expand = {}
+
+							textbox = {
+								layoutpolicy_horizontal = expanding
+								size = { 0 20 }
+								align = right|nobaseline
+								elide = right
+								fontsize_min = 12
+
+								block "support_label_text" {
+									text = "BPM_CIVINST_SUPPORT"
+								}
+							}
+						}
+
+						hbox = {
+							layoutpolicy_horizontal = expanding
+
+							# icon = {
+							# 	#visible = "[GreaterThanOrEqualTo_CFixedPoint(PoliticalMovement.GetRadicalism, '(CFixedPoint)0.5')]"
+							# 	size = { 25 25 }
+							# 	texture = "gfx/interface/icons/political_movement_icons/political_activism_red.dds"
+							# }
+
+							icon = {
+								#visible = "[Not(GreaterThanOrEqualTo_CFixedPoint(PoliticalMovement.GetRadicalism, '(CFixedPoint)0.5'))]"
+								size = { 25 25 }
+								texture = "gfx/interface/icons/political_movement_icons/political_activism.dds"
+							}
+
+							block "additional_activism_label" {}
+
+							expand = {}
+
+							textbox = {
+								layoutpolicy_horizontal = expanding
+								size = { 0 20 }
+								align = right|nobaseline
+								elide = right
+								fontsize_min = 12
+
+								block "activism_label_text" {
+									text = "BPM_CIVINST_ORGANIZATION"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	type bpm_state_panel_civinst_potential_item = widget {
+		size = { 500 40 }
+
+		visible = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_creation_trigger_sgui')).IsShown(GuiScope.SetRoot(State.MakeScope).End)]"
+		background = {
+			using = simple_frame
+		}
+		hbox = {
+			layoutpolicy_vertical = expanding
+			spacing = 5
+			minimumsize = { 480 40 }
+			hbox = {}
+			icon = {
+				size = { 32 32 }
+				texture = "[GetInstitutionType(Concatenate(Scope.GetFlagName, '_icon')).GetIcon]"
+			}   
+			textbox = {
+				size = { 420 32 }
+				block "action_name" {
+					text = "[Localize(Concatenate(Scope.GetFlagName, '_name'))]"
+				}
+				margin_right = 35
+
+				default_format = "#header"
+				block "action_tooltip" {
+					tooltip = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_creation_trigger_sgui')).IsValidTooltip(GuiScope.SetRoot(State.MakeScope).End)]"
+				}
+				using = fontsize_medium
+				#multiline = yes
+			}
+			#tooltip = "[GetScriptedGui(Concatenate(Scope.GetFlagName, 'creation_trigger_sgui')).IsValidTooltip(GuiScope.SetRoot(State.MakeScope).End)]"
+			expand = {}
+		}	
+	}
+}
