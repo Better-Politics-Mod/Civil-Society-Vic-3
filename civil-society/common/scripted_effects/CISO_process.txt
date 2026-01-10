@@ -11,24 +11,3 @@ ciso_civsoc_process_monthly = {
 ciso_civsoc_process_halfyearly = {
 
 }
-
-
-
-#==========TOOLING==========#
-ciso_civsoc_process_tooling_handle_creation = {
-	if = {
-		limit = {
-			$ci$_creation_trigger = yes
-		}
-		add_to_variable_list = {
-			name = ciso_civil_institutions
-			target = flag:$ci$
-		}
-	}
-	else = {
-		remove_list_variable = {
-			name = ciso_civil_institutions
-			target = flag:$ci$
-		}
-	} 
-}

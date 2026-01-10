@@ -1,0 +1,17 @@
+ciso_state_has_civil_society = {
+	OR = {
+		OWNER = {
+			total_population > 10000000
+		}
+		AND = {
+			is_capital = yes
+			OR = {
+				is_player = yes
+				country_rank >= rank_value:insignificant_power
+			}
+		}
+		OWNER = {
+			country_rank >= rank_value:great_power
+		}
+	}
+}
