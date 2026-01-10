@@ -51,7 +51,7 @@ types state_panel_types
 		}
 
 		blockoverride "fixed_top" {
-			bpm_tab_buttons = {
+			ciso_tab_buttons = {
 
 				# Overview
 				blockoverride "first_button" {
@@ -165,22 +165,22 @@ types state_panel_types
 
 				# Society
 				blockoverride "sixth_button" {
-					text = "BPM_SOCIETY"
+					text = "CISO_SOCIETY"
 				}
 				blockoverride "sixth_button_tooltip" {
-					tooltip = "BPM_SOCIETY"
+					tooltip = "CISO_SOCIETY"
 				}
 				blockoverride "sixth_button_click" {
-					onclick = "[InformationPanel.SelectTab('bpm_society')]"
+					onclick = "[InformationPanel.SelectTab('ciso_society')]"
 				}
 				blockoverride "sixth_button_visibility" {
-					visible = "[InformationPanel.IsTabSelected('bpm_society')]"
+					visible = "[InformationPanel.IsTabSelected('ciso_society')]"
 				}
 				blockoverride "sixth_button_visibility_checked" {
-					visible = "[Not( InformationPanel.IsTabSelected('bpm_society') )]"
+					visible = "[Not( InformationPanel.IsTabSelected('ciso_society') )]"
 				}
 				blockoverride "sixth_button_selected" {
-					text = "BPM_SOCIETY"
+					text = "CISO_SOCIETY"
 				}
 			}
 		}
@@ -212,8 +212,8 @@ types state_panel_types
 					onmousehierarchyenter = "[SetCanOpenRightClickContextMenu( ObjectsEqual(StatesPanel.GetState.GetCountry.Self, GetMetaPlayer.GetPlayedOrObservedCountry.Self) )]"
 					onmousehierarchyleave = "[SetCanOpenRightClickContextMenu( '(bool)yes' )]"
 				}
-				bpm_state_panel_society_content = {
-					visible = "[InformationPanel.IsTabSelected('bpm_society')]"
+				ciso_state_panel_society_content = {
+					visible = "[InformationPanel.IsTabSelected('ciso_society')]"
 					using = default_content_fade
 				}
 
@@ -714,7 +714,7 @@ types state_panel_types
 		}
 	}
 
-    type bpm_state_panel_society_content = flowcontainer {
+    type ciso_state_panel_society_content = flowcontainer {
 		ignoreinvisible = yes
 		direction = vertical
 		using = default_list_position
@@ -751,7 +751,7 @@ types state_panel_types
                 textbox = {
                     layoutpolicy_horizontal = expanding
                     layoutpolicy_vertical = expanding
-                    text = "BPMCS_SOCIETY_SOCIAL_ATMOSPHERE"
+                    text = "CISO_SOCIETY_SOCIAL_ATMOSPHERE"
                     using = fontsize_xl
                     align = left|nobaseline
                 }
@@ -766,7 +766,7 @@ types state_panel_types
         }
 		default_header = {
 			blockoverride "text" {
-				text = "BPM_SOCIETY_CIVINSTS"
+				text = "CISO_SOCIETY_CIVINSTS"
 			}
 			
 			# grid/list toggle
@@ -806,9 +806,9 @@ types state_panel_types
 
 			margin = { 15 0 }
 
-			datamodel = "[State.MakeScope.GetList('bpmcs_civil_institutions')]"
+			datamodel = "[State.MakeScope.GetList('ciso_civil_institutions')]"
 			item = {
-				bpm_state_panel_civinst_item = {
+				ciso_state_panel_civinst_item = {
 					datacontext = "[Scope]"
 				}
 			}
@@ -816,19 +816,19 @@ types state_panel_types
 
 		section_header_button = {
 			blockoverride "left_text" {
-				text = "BPM_SOCIETY_POTENTIAL_CIVINSTS"
+				text = "CISO_SOCIETY_POTENTIAL_CIVINSTS"
 			}
 
 			blockoverride "onclick" {
-				onclick = "[GetVariableSystem.Toggle('bpm_society_potential_civinsts_show')]"
+				onclick = "[GetVariableSystem.Toggle('ciso_society_potential_civinsts_show')]"
 			}
 			
 			blockoverride "onclick_showmore" {
-				visible = "[Not(GetVariableSystem.Exists('bpm_society_potential_civinsts_show'))]"
+				visible = "[Not(GetVariableSystem.Exists('ciso_society_potential_civinsts_show'))]"
 			}
 
 			blockoverride "onclick_showless" {
-				visible = "[GetVariableSystem.Exists('bpm_society_potential_civinsts_show')]"
+				visible = "[GetVariableSystem.Exists('ciso_society_potential_civinsts_show')]"
 			}
 		}
 		flowcontainer = {
@@ -836,11 +836,11 @@ types state_panel_types
 			layoutpolicy_horizontal = expanding
 			spacing = 5
 			margin = { 15 0 }
-			visible = "[GetVariableSystem.Exists('bpm_society_potential_civinsts_show')]"
+			visible = "[GetVariableSystem.Exists('ciso_society_potential_civinsts_show')]"
 
-			datamodel = "[GetGlobalList('bpmcs_civil_institutions')]"
+			datamodel = "[GetGlobalList('ciso_civil_institutions')]"
 			item = {
-				bpm_state_panel_civinst_potential_item = {
+				ciso_state_panel_civinst_potential_item = {
 					datacontext = "[Scope]"
 				}
 			}
@@ -852,7 +852,7 @@ types tab_bars
 {
     	
 	### REGULAR
-	type bpm_tab_buttons = hbox {
+	type ciso_tab_buttons = hbox {
 		margin = { 3 0 }
 		layoutpolicy_horizontal = expanding
 		layoutpolicy_vertical = fixed

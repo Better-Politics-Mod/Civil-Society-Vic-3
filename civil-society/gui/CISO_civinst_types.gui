@@ -9,9 +9,9 @@
 @panel_width_plus_30 = 570			# used to be 490
 @panel_width_plus_70 = 610			# used to be 530
 
-types bpmCS_civinst_types
+types CISO_civinst_types
 {
-	type bpm_state_panel_civinst_item = widget {
+	type ciso_state_panel_civinst_item = widget {
 		#visible = "[Not(PoliticalMovement.IsInsurrectionary)]"
 
 		block "button_size" {
@@ -89,7 +89,7 @@ types bpmCS_civinst_types
 								fontsize_min = 12
 
 								block "support_label_text" {
-									text = "BPM_CIVINST_SUPPORT"
+									text = "CISO_CIVINST_SUPPORT"
 								}
 							}
 						}
@@ -121,7 +121,7 @@ types bpmCS_civinst_types
 								fontsize_min = 12
 
 								block "activism_label_text" {
-									text = "BPM_CIVINST_ORGANIZATION"
+									text = "CISO_CIVINST_ORGANIZATION"
 								}
 							}
 						}
@@ -131,7 +131,7 @@ types bpmCS_civinst_types
 		}
 	}
 
-	type bpm_state_panel_civinst_potential_item = widget {
+	type ciso_state_panel_civinst_potential_item = widget {
 		size = { 500 40 }
 
 		visible = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_creation_trigger_sgui')).IsShown(GuiScope.SetRoot(State.MakeScope).End)]"

@@ -3,15 +3,15 @@
 @panel_width_minus_20 = 520
 widget = {
 	size = { 100% 100% }
-	name = "bpm_crisis_window"
+	name = "ciso_crisis_window"
 	layer = layer_ingame_menu
 	ignore_in_debug_draw = yes
-	visible = "[GetVariableSystem.Exists('bpm_civinst_show')]"
+	visible = "[GetVariableSystem.Exists('ciso_civinst_show')]"
 
 	state = {
 		name = _show
 		# Close open panel before showing this one
-		on_finish = "[GetVariableSystem.Set('bpm_crisis_tab', 'dissent')]"
+		on_finish = "[GetVariableSystem.Set('ciso_crisis_tab', 'dissent')]"
 		on_finish = "[InformationPanelBar.ClosePanel]"
 		on_finish = "[MapListPanelManager.CloseCurrentPanel]"
 	}
@@ -24,7 +24,7 @@ widget = {
 			layoutpolicy_horizontal = expanding
 			layoutpolicy_vertical = expanding
 
-			bpm_fullscreen_block_window = {
+			ciso_fullscreen_block_window = {
 				background = {
 					texture = "gfx/state_pictures/urban_european_overlord.dds"
 					alpha = 0.1
@@ -53,7 +53,7 @@ widget = {
 				}
 
 
-				visible = "[GetVariableSystem.HasValue('com_open_window', 'bpm_gui_sidebar_icon')]"
+				visible = "[GetVariableSystem.HasValue('com_open_window', 'ciso_gui_sidebar_icon')]"
 				#This is necessary to remove the overlay even if the scripted button is used.
 				#It uses the community variable to hide and show the overlay if the window is open/closed
 				blockoverride "window_header_name"
@@ -65,7 +65,7 @@ widget = {
 					name = _show
 					on_finish = "[GetVariableSystem.Set( 'com_fullscreen', 'com_fullscreen')]"
 					# Close open panel before showing this one
-					on_finish = "[GetVariableSystem.Set('bpm_crisis_tab', 'dissent')]"
+					on_finish = "[GetVariableSystem.Set('ciso_crisis_tab', 'dissent')]"
 					on_finish = "[InformationPanelBar.ClosePanel]"
 					on_finish = "[MapListPanelManager.CloseCurrentPanel]"
 				}
@@ -128,13 +128,13 @@ widget = {
 							tooltip = "Dissent"
 						}
 						blockoverride "first_button_click" {
-							onclick = "[GetVariableSystem.Set('bpm_crisis_tab', 'dissent')]"
+							onclick = "[GetVariableSystem.Set('ciso_crisis_tab', 'dissent')]"
 						}
 						blockoverride "first_button_visibility" {
-							visible = "[GetVariableSystem.HasValue('bpm_crisis_tab', 'dissent')]"
+							visible = "[GetVariableSystem.HasValue('ciso_crisis_tab', 'dissent')]"
 						}
 						blockoverride "first_button_visibility_checked" {
-							visible = "[Not(GetVariableSystem.HasValue('bpm_crisis_tab', 'dissent'))]"
+							visible = "[Not(GetVariableSystem.HasValue('ciso_crisis_tab', 'dissent'))]"
 						}
 						blockoverride "first_button_selected" {
 							text = "Dissent"
@@ -148,13 +148,13 @@ widget = {
 							tooltip = "Crises"
 						}
 						blockoverride "second_button_click" {
-							onclick = "[GetVariableSystem.Set('bpm_crisis_tab', 'crises')]"
+							onclick = "[GetVariableSystem.Set('ciso_crisis_tab', 'crises')]"
 						}
 						blockoverride "second_button_visibility" {
-							visible = "[GetVariableSystem.HasValue('bpm_crisis_tab', 'crises')]"
+							visible = "[GetVariableSystem.HasValue('ciso_crisis_tab', 'crises')]"
 						}
 						blockoverride "second_button_visibility_checked" {
-							visible = "[Not(GetVariableSystem.HasValue('bpm_crisis_tab', 'crises'))]"
+							visible = "[Not(GetVariableSystem.HasValue('ciso_crisis_tab', 'crises'))]"
 						}
 						blockoverride "second_button_selected" {
 							text = "Crises"
@@ -166,11 +166,11 @@ widget = {
 
 				blockoverride "entire_scrollarea"
 				{
-					bpm_political_situation_dissent_panel = {
-						visible = "[GetVariableSystem.HasValue('bpm_crisis_tab', 'dissent')]"
+					ciso_political_situation_dissent_panel = {
+						visible = "[GetVariableSystem.HasValue('ciso_crisis_tab', 'dissent')]"
 					}
-					bpm_political_situation_crises_panel = {
-						visible = "[GetVariableSystem.HasValue('bpm_crisis_tab', 'crises')]"
+					ciso_political_situation_crises_panel = {
+						visible = "[GetVariableSystem.HasValue('ciso_crisis_tab', 'crises')]"
 					}
 				}
 			}

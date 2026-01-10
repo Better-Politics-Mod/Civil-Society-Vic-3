@@ -1,33 +1,33 @@
 # REGISTER CIVINST 2
 
-bpmcs_civsoc_process_monthly = {
+ciso_civsoc_process_monthly = {
 	# ----- CREATION ----- #
-	bpmcs_civsoc_process_tooling_handle_creation = { ci = bpmcs_ci_manufacturing_corporations }
-	bpmcs_civsoc_process_tooling_handle_creation = { ci = bpmcs_ci_heavy_industry_unions }
-	bpmcs_civsoc_process_tooling_handle_creation = { ci = bpmcs_ci_royal_court }
-	bpmcs_civsoc_process_tooling_handle_creation = { ci = bpmcs_ci_tammany_hall }
+	ciso_civsoc_process_tooling_handle_creation = { ci = ciso_ci_manufacturing_corporations }
+	ciso_civsoc_process_tooling_handle_creation = { ci = ciso_ci_heavy_industry_unions }
+	ciso_civsoc_process_tooling_handle_creation = { ci = ciso_ci_royal_court }
+	ciso_civsoc_process_tooling_handle_creation = { ci = ciso_ci_tammany_hall }
 }
 
-bpmcs_civsoc_process_halfyearly = {
+ciso_civsoc_process_halfyearly = {
 
 }
 
 
 
 #==========TOOLING==========#
-bpmcs_civsoc_process_tooling_handle_creation = {
+ciso_civsoc_process_tooling_handle_creation = {
 	if = {
 		limit = {
 			$ci$_creation_trigger = yes
 		}
 		add_to_variable_list = {
-			name = bpmcs_civil_institutions
+			name = ciso_civil_institutions
 			target = flag:$ci$
 		}
 	}
 	else = {
 		remove_list_variable = {
-			name = bpmcs_civil_institutions
+			name = ciso_civil_institutions
 			target = flag:$ci$
 		}
 	} 
