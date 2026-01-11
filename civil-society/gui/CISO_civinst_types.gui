@@ -169,6 +169,7 @@ types CISO_civinst_types
 		### PM ITEM
 	type ciso_state_panel_measure_item = button {
 		using = expand_button_bg_dropdown
+		onclick = "[GetVariableSystem.Toggle(Concatenate(Scope.GetFlagName, '_expanded'))]"
 
 		size = { @panel_width_minus_10 55 }
 		margin = { 10 5 }
