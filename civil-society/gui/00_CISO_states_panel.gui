@@ -822,6 +822,62 @@ types state_panel_types
 				text = "CISO_SOCIETY_NEEDS"
 			}
 		}
+		flowcontainer = {
+			direction = vertical
+			flowcontainer = {
+				direction = horizontal
+				widget = {
+					minimumsize = { 30 -1 }
+				}
+				dynamicgridbox = {
+					datamodel = "[GetGlobalList('ciso_needs')]"
+
+					datamodel_wrap = 6
+					flipdirection = yes
+					spacing = 10
+					layoutpolicy_horizontal = expanding
+					layoutpolicy_vertical = expanding
+					#minimumsize = { @panel_width  -1 }
+
+					item = {
+						widget = {
+							size = { 80 100 }
+							widget = { 
+								margin = { 5 5 }
+								size = { 70 90 }
+								background = {
+									using = entry_bg_simple
+								}
+								vbox = {
+									expand = {}
+									icon = {
+										size = { 32 32 }
+										texture = "gfx/interface/icons/need_icons/welfare.dds"
+									}
+									expand = {}
+									textbox = {
+										text = "#tooltip_header Welfare#!"
+										using = fontsize_medium
+										align = hcenter|nobaseline
+										margin_top = 5
+									}
+									expand = {}
+									textbox = {
+										text = "#N #v;N 12#! / #v;N 25#!#!"
+										using = fontsize_small
+										align = hcenter|nobaseline
+										margin_top = 5
+									}
+									expand = {}
+								}
+							}
+						}
+					}
+				}
+			}
+
+		}
+
 		default_header = {
 			blockoverride "text" {
 				text = "CISO_SOCIETY_MEASURES"
@@ -835,9 +891,48 @@ types state_panel_types
 
 			margin = { 15 0 }
 
+			datamodel = "[State.MakeScope.GetList('ciso_society_measures')]"
+			item = {
+				flowcontainer = {
+					direction = vertical
+					layoutpolicy_vertical = expanding
+					ciso_state_panel_measure_item = {
+						datacontext = "[Scope]"
+					}
+					ciso_state_panel_submeasure_item = {
+						visible = "[GetVariableSystem.Exists(Concatenate(Scope.GetFlagName, '_expanded'))]"
+						datacontext = "[Scope]"
+					}
+				}
+			}
+        }
+		section_header_button = {
+			blockoverride "left_text" {
+				text = "CISO_SOCIETY_MEASURE_POTENTIAL_MEASURE"
+			}
+
+			blockoverride "onclick" {
+				onclick = "[GetVariableSystem.Toggle('ciso_society_potential_measures_show')]"
+			}
+			
+			blockoverride "onclick_showmore" {
+				visible = "[Not(GetVariableSystem.Exists('ciso_society_potential_measures_show'))]"
+			}
+
+			blockoverride "onclick_showless" {
+				visible = "[GetVariableSystem.Exists('ciso_society_potential_measures_show')]"
+			}
+		}
+		flowcontainer = {
+            direction = vertical
+			layoutpolicy_horizontal = expanding
+			spacing = 5
+			margin = { 15 0 }
+			visible = "[GetVariableSystem.Exists('ciso_society_potential_measures_show')]"
+
 			datamodel = "[GetGlobalList('ciso_society_measures')]"
 			item = {
-				ciso_state_panel_measure_item = {
+				ciso_state_panel_measure_potential_item = {
 					datacontext = "[Scope]"
 				}
 			}

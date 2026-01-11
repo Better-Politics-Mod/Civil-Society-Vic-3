@@ -5,10 +5,10 @@ ciso_state_has_civil_society = {
 		}
 		AND = {
 			is_capital = yes
-			OR = {
+			OWNER = { OR = {
 				is_player = yes
 				country_rank >= rank_value:insignificant_power
-			}
+			} }
 		}
 		OWNER = {
 			country_rank >= rank_value:great_power

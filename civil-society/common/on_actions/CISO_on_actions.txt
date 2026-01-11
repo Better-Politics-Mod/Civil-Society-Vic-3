@@ -41,14 +41,9 @@ ciso_on_halfyearly = {
 ciso_on_game_started = {
 	effect = {
 		ciso_init_civsoc_global = yes
+		ciso_init_measures_global = yes
 		every_country = {
 			ciso_init_civsoc = yes
-		}
-
-
-		add_to_global_variable_list = {
-			name = ciso_society_measures
-			target = flag:ciso_measure_test_measure
 		}
 	}
 }

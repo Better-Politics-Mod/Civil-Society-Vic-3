@@ -1,0 +1,215 @@
+# COPY-PASTED FOR NOW
+@panel_width_minus_10 = 530			# used to be 450
+@panel_width = 540  				# used to be 460
+@panel_width_half = 270				# used to be 230
+@panel_width_plus_10 = 550  		# used to be 470
+@panel_width_plus_14 = 554			# used to be 474
+@panel_width_plus_14_half = 277		# used to be 237
+@panel_width_plus_20 = 560			# used to be 480
+@panel_width_plus_30 = 570			# used to be 490
+@panel_width_plus_70 = 610			# used to be 530
+
+types CISO_measures_types
+{
+	type ciso_state_panel_measure_potential_item = widget {
+		size = { 500 40 }
+
+		visible = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_conditions_effect')).IsShown(GuiScope.SetRoot(State.MakeScope).End)]"
+		background = {
+			using = simple_frame
+		}
+		hbox = {
+			layoutpolicy_vertical = expanding
+			spacing = 5
+			minimumsize = { 480 40 }
+            margin = { 10 0 }
+			hbox = {}
+			icon = {
+				size = { 32 32 }
+				texture = "[GetInstitutionType(Concatenate(Scope.GetFlagName, '_icon')).GetIcon]"
+			}   
+			textbox = {
+				size = { 240 32 }
+				block "action_name" {
+					text = "[Localize(Concatenate(Scope.GetFlagName, '_name'))]"
+				}
+				margin_right = 35
+
+				default_format = "#header"
+				block "action_tooltip" {
+					tooltip = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_conditions_effect')).IsValidTooltip(GuiScope.SetRoot(State.MakeScope).End)]"
+				}
+				using = fontsize_medium
+				#multiline = yes
+			}
+			#tooltip = "[GetScriptedGui(Concatenate(Scope.GetFlagName, 'creation_trigger_sgui')).IsValidTooltip(GuiScope.SetRoot(State.MakeScope).End)]"
+			expand = {}
+
+            button = {
+                using = default_button
+                size = { 100 25 }
+                text = "CISO_SOCIETY_MEASURE_INITIAL_INVESTMENT"
+                enabled = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_conditions_effect')).IsValid(GuiScope.SetRoot(State.MakeScope).End)]"
+                onclick = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_conditions_effect')).Execute(GuiScope.SetRoot(State.MakeScope).End)]"
+            }
+		}	
+	}
+		### PM ITEM
+	type ciso_state_panel_measure_item = button {
+		using = expand_button_bg_dropdown
+		onclick = "[GetVariableSystem.Toggle(Concatenate(Scope.GetFlagName, '_expanded'))]"
+
+		size = { @panel_width_minus_10 55 }
+		margin = { 10 5 }
+		datacontext = "[Scope]"
+        hbox = {
+            layoutpolicy_horizontal = expanding
+            layoutpolicy_vertical = expanding
+            spacing = 10
+            margin = { 10 5 }
+
+            button = {
+                using = expand_arrow
+                size = { 36 36 }
+                block "onclick_showmore" {
+                    onclick = "[GetVariableSystem.Toggle(Concatenate(Scope.GetFlagName, '_expanded'))]"
+                }				
+                visible = "[Not(GetVariableSystem.Exists(Concatenate(Scope.GetFlagName, '_expanded')))]"
+            }
+            button = {
+                using = expand_arrow_expanded
+                size = { 36 36 }
+                block "onclick_showless" {
+                    onclick = "[GetVariableSystem.Toggle(Concatenate(Scope.GetFlagName, '_expanded'))]"
+                }
+                visible = "[GetVariableSystem.Exists(Concatenate(Scope.GetFlagName, '_expanded'))]"
+            }
+            icon = {
+                size = { 42 42 }
+                texture = "[GetInstitutionType(Concatenate(Scope.GetFlagName, '_icon')).GetIcon]"
+            }
+
+            vbox = {
+                ### DOWNSIZE / EXPAND
+                ciso_measure_investment_control = {
+                    blockoverride "controller_size" {
+                        size = { 115 35 }
+                    }
+                }
+            }
+
+            hbox = {
+                minimumsize = { 4 -1 }
+            }
+            ### STATE NAME AND BUTTON
+            block "state_name_button" {
+                button = {
+                    size = { 240 30 }
+                    using = default_button
+                    using = tooltip_ne
+
+                    textbox = {
+                        size = { 80% 100% }
+                        margin = { 10 0 }
+                        text = "[Localize(Concatenate(Scope.GetFlagName, '_name'))]"
+                        parentanchor = vcenter
+                        align = nobaseline
+                        elide =  right
+                    }
+                }
+            }
+            expand = {}
+        }
+
+	}
+
+    type ciso_state_panel_submeasure_item = widget {
+        background = {
+            using = dropdown_background
+        }
+        visible = "[GetVariableSystem.Exists(Concatenate(Scope.GetFlagName, '_expanded'))]"
+        size = { 525 240 }
+        textbox = {
+            using = tooltip_above
+            fontsize_min = 12
+            align = nobaseline
+            elide = right
+            text = "[Localize(Concatenate(Scope.GetFlagName, '_desc'))]"
+            margin_left = 10
+            margin_right = 10
+            maximumsize = { 525 240 }
+            multiline = yes
+            autoresize = yes
+        }
+    }
+
+	type ciso_measure_investment_control = container {
+		minimumsize = { 125 35 }
+
+		#using = building_size_tooltip_with_ownership
+
+		background = {
+			using = entry_bg
+			margin = { -3 0 }
+		}
+
+		margin_widget = {
+			block "controller_size" {
+				size = { 150 35 }
+			}
+			margin_left = 35
+			margin_right = 35
+
+		}
+
+		widget = {
+			parentanchor = hcenter|vcenter
+			size = {10 12} #ensure text is snugly encapsulated vertically
+
+			textbox = {
+				parentanchor = center|vcenter
+				using = tooltip_above
+				elide = right
+				fontsize_min = 12
+				autoresize = yes
+				align = nobaseline
+				text = "@bur![State.MakeScope.ScriptValue(Concatenate(Scope.GetFlagName, '_investment'))|D]"
+			}
+		}
+
+		### DOWNSIZE
+		button_icon_minus_action = {
+			parentanchor = vcenter
+			# tooltip = "[Building.GetDownsizeTooltip]"
+			# onclick = "[Execute( Building.Downsize )]"
+			# enabled = "[IsValid( Building.Downsize )]"
+			using = tooltip_below
+
+			block "button_size" {
+				size = { 28 28 }
+			}
+            click_modifiers = {
+                ondefault = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_decrement_effect')).Execute(GuiScope.SetRoot(State.MakeScope).End)]"
+                onshift = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_decrement_alot_effect')).Execute(GuiScope.SetRoot(State.MakeScope).End)]"
+                onctrl = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_decrement_very_alot_effect')).Execute(GuiScope.SetRoot(State.MakeScope).End)]"
+                onalt = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_decrement_alittle_effect')).Execute(GuiScope.SetRoot(State.MakeScope).End)]"
+            }
+
+		}
+
+		button_icon_plus_action = { #regular expansion
+			# visible = "[Building.GetState.GetOwner.IsLocalPlayer]"
+
+			size = { 28 28 }
+			parentanchor = right|vcenter
+            click_modifiers = {
+                ondefault = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_increment_effect')).Execute(GuiScope.SetRoot(State.MakeScope).End)]"
+                onshift = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_increment_alot_effect')).Execute(GuiScope.SetRoot(State.MakeScope).End)]"
+                onctrl = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_increment_very_alot_effect')).Execute(GuiScope.SetRoot(State.MakeScope).End)]"
+                onalt = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_increment_alittle_effect')).Execute(GuiScope.SetRoot(State.MakeScope).End)]"
+            }
+			# onclick = "[Execute( Building.QueueConstruction )]"
+			# enabled = "[IsValid( Building.QueueConstruction )]"
+		}
+	}
+}
