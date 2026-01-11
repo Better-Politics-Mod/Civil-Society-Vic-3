@@ -59,7 +59,7 @@ types CISO_measures_types
 		using = expand_button_bg_dropdown
 		onclick = "[GetVariableSystem.Toggle(Concatenate(Scope.GetFlagName, '_expanded'))]"
 
-		size = { @panel_width_minus_10 55 }
+		size = { 500 55 }
 		margin = { 10 5 }
 		datacontext = "[Scope]"
         hbox = {
