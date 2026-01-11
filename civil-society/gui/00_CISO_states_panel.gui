@@ -768,35 +768,6 @@ types state_panel_types
 			blockoverride "text" {
 				text = "CISO_SOCIETY_CIVINSTS"
 			}
-			
-			# grid/list toggle
-			button_icon_round_toggle = {
-				size = { 29 29 }
-				parentanchor = right|vcenter
-				position = { -10 0 }
-				
-				blockoverride "on_click" {
-					onclick = "[GetVariableSystem.Toggle('buildings_list')]"
-				}
-				blockoverride "view_1" {
-					visible = "[Not(GetVariableSystem.Exists('buildings_list'))]"
-				}
-				blockoverride "view_2" {
-					visible = "[GetVariableSystem.Exists('buildings_list')]"
-				}
-				blockoverride "icon_1" {
-					texture = "gfx/interface/buttons/button_icons/grid.dds"
-				}
-				blockoverride "icon_2" {
-					texture = "gfx/interface/buttons/button_icons/list.dds"
-				}
-				blockoverride "tooltip_1" {
-					tooltip = "TOOLTIP_VIEW_LIST"
-				}
-				blockoverride "tooltip_2" {
-					tooltip = "TOOLTIP_VIEW_GRID"
-				}
-			}
 		}
 
         flowcontainer = {
@@ -841,6 +812,32 @@ types state_panel_types
 			datamodel = "[GetGlobalList('ciso_civil_institutions')]"
 			item = {
 				ciso_state_panel_civinst_potential_item = {
+					datacontext = "[Scope]"
+				}
+			}
+        }
+
+		default_header = {
+			blockoverride "text" {
+				text = "CISO_SOCIETY_NEEDS"
+			}
+		}
+		default_header = {
+			blockoverride "text" {
+				text = "CISO_SOCIETY_MEASURES"
+			}
+		}
+
+        flowcontainer = {
+            direction = vertical
+			layoutpolicy_horizontal = expanding
+			spacing = 5
+
+			margin = { 15 0 }
+
+			datamodel = "[GetGlobalList('ciso_society_measures')]"
+			item = {
+				ciso_state_panel_measure_item = {
 					datacontext = "[Scope]"
 				}
 			}

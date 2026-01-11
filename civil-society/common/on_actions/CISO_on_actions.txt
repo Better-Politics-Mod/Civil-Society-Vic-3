@@ -44,5 +44,11 @@ ciso_on_game_started = {
 		every_country = {
 			ciso_init_civsoc = yes
 		}
+
+
+		add_to_global_variable_list = {
+			name = ciso_society_measures
+			target = flag:ciso_measure_test_measure
+		}
 	}
 }

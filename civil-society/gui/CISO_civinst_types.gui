@@ -148,7 +148,7 @@ types CISO_civinst_types
 				texture = "[GetInstitutionType(Concatenate(Scope.GetFlagName, '_icon')).GetIcon]"
 			}   
 			textbox = {
-				size = { 420 32 }
+				size = { 360 32 }
 				block "action_name" {
 					text = "[Localize(Concatenate(Scope.GetFlagName, '_name'))]"
 				}
@@ -164,5 +164,158 @@ types CISO_civinst_types
 			#tooltip = "[GetScriptedGui(Concatenate(Scope.GetFlagName, 'creation_trigger_sgui')).IsValidTooltip(GuiScope.SetRoot(State.MakeScope).End)]"
 			expand = {}
 		}	
+	}
+
+		### PM ITEM
+	type ciso_state_panel_measure_item = button {
+		using = expand_button_bg_dropdown
+
+		size = { @panel_width_minus_10 55 }
+		margin = { 10 5 }
+		datacontext = "[Scope]"
+		vbox = {
+			layoutpolicy_horizontal = expanding
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				layoutpolicy_vertical = expanding
+				spacing = 10
+				margin = { 10 5 }
+
+				button = {
+					using = expand_arrow
+					size = { 36 36 }
+					block "onclick_showmore" {
+						onclick = "[GetVariableSystem.Toggle(Concatenate(Scope.GetFlagName, '_expanded'))]"
+					}				
+					visible = "[Not(GetVariableSystem.Exists(Concatenate(Scope.GetFlagName, '_expanded')))]"
+				}
+				button = {
+					using = expand_arrow_expanded
+					size = { 36 36 }
+					block "onclick_showless" {
+						onclick = "[GetVariableSystem.Toggle(Concatenate(Scope.GetFlagName, '_expanded'))]"
+					}
+					visible = "[GetVariableSystem.Exists(Concatenate(Scope.GetFlagName, '_expanded'))]"
+				}
+				icon = {
+					size = { 42 42 }
+					texture = "[GetInstitutionType(Concatenate(Scope.GetFlagName, '_icon')).GetIcon]"
+				}
+
+				vbox = {
+					### DOWNSIZE / EXPAND
+					ciso_measure_investment_control = {
+						blockoverride "controller_size" {
+							size = { 115 35 }
+						}
+					}
+				}
+
+				hbox = {
+					minimumsize = { 4 -1 }
+				}
+				### STATE NAME AND BUTTON
+				block "state_name_button" {
+					button = {
+						size = { 240 30 }
+						using = default_button
+						using = tooltip_ne
+
+						textbox = {
+							size = { 80% 100% }
+							margin = { 10 0 }
+							text = "[Localize(Concatenate(Scope.GetFlagName, '_name'))]"
+							parentanchor = vcenter
+							align = nobaseline
+							elide =  right
+						}
+					}
+				}
+				expand = {}
+			}
+			hbox = {
+				layoutpolicy_horizontal = expanding
+				margin = { 2 4 }
+				spacing = 5
+				widget = {
+					background = {
+						using = dropdown_background
+					}
+					visible = "[GetVariableSystem.Exists(Concatenate(Scope.GetFlagName, '_expanded'))]"
+					size = { 525 240 }
+					textbox = {
+						using = tooltip_above
+						fontsize_min = 12
+						align = nobaseline
+						elide = right
+						text = "[Localize(Concatenate(Scope.GetFlagName, '_desc'))]"
+						margin_left = 10
+						margin_right = 10
+						maximumsize = { 525 240 }
+						multiline = yes
+						autoresize = yes
+					}
+				}
+				expand = {}
+			}
+		}
+	}
+
+	type ciso_measure_investment_control = container {
+		minimumsize = { 125 35 }
+
+		#using = building_size_tooltip_with_ownership
+
+		background = {
+			using = entry_bg
+			margin = { -3 0 }
+		}
+
+		margin_widget = {
+			block "controller_size" {
+				size = { 150 35 }
+			}
+			margin_left = 35
+			margin_right = 35
+
+		}
+
+		widget = {
+			parentanchor = hcenter|vcenter
+			size = {10 12} #ensure text is snugly encapsulated vertically
+
+			textbox = {
+				parentanchor = center|vcenter
+				using = tooltip_above
+				elide = right
+				fontsize_min = 12
+				autoresize = yes
+				align = nobaseline
+				text = "@bur![GetPlayer.GetWeeklyFixedExpenses|D]"
+			}
+		}
+
+		### DOWNSIZE
+		button_icon_minus_action = {
+			parentanchor = vcenter
+			# tooltip = "[Building.GetDownsizeTooltip]"
+			# onclick = "[Execute( Building.Downsize )]"
+			# enabled = "[IsValid( Building.Downsize )]"
+			using = tooltip_below
+			
+			block "button_size" {
+				size = { 28 28 }
+			}
+		}
+
+		button_icon_plus_action = { #regular expansion
+			# visible = "[Building.GetState.GetOwner.IsLocalPlayer]"
+
+			size = { 28 28 }
+			parentanchor = right|vcenter
+
+			# onclick = "[Execute( Building.QueueConstruction )]"
+			# enabled = "[IsValid( Building.QueueConstruction )]"
+		}
 	}
 }

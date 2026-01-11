@@ -1,0 +1,3 @@
+ciso_measure_test_measure_icon = {
+	icon = "gfx/interface/icons/civil_institution_icons/tammany_hall.dds"
+}

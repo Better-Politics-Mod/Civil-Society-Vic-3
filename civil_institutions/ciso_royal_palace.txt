@@ -1,0 +1,17 @@
+ciso_ci_royal_court = {
+	icon = "gfx/interface/icons/civil_institution_icons/royal_court.dds"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = "ciso_ci_royal_court_creation_trigger_is_royal_capital"
+			is_capital = yes
+			owner = { 
+				has_law = law_type:law_monarchy
+			}
+		}
+	}
+}

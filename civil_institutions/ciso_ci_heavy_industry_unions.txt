@@ -1,0 +1,24 @@
+ciso_ci_heavy_industry_unions = {
+	icon = "gfx/interface/icons/civil_institution_icons/heavy_industry_unions.dds"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = "ciso_ci_heavy_industry_unions_creation_trigger_heavy_industry"
+			any_scope_building = {
+				level > 5
+				is_building_group = bg_heavy_industry
+			}
+		}
+		custom_tooltip = {
+			text = "ciso_ci_heavy_industry_unions_creation_trigger_machinists"
+			pop_type_percent_state = {
+				target = pop_type:machinists
+				value >= 0.025
+			}
+		}
+	}
+}

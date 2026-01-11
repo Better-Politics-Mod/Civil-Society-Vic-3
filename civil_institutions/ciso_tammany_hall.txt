@@ -1,25 +1,14 @@
-ciso_ci_manufacturing_corporations = {
-	icon = "gfx/interface/icons/civil_institution_icons/manufacturing_corporations.dds"
+ciso_ci_tammany_hall = {
+	icon = "gfx/interface/icons/civil_institution_icons/tammany_hall.dds"
 
 	visible = {
-		always = yes
+		state_region = s:STATE_NEW_YORK
 	}
 
 	possible = {
 		custom_tooltip = {
-			text = "ciso_ci_manufacturing_corporations_creation_trigger_manufacturing"
-			any_scope_building = {
-				level > 10
-				is_building_group = bg_manufacturing
-				private_ownership_fraction > 0.2
-			}
-		}
-		custom_tooltip = {
-			text = "ciso_ci_manufacturing_corporations_creation_trigger_capitalist_ratio"
-			pop_type_percent_state = {
-				target = pop_type:capitalists
-				value >= 0.0025
-			}
+			text = "ciso_ci_tammany_hall_creation_trigger_is_newyork"
+			state_region = s:STATE_NEW_YORK
 		}
 	}
 }
