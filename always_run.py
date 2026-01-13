@@ -502,6 +502,9 @@ class CivInstHandler:
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
             possible = ParadoxHelper.get_script_block(tree, "possible")
+            visible = ParadoxHelper.get_script_block(tree, "visible")
+
+            possible.extend(visible)
 
             triggers_file[f"{root}_creation_trigger"] = possible
         
@@ -741,6 +744,149 @@ class MeasureHandler:
     def __init__(self, files):
         self.parse_and_update(files)
 
+class Needs:
+    def handle_institution_icon(self):
+        trees = self.trees
+        # each tree should have a name as root
+        # and immediately inside it an "icon" key
+        institution_icon_file = {}
+        
+
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            icon = tree[root].get("icon", None)
+            if icon:
+                institution_icon_file[f"{root}_icon"] = [{
+                    "icon": f"\"{icon}\""
+                }]
+
+        return institution_icon_file
+
+    def handle_setup(self):
+        trees = self.trees
+        init_global = []
+        
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            init_global.append({
+                "add_to_global_variable_list": [
+                    {"name": "ciso_needs" },
+                    {"target": f"flag:{root}"}
+                ]
+            })
+
+        return {"ciso_init_needs_global": init_global}
+
+    def handle_process(self):
+        trees = self.trees
+        process_file_monthly = []
+
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            minv = tree[root].get("minimum", "999")
+            process_file_monthly.append({
+                "ciso_need_process_tooling_handle_needs": [
+                    {"ne": root },
+                    {"min":  minv }
+                ]
+            })
+
+        return {
+            "ciso_needs_process_monthly": process_file_monthly
+        }
+
+    def handle_script_value(self):
+        trees = self.trees
+        script_value_file = {}
+
+        
+        for tree in trees:
+            required_value = ParadoxHelper.get_script_block(tree, "required_value")
+            root = ParadoxHelper.get_root(tree)
+            script_value_file[f"{root}_fp"] = [{
+                "value": f"modifier:state_{root}_fp"
+            }]
+            script_value_file[f"{root}_rfp"] = required_value
+
+        return script_value_file
+
+    def handle_sgui(self):
+        trees = self.trees
+        sgui_file = {}
+        
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            visible = ParadoxHelper.get_script_block(tree, "visible")
+            
+            sgui_file[f"{root}_conditions_effect"] = [
+                {"scope": "state"},
+                {
+                    "is_shown": [{
+                        "NOT": {
+                            "is_target_in_variable_list": [
+                                {"name": "ciso_needs"},
+                                {"target": f"flag:{root}"}
+                            ]
+                        }
+                    }] + visible
+                }
+            ]
+        
+        return sgui_file
+
+    def handle_modtype(self):
+        trees = self.trees
+        modtype_file = {}
+
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            modtype_file[f"state_{root}_fp"] = [
+                {"decimals": "0"},
+                {"color": "good"}
+            ]
+
+        return modtype_file
+
+    def parse_and_update(self, files):
+        self.trees = [ParadoxHelper.parse_file(file) for file in files]
+
+        # institutions
+        institution_icon_folder = commons / "institutions"
+        institution_icon_file = self.handle_institution_icon()
+
+        # setup
+        setup_folder = commons / "scripted_effects"
+        setup_file = self.handle_setup()
+
+        # sgui 
+        sgui_folder = commons / "scripted_guis"
+        sgui_file = self.handle_sgui()
+
+        # script value
+        script_value_folder = commons / "script_values"
+        script_value_file = self.handle_script_value()
+        
+        # modtype
+        modtype_folder = commons / "modifier_type_definitions"
+        modtype_file = self.handle_modtype()
+
+        # process 
+        process_folder = commons / "scripted_effects"
+        process_file = self.handle_process()
+
+        ParadoxHelper.write_handled_files(
+            [institution_icon_folder, institution_icon_file, "CISO_needs.txt"],
+            [setup_folder, setup_file, "CISO_setup_needs.txt"], 
+            [sgui_folder, sgui_file, "CISO_sguis_needs.txt"],
+            [script_value_folder, script_value_file, "CISO_needs_values.txt"],
+            [modtype_folder, modtype_file, "CISO_needs_modtypes.txt"],
+            [process_folder, process_file, "CISO_process_needs.txt"]
+        )
+
+    def __init__(self, files):
+        self.parse_and_update(files)
+
+
 
 
 
@@ -748,9 +894,13 @@ class MeasureHandler:
 if __name__ == "__main__":
     ciso_common = script_directory / "ciso_common"
     civinsts = ciso_common / "civil_institutions"
-    measures = ciso_common / "measures"
     files = list(civinsts.glob("*.txt"))
     CivInstHandler(files)
 
+    measures = ciso_common / "measures"
     measure_files = list(measures.glob("*.txt"))
     MeasureHandler(measure_files)
+
+    needs = ciso_common / "needs"
+    need_files = list(needs.glob("*.txt"))
+    Needs(need_files)

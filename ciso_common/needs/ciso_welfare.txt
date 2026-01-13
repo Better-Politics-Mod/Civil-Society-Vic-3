@@ -1,0 +1,14 @@
+ciso_ne_welfare = {
+	icon = "gfx/interface/icons/need_icons/welfare.dds"
+
+	possible = {
+		always = yes
+	}
+
+	required_value = {
+		value = state_population
+		divide = 400000
+	}
+
+	minimum = 5
+}

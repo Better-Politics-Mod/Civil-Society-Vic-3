@@ -6,9 +6,6 @@ ciso_ci_tammany_hall = {
 	}
 
 	possible = {
-		custom_tooltip = {
-			text = "ciso_ci_tammany_hall_creation_trigger_is_newyork"
-			state_region = s:STATE_NEW_YORK
-		}
+		always = yes
 	}
 }

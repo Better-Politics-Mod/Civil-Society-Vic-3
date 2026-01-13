@@ -23,6 +23,25 @@ ciso_init_civsoc = {
 			ciso_state_has_civil_society = yes
 		}
 		ciso_civsoc_process_monthly = yes
+		ciso_needs_process_monthly = yes
 		# do something
+	}
+}
+
+ciso_need_process_tooling_handle_needs = {
+	if = {
+		limit = {
+			$ne$_rfp >= $min$
+		}
+		add_to_variable_list = {
+			name = ciso_needs
+			target = flag:$ne$
+		}
+	}
+	else = {
+		remove_list_variable = {
+			name = ciso_needs
+			target = flag:$ne$
+		}
 	}
 }
