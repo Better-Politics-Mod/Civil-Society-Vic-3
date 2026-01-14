@@ -45,3 +45,54 @@ ciso_need_process_tooling_handle_needs = {
 		}
 	}
 }
+
+
+#### THE BULK ####
+
+ciso_calculate_allocation = {
+	save_scope_as = state
+	
+
+	# First we need to calculate λ
+	set_local_variable = { 
+		name = avg_sqrt_w
+		# TODO GEN
+		value = ciso_$ci$_avg_sqrt_weight
+	}
+
+	set_local_variable = {
+		name = avg_shift
+		# TODO GEN
+		value = ciso_avg_already_allocated
+	}
+	# lambda = (B * avg_sqrt_w / (M / n + avg_shift)) ** 2
+	set_local_variable = {
+		name = lambda
+		value = {
+			value = {
+				value = $B$
+				multiply = local_var:avg_sqrt_w
+				divide = {
+					value = {
+						# TODO GEN
+						value = ciso_$ci$_social_impact
+						# TODO GEN
+						divide = ciso_$ci$_num_measures
+					}
+					add = local_var:avg_shift
+				}
+			}
+			multiply = {
+				value = $B$
+				multiply = local_var:avg_sqrt_w
+				divide = {
+					value = {
+						value = ciso_$ci$_social_impact
+						divide = ciso_$ci$_num_measures
+					}
+					add = local_var:avg_shift
+				}
+			}
+		}
+	}
+}
