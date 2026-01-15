@@ -5,7 +5,7 @@ if = {
 	set_local_variable = {
 		name = ciso_raw_alloc_scale
 		value = {
-			value = ciso_$ci$_social_impact
+			value = $ci$_social_impact
 			divide = local_var:ciso_raw_alloc_total
 		}
 	}

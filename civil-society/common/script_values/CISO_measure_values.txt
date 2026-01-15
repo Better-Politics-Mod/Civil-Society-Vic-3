@@ -12,3 +12,10 @@ ciso_ms_soup_kitchen_investment = {
 		value = 0
 	}
 }
+ciso_avg_already_allocated = {
+	value = 0
+	add = ciso_ms_soup_kitchen_investment
+	divide = {
+		value = 1
+	}
+}

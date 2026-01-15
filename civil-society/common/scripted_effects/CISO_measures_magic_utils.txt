@@ -13,7 +13,7 @@ ciso_do_every_measure_with_ci = {
 		name = ciso_raw_alloc_ciso_ms_soup_kitchen
 		value = {
 			value = {
-				value = ciso_$ci$_weight
+				value = $ci$_weight
 				divide = local_var:lambda
 				round_to = 0.1
 				pow = 0.5
@@ -34,8 +34,8 @@ ciso_do_every_measure_with_ci = {
 	change_variable = {
 		name = ciso_ciso_ms_soup_kitchen_ci_investment_var
 		add = {
-			value = var:ciso_ciso_ms_soup_kitchen_ci_investment_var
-			add = local_var:ciso_raw_alloc_ciso_ms_soup_kitchen
+			value = local_var:ciso_raw_alloc_ciso_ms_soup_kitchen
+			multiply = local_var:ciso_raw_alloc_scale
 		}
 	}
 }

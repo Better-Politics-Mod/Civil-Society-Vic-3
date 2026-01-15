@@ -56,13 +56,11 @@ ciso_calculate_allocation = {
 	# First we need to calculate λ
 	set_local_variable = { 
 		name = avg_sqrt_w
-		# TODO GEN
-		value = ciso_$ci$_avg_sqrt_weight
+		value = $ci$_avg_sqrt_weight
 	}
 
 	set_local_variable = {
 		name = avg_shift
-		# TODO GEN
 		value = ciso_avg_already_allocated
 	}
 	# lambda = (B * avg_sqrt_w / (M / n + avg_shift)) ** 2
@@ -74,10 +72,8 @@ ciso_calculate_allocation = {
 				multiply = local_var:avg_sqrt_w
 				divide = {
 					value = {
-						# TODO GEN
-						value = ciso_$ci$_social_impact
-						# TODO GEN
-						divide = ciso_$ci$_num_measures
+						value = $ci$_social_impact
+						divide = $ci$_num_measures
 					}
 					add = local_var:avg_shift
 				}
@@ -87,39 +83,14 @@ ciso_calculate_allocation = {
 				multiply = local_var:avg_sqrt_w
 				divide = {
 					value = {
-						# TODO GEN
-						value = ciso_$ci$_social_impact
-						# TODO GEN
-						divide = ciso_$ci$_num_measures
+						value = $ci$_social_impact
+						divide = $ci$_num_measures
 					}
 					add = local_var:avg_shift
 				}
 			}
 		}
 	}
-	# TODO: GEN ciso_$ci$_weight
-	ciso_do_every_measure_with_ci = { ci = $ci$ } #{
-		# ci = $ci$
-		# # scope = state
-		# # $me$ = measure key
-		# # scope:measure = flag:$me$
 
-		# # TODO: Gen ciso_$ci$_me_weight
-		# do = "
-		# 	set_local_variable = {
-		# 		name = ciso_raw_alloc
-		# 		value = {
-		# 			value = {
-		# 				ciso_$ci$_me_weight
-		# 				divide = local_var:lambda
-		# 				round_to = 0.1
-		# 				pow = 0.5
-		# 			}
-		# 			multiply = ciso_B
-		# 			subtract = ciso_B
-		# 			subtract = var:ciso_$me$_ci_investment_var
-		# 		}
-		# 	}
-		# "
-	#}
+	ciso_do_every_measure_with_ci = { ci = $ci$ } #{
 }
