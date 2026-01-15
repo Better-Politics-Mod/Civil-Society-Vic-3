@@ -21,4 +21,14 @@ ciso_ci_heavy_industry_unions = {
 			}
 		}
 	}
+
+	measure_weights = {
+		value = 0
+		if = {
+			limit = {
+				scope:measure = flag:ciso_ms_union_hall
+			}
+			add = 1
+		}
+	}
 }

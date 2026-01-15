@@ -8,4 +8,14 @@ ciso_ci_tammany_hall = {
 	possible = {
 		always = yes
 	}
+
+	measure_weights = {
+		value = 0
+		if = {
+			limit = {
+				scope:measure = flag:ciso_ms_soup_kitchen
+			}
+			add = 1
+		}
+	}
 }

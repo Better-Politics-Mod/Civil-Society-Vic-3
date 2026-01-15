@@ -4,6 +4,26 @@
 ciso_init_measures_global = {
 	add_to_global_variable_list = {
 		name = ciso_society_measures
+		target = flag:ciso_ms_insurance
+	}
+	add_to_global_variable_list = {
+		name = ciso_society_measures
 		target = flag:ciso_ms_soup_kitchen
+	}
+	add_to_global_variable_list = {
+		name = ciso_society_measures
+		target = flag:ciso_ms_library
+	}
+	add_to_global_variable_list = {
+		name = ciso_society_measures
+		target = flag:ciso_ms_schooling
+	}
+	add_to_global_variable_list = {
+		name = ciso_society_measures
+		target = flag:ciso_ms_union_hall
+	}
+	add_to_global_variable_list = {
+		name = ciso_society_measures
+		target = flag:ciso_ms_health_center
 	}
 }

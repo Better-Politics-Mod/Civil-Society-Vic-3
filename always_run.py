@@ -79,13 +79,45 @@ class ParadoxParser:
             char = self.current_char()
             
             # Stop at structural characters or whitespace
-            if char in '{}=<>#\n\r\t ':
+            if char in '{}=#\n\r\t ':
                 break
             
             result.append(char)
             self.advance()
         
         return ''.join(result)
+    
+    def parse_comparison_or_value(self):
+        """Parse a comparison expression (a > b) or a simple value."""
+        # Save position in case we need to backtrack
+        start_pos = self.pos
+        
+        # Parse first part
+        first = self.parse_identifier()
+        
+        self.skip_whitespace()
+        
+        # Check if followed by comparison operator
+        char = self.current_char()
+        if char in '<>':
+            operator = char
+            self.advance()
+            
+            # Check for compound operators (<=, >=, etc.)
+            if self.current_char() == '=':
+                operator += self.current_char()
+                self.advance()
+            
+            self.skip_whitespace()
+            
+            # Parse right side
+            second = self.parse_identifier()
+            
+            # Return as a comparison expression string
+            return f"{first}{operator}{second}"
+        
+        # Not a comparison, just return the first part
+        return first
     
     def parse_value(self):
         """Parse a single value (string, number, identifier, or object)."""
@@ -104,8 +136,8 @@ class ParadoxParser:
         if char == '{':
             return self.parse_object()
         
-        # Unquoted identifier or number
-        return self.parse_identifier()
+        # Unquoted identifier, number, or comparison expression
+        return self.parse_comparison_or_value()
     
     def parse_object(self):
         """Parse an object (dictionary or list)."""
@@ -129,24 +161,23 @@ class ParadoxParser:
             if self.current_char() is None:
                 break
             
-            # Parse key
-            key = self.parse_value()
+            # Parse key (might be a comparison expression)
+            key = self.parse_comparison_or_value()
             
             if key is None:
                 break
             
             self.skip_whitespace()
             
-            # Check for assignment operators
+            # Check for assignment operator (only =)
             char = self.current_char()
             
-            if char in '=<>':
-                # Handle operators like =, ==, <=, >=, etc.
+            if char == '=':
                 operator = char
                 self.advance()
                 
-                # Check for compound operators
-                if self.current_char() in '=<>':
+                # Check for compound operators (==)
+                if self.current_char() == '=':
                     operator += self.current_char()
                     self.advance()
                 
@@ -159,7 +190,7 @@ class ParadoxParser:
                 items.append({'key': key, 'value': value, 'has_operator': True})
             
             else:
-                # No operator - just a standalone key
+                # No operator - just a standalone key (or comparison expression)
                 items.append({'key': key, 'value': True, 'has_operator': False})
         
         # Now decide structure based on items
@@ -215,6 +246,7 @@ class ParadoxParser:
                 else:
                     result[item['key']] = item['value']
             return result
+
 class ParadoxWriter:
     """Converts parsed tree structure back to Paradox script format."""
     
@@ -244,8 +276,34 @@ class ParadoxWriter:
             return False
         
         # Check for special characters that require quoting
-        special_chars = ' \t\n\r{}=<>#'
+        # Note: Don't require quotes for comparison operators
+        special_chars = ' \t\n\r{}=#'
         return any(char in value for char in special_chars)
+    
+    def is_comparison_expression(self, value):
+        """Check if a value is a comparison expression like 'a>0'."""
+        if not isinstance(value, str):
+            return False
+        # Check for comparison operators
+        return any(op in value for op in ['>=', '<=', '>', '<', '==', '!='])
+    
+    def format_comparison(self, expr):
+        """Format a comparison expression with proper spacing."""
+        if not isinstance(expr, str):
+            return expr
+        
+        # Add spaces around comparison operators for readability
+        for op in ['>=', '<=', '==', '!=']:
+            if op in expr:
+                parts = expr.split(op)
+                return f"{parts[0].strip()} {op} {parts[1].strip()}"
+        
+        for op in ['>', '<']:
+            if op in expr:
+                parts = expr.split(op)
+                return f"{parts[0].strip()} {op} {parts[1].strip()}"
+        
+        return expr
     
     def format_value(self, value):
         """Format a single value for output."""
@@ -280,11 +338,16 @@ class ParadoxWriter:
         for key, value in d.items():
             indent = self.get_indent(level + 1 if not is_root else level)
             
-            # Format the key
-            formatted_key = self.format_value(key) if not isinstance(key, str) or self.needs_quotes(key) else key
+            # Check if key is a comparison expression
+            if self.is_comparison_expression(key):
+                # Format comparison expression with proper spacing
+                formatted_key = self.format_comparison(key)
+            else:
+                # Format the key normally
+                formatted_key = self.format_value(key) if not isinstance(key, str) or self.needs_quotes(key) else key
             
             if value is True:
-                # Just the key, no value
+                # Just the key, no value (like comparison expressions or standalone identifiers)
                 lines.append(f"{indent}{formatted_key}")
             elif isinstance(value, dict):
                 # Nested object
@@ -369,6 +432,7 @@ class ParadoxWriter:
             return self.write_list(value, level)
         else:
             return self.format_value(value)
+            
 class ParadoxHelper:
     @staticmethod
     def parse_file(filepath):
@@ -526,8 +590,8 @@ class CivInstHandler(BaseHandler):
         
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
-            me_weights = ParadoxHelper.get_script_block(tree, "measure_weights")
-            values_file[f"{root}_me_weights"] = me_weights
+            ms_weights = ParadoxHelper.get_script_block(tree, "measure_weights")
+            values_file[f"{root}_ms_weights"] = ms_weights
             values_file[f"{root}_social_impact"] = ParadoxParser("""
                 value = 0
                 if = {
@@ -544,10 +608,10 @@ class CivInstHandler(BaseHandler):
                     save_temporary_scope_as = measure
                     prev = {
                         add = {
-                            value = ciso_<<root>>_me_weights
+                            value = ciso_<<root>>_ms_weights
                             if = {
                                 limit = {
-                                    ciso_<<root>>_me_weights > 0
+                                    ciso_<<root>>_ms_weights > 0
                                 }
                                 pow = 0.5
                             }
@@ -573,7 +637,7 @@ class CivInstHandler(BaseHandler):
                             value = 0
                             if = {
                                 limit = {
-                                    ciso_<<root>>_me_weights > 0
+                                    <<root>>_ms_weights > 0
                                 }
                                 value = 1
                             }
@@ -581,6 +645,8 @@ class CivInstHandler(BaseHandler):
                     }
                 }
             """.replace("<<root>>", root)).parse()
+
+            print(ParadoxParser("limit = { a > 0 }").parse())
         
         return values_file
 
@@ -786,6 +852,18 @@ class MeasureHandler(BaseHandler):
                         "value": "0"
                     }
                 ]
+            },
+            {
+                "if": [
+                    {
+                        "limit": [
+                            {"has_variable": f"{root}_ci_investment_var"}
+                        ]
+                    },
+                    {
+                        "add": f"var:{root}_ci_investment_var"
+                    }
+                ],
             }]
 
         for tree in trees:

@@ -3,7 +3,27 @@
 
 ciso_reset_all_measure_ci_invest = {
 	set_variable = {
+		name = ciso_ciso_ms_insurance_ci_investment_var
+		value = 0
+	}
+	set_variable = {
 		name = ciso_ciso_ms_soup_kitchen_ci_investment_var
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ciso_ms_library_ci_investment_var
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ciso_ms_schooling_ci_investment_var
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ciso_ms_union_hall_ci_investment_var
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ciso_ms_health_center_ci_investment_var
 		value = 0
 	}
 }

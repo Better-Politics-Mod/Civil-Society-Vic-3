@@ -1,0 +1,7 @@
+ciso_ms_schooling = {
+	icon = "gfx/interface/icons/measure_icons/soup_kitchen.dds"
+	
+	visible = {
+		always = yes
+	}
+}

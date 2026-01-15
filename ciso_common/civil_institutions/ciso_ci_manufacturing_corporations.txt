@@ -22,4 +22,14 @@ ciso_ci_manufacturing_corporations = {
 			}
 		}
 	}
+
+	measure_weights = {
+		value = 0
+		if = {
+			limit = {
+				scope:measure = flag:ciso_ms_schooling
+			}
+			add = 1
+		}
+	}
 }

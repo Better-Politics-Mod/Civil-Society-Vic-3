@@ -14,4 +14,14 @@ ciso_ci_royal_court = {
 			}
 		}
 	}
+
+	measure_weights = {
+		value = 0
+		if = {
+			limit = {
+				scope:measure = flag:ciso_ms_health_center
+			}
+			add = 1
+		}
+	}
 }
