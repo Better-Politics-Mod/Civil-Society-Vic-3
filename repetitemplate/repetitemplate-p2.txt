@@ -1,0 +1,8 @@
+
+change_variable = {
+	name = ciso_<<root>>_ci_investment_var
+	add = {
+		value = local_var:ciso_raw_alloc_<<root>>
+		multiply = local_var:ciso_raw_alloc_scale
+	}
+}

@@ -1,0 +1,4 @@
+set_local_variable = {
+	name = ciso_raw_alloc_total
+	value = 0
+}

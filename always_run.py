@@ -445,8 +445,16 @@ class CivInstHandler:
                 ]
             })
 
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            process_file_monthly.append({
+                "ciso_calculate_allocation": [ { "ci": root } ]
+            })
+
         return {
-            "ciso_civsoc_process_monthly": process_file_monthly
+            "ciso_civsoc_process_monthly": [
+                {"ciso_reset_all_measures_ci_invest": "yes"}
+            ] + process_file_monthly
         }
 
     def handle_setup(self):
@@ -545,6 +553,37 @@ class CivInstHandler:
         self.parse_and_update(files)
 
 class MeasureHandler:
+
+    def handle_magic(self):
+        trees = self.trees
+
+        magic_file = []
+
+        with open(script_directory / "repetitemplate" / "repetitemplate-s1.txt") as f:
+            magic_file.append(ParadoxParser(f.read()).parse())
+
+        with open(script_directory / "repetitemplate" / "repetitemplate-p1.txt") as f:
+            p1 = f.read()
+        with open(script_directory / "repetitemplate" / "repetitemplate-p2.txt") as f:
+            p2 = f.read()
+            
+        #print(p1.replace("<<root>>", "me"))
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            magic_file.append(ParadoxParser(p1.replace("<<root>>", root)).parse())
+        
+        with open(script_directory / "repetitemplate" / "repetitemplate-s1.txt") as f:
+            magic_file.append(ParadoxParser(f.read()).parse())
+        
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            magic_file.append(ParadoxParser(p2.replace("<<root>>", root)).parse())
+
+        print(magic_file)
+
+        return {"ciso_do_every_measure_with_ci": magic_file}
+            
+
     def handle_institution_icon(self):
         trees = self.trees
         # each tree should have a name as root
@@ -577,16 +616,21 @@ class MeasureHandler:
 
         return {"ciso_init_measures_global": init_global}
 
+    def handle_utils(self):
         trees = self.trees
-        triggers_file = {}
+        utils = []
         
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
-            possible = ParadoxHelper.get_script_block(tree, "possible")
+            utils.append({
+                "set_variable": [
+                    {"name": f"ciso_{root}_ci_investment_var" },
+                    {"value": f"0"}
+                ]
+            })
 
-            triggers_file[f"{root}_creation_trigger"] = possible
-        
-        return triggers_file
+        return {"ciso_reset_all_measure_ci_invest": utils}
+
     
     def handle_script_value(self):
         trees = self.trees
@@ -734,11 +778,21 @@ class MeasureHandler:
         script_value_folder = commons / "script_values"
         script_value_file = self.handle_script_value()
 
+        # utils 
+        utils_folder = commons / "scripted_effects"
+        utils_file = self.handle_utils()
+
+        # magic
+        magic_folder = commons / "scripted_effects"
+        magic_file = self.handle_magic()
+
         ParadoxHelper.write_handled_files(
             [institution_icon_folder, institution_icon_file, "CISO_measures.txt"],
             [setup_folder, setup_file, "CISO_setup_measures.txt"], 
             [sgui_folder, sgui_file, "CISO_sguis_measures.txt"],
-            [script_value_folder, script_value_file, "CISO_measure_values.txt"]   
+            [script_value_folder, script_value_file, "CISO_measure_values.txt"],
+            [utils_folder, utils_file, "CISO_measure_utils.txt"],
+            [magic_folder, magic_file, "CISO_magic_utils.txt"]
         )
 
     def __init__(self, files):
