@@ -247,192 +247,113 @@ class ParadoxParser:
                     result[item['key']] = item['value']
             return result
 
+
 class ParadoxWriter:
-    """Converts parsed tree structure back to Paradox script format."""
-    
-    def __init__(self, indent_char='\t', indent_level=0):
+    def __init__(self, indent_char='\t'):
         self.indent_char = indent_char
-        self.indent_level = indent_level
     
-    def write(self, tree):
-        """Convert tree structure to Paradox script text."""
-        # Check if tree is a dict at root level
-        if isinstance(tree, dict):
-            return self.write_dict(tree, self.indent_level, is_root=True)
-        return self.write_value(tree, self.indent_level)
-    
-    def get_indent(self, level):
-        """Get indentation string for given level."""
-        return self.indent_char * level
-    
-    def needs_quotes(self, value):
-        """Check if a value needs to be quoted."""
-        if not isinstance(value, str):
-            return False
+    def write(self, obj, indent_level=0):
+        """
+        Convert a JSON-like object to Paradox script format.
         
-        # Already has quotes
-        if (value.startswith('"') and value.endswith('"')) or \
-           (value.startswith("'") and value.endswith("'")):
-            return False
-        
-        # Check for special characters that require quoting
-        # Note: Don't require quotes for comparison operators
-        special_chars = ' \t\n\r{}=#'
-        return any(char in value for char in special_chars)
-    
-    def is_comparison_expression(self, value):
-        """Check if a value is a comparison expression like 'a>0'."""
-        if not isinstance(value, str):
-            return False
-        # Check for comparison operators
-        return any(op in value for op in ['>=', '<=', '>', '<', '==', '!='])
-    
-    def format_comparison(self, expr):
-        """Format a comparison expression with proper spacing."""
-        if not isinstance(expr, str):
-            return expr
-        
-        # Add spaces around comparison operators for readability
-        for op in ['>=', '<=', '==', '!=']:
-            if op in expr:
-                parts = expr.split(op)
-                return f"{parts[0].strip()} {op} {parts[1].strip()}"
-        
-        for op in ['>', '<']:
-            if op in expr:
-                parts = expr.split(op)
-                return f"{parts[0].strip()} {op} {parts[1].strip()}"
-        
-        return expr
-    
-    def format_value(self, value):
-        """Format a single value for output."""
-        if value is True:
-            return ""  # Boolean True means just the key with no value
-        elif value is None or value is False:
+        Args:
+            obj: The object to convert (dict, list, or primitive)
+            indent_level: Current indentation level
+            
+        Returns:
+            String in Paradox script format
+        """
+        if obj is None:
             return ""
+        
+        if isinstance(obj, dict):
+            return self._write_dict(obj, indent_level)
+        elif isinstance(obj, list):
+            return self._write_list(obj, indent_level)
+        else:
+            return self._write_value(obj)
+    
+    def _write_dict(self, d, indent_level):
+        """Write a dictionary as Paradox script."""
+        lines = []
+        indent = self.indent_char * indent_level
+        
+        for key, value in d.items():
+            # Handle comparison operators - write them without '=' but with spaces around operators
+            if self._is_comparison(key):
+                formatted_key = self._format_comparison(key)
+                lines.append(f"{indent}{formatted_key}")
+                continue
+            if isinstance(value, dict):
+                # For nested dicts, write key = { ... }
+                lines.append(f"{indent}{key} = {{")
+                lines.append(self._write_dict(value, indent_level + 1))
+                lines.append(f"{indent}}}")
+            elif isinstance(value, list):
+                # For lists, write key = { ... } (without extra braces)
+                list_content = self._write_list(value, indent_level + 1)
+                if list_content.strip():  # Only write if list has content
+                    lines.append(f"{indent}{key} = {{")
+                    lines.append(list_content)
+                    lines.append(f"{indent}}}")
+            else:
+                # For simple values, write key = value
+                lines.append(f"{indent}{key} = {self._write_value(value)}")
+        
+        return '\n'.join(lines)
+    
+    def _write_list(self, lst, indent_level):
+        """Write a list as Paradox script."""
+        lines = []
+        indent = self.indent_char * indent_level
+        
+        for item in lst:
+            if isinstance(item, dict):
+                # For dict items in a list, write the dict content directly (no extra braces)
+                dict_content = self._write_dict(item, indent_level)
+                if dict_content.strip():
+                    lines.append(dict_content)
+            elif isinstance(item, list):
+                # Nested lists are flattened - just process their contents
+                nested_content = self._write_list(item, indent_level)
+                if nested_content.strip():
+                    lines.append(nested_content)
+            else:
+                # For simple values in a list
+                lines.append(f"{indent}{self._write_value(item)}")
+        
+        return '\n'.join(lines)
+    
+    def _write_value(self, value):
+        """Convert a value to its Paradox script representation."""
+        if isinstance(value, bool):
+            return "yes" if value else "no"
         elif isinstance(value, str):
-            if self.needs_quotes(value):
-                # Escape quotes inside the string
-                escaped = value.replace('"', '\\"')
-                return f'"{escaped}"'
+            # Check if string needs quotes (contains spaces or special chars)
+            if ' ' in value or any(c in value for c in ['=', '{', '}', '#']):
+                return f'"{value}"'
             return value
         elif isinstance(value, (int, float)):
             return str(value)
-        elif isinstance(value, dict):
-            return self.write_dict(value, self.indent_level, is_root=False)
-        elif isinstance(value, list):
-            return self.write_list(value, self.indent_level)
         else:
             return str(value)
     
-    def write_dict(self, d, level, is_root=False):
-        """Write a dictionary as a Paradox object."""
-        if not d:
-            return "{}"
-        
-        lines = []
-        if not is_root:
-            lines.append("{")
-        
-        for key, value in d.items():
-            indent = self.get_indent(level + 1 if not is_root else level)
-            
-            # Check if key is a comparison expression
-            if self.is_comparison_expression(key):
-                # Format comparison expression with proper spacing
-                formatted_key = self.format_comparison(key)
-            else:
-                # Format the key normally
-                formatted_key = self.format_value(key) if not isinstance(key, str) or self.needs_quotes(key) else key
-            
-            if value is True:
-                # Just the key, no value (like comparison expressions or standalone identifiers)
-                lines.append(f"{indent}{formatted_key}")
-            elif isinstance(value, dict):
-                # Nested object
-                nested = self.write_dict(value, level + 1 if not is_root else level, is_root=False)
-                lines.append(f"{indent}{formatted_key} = {nested}")
-            elif isinstance(value, list):
-                # Check if it's a list of dicts (multiple key-value pairs)
-                if all(isinstance(item, dict) for item in value):
-                    # List of dicts - write each dict directly without wrapping in { }
-                    lines.append(f"{indent}{formatted_key} = {{")
-                    for item in value:
-                        # Write each dict's content directly
-                        dict_lines = self.write_dict(item, level + 1 if not is_root else level, is_root=False).split('\n')
-                        # Skip the outer { } and just use the content
-                        for line in dict_lines[1:-1]:  # Skip first '{' and last '}'
-                            lines.append(line)
-                    lines.append(self.get_indent(level + 1 if not is_root else level) + "}")
-                else:
-                    # Regular list or mixed content
-                    all_simple = all(isinstance(item, (bool, str, int, float)) or item is True for item in value)
-                    
-                    if all_simple and len(value) <= 3:
-                        # Inline simple list
-                        items = [self.format_value(item) for item in value if item is not True]
-                        if items:
-                            lines.append(f"{indent}{formatted_key} = {{ {' '.join(items)} }}")
-                        else:
-                            lines.append(f"{indent}{formatted_key} = {{}}")
-                    else:
-                        # Multi-line list
-                        list_content = self.write_list(value, level + 1 if not is_root else level)
-                        lines.append(f"{indent}{formatted_key} = {list_content}")
-            else:
-                # Simple key-value pair
-                formatted_value = self.format_value(value)
-                if formatted_value:
-                    lines.append(f"{indent}{formatted_key} = {formatted_value}")
-                else:
-                    lines.append(f"{indent}{formatted_key}")
-        
-        if not is_root:
-            lines.append(self.get_indent(level) + "}")
-        return "\n".join(lines)
+    def _is_comparison(self, key):
+        """Check if a key is a comparison expression."""
+        comparison_ops = ['>=', '<=', '!=', '>', '<', '=']
+        return any(op in key for op in comparison_ops)
     
-    def write_list(self, lst, level):
-        """Write a list as a Paradox array."""
-        if not lst:
-            return "{}"
-        
-        # Check if all items are simple
-        all_simple = all(isinstance(item, (bool, str, int, float)) or item is True for item in lst)
-        
-        if all_simple and len(lst) <= 3:
-            # Inline for short simple lists
-            items = [self.format_value(item) for item in lst if item is not True]
-            return "{ " + " ".join(items) + " }"
-        
-        # Multi-line format
-        lines = ["{"]
-        
-        for item in lst:
-            indent = self.get_indent(level + 1)
-            
-            if isinstance(item, dict):
-                nested = self.write_dict(item, level + 1, is_root=False)
-                lines.append(f"{indent}{nested}")
-            elif item is True:
-                continue  # Skip boolean markers
-            else:
-                formatted = self.format_value(item)
-                if formatted:
-                    lines.append(f"{indent}{formatted}")
-        
-        lines.append(self.get_indent(level) + "}")
-        return "\n".join(lines)
-    
-    def write_value(self, value, level):
-        """Write any value type."""
-        if isinstance(value, dict):
-            return self.write_dict(value, level, is_root=False)
-        elif isinstance(value, list):
-            return self.write_list(value, level)
-        else:
-            return self.format_value(value)
-            
+    def _format_comparison(self, key):
+        """Add spaces around comparison operators."""
+        # Order matters - check longer operators first
+        comparison_ops = ['>=', '<=', '!=', '>', '<', '=']
+        for op in comparison_ops:
+            if op in key:
+                parts = key.split(op, 1)
+                return f"{parts[0].strip()} {op} {parts[1].strip()}"
+        return key
+
+
 class ParadoxHelper:
     @staticmethod
     def parse_file(filepath):
@@ -591,14 +512,29 @@ class CivInstHandler(BaseHandler):
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
             ms_weights = ParadoxHelper.get_script_block(tree, "measure_weights")
-            values_file[f"{root}_ms_weights"] = ms_weights
+            values_file[f"{root}_ms_weights"] = [{
+                "if": [
+                {
+                    "limit": [{
+                        "NOT": [{
+                            "exists": "scope:measure"
+                        }]
+                    }]
+                },
+                {
+                    "scope:ms": [{
+                        "save_temporary_scope_as": "measure"
+                    }]
+                }
+                ]
+            }] + ms_weights
             values_file[f"{root}_social_impact"] = ParadoxParser("""
-                value = 0
+                value = 500
                 if = {
                     limit = {
                         has_variable = <<root>>_social_impact
                     }
-                    value = var:<<root>>_social_impact
+                    add = var:<<root>>_social_impact
                 }
             """.replace("<<root>>", root)).parse()
             values_file[f"{root}_avg_sqrt_weight"] = ParadoxParser("""
@@ -608,10 +544,10 @@ class CivInstHandler(BaseHandler):
                     save_temporary_scope_as = measure
                     prev = {
                         add = {
-                            value = ciso_<<root>>_ms_weights
+                            value = <<root>>_ms_weights
                             if = {
                                 limit = {
-                                    ciso_<<root>>_ms_weights > 0
+                                    <<root>>_ms_weights > 0
                                 }
                                 pow = 0.5
                             }
@@ -645,8 +581,6 @@ class CivInstHandler(BaseHandler):
                     }
                 }
             """.replace("<<root>>", root)).parse()
-
-            print(ParadoxParser("limit = { a > 0 }").parse())
         
         return values_file
 
@@ -763,6 +697,7 @@ class MeasureHandler(BaseHandler):
 
         with open(script_directory / "repetitemplate" / "repetitemplate-p1.txt") as f:
             p1 = f.read()
+        import json
         with open(script_directory / "repetitemplate" / "repetitemplate-p2.txt") as f:
             p2 = f.read()
             
@@ -770,13 +705,15 @@ class MeasureHandler(BaseHandler):
             root = ParadoxHelper.get_root(tree)
             magic_file.append(ParadoxParser(p1.replace("<<root>>", root)).parse())
         
-        with open(script_directory / "repetitemplate" / "repetitemplate-s1.txt") as f:
+        with open(script_directory / "repetitemplate" / "repetitemplate-s2.txt") as f:
             magic_file.append(ParadoxParser(f.read()).parse())
         
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
             magic_file.append(ParadoxParser(p2.replace("<<root>>", root)).parse())
 
+        import json
+        #print(json.dumps({"ciso_do_every_measure_with_ci": magic_file}, indent=4))
         return {"ciso_do_every_measure_with_ci": magic_file}
 
     @handler(lambda c: c / "institutions", "CISO_measures.txt")
@@ -817,14 +754,16 @@ class MeasureHandler(BaseHandler):
         
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
-            utils.append({
+            utils.extend([
+                {
                 "set_variable": [
-                    {"name": f"ciso_{root}_ci_investment_var" },
+                    {"name": f"{root}_ci_investment_var" },
                     {"value": f"0"}
                 ]
-            })
+                }
+            ])
 
-        return {"ciso_reset_all_measure_ci_invest": utils}
+        return {"ciso_reset_all_measures_ci_invest": utils}
 
     @handler(lambda c: c / "script_values", "CISO_measure_values.txt")
     def handle_script_value(self):
@@ -965,6 +904,20 @@ class MeasureHandler(BaseHandler):
         return [
             {"scope": "state"},
             {"effect": [
+                {
+                    "if": [
+                    {"limit": [{
+                        "NOT": [
+                            {"has_variable": f"{root}_investment_var"}
+                        ]
+                    }]},
+                    {
+                        "set_variable": [
+                            {"name": f"{root}_investment_var"},
+                            {"value": "0"}
+                        ]
+                    }]
+                },
                 {
                     "change_variable": [
                         {"name": f"{root}_investment_var"},

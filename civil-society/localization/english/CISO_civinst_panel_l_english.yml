@@ -6,6 +6,8 @@
   CISO_CIVINST_NAME: "Heavy Industry Unions"
   CISO_CIVINST_SUPPORT: "Totalizing (#v 42%#!)"
   CISO_CIVINST_ORGANIZATION: "#green;b Disciplined#! (#v 100%#!)"
+  CISO_CIVINST_SI: "[State.MakeScope.ScriptValue(Concatenate(Scope.GetFlagName, '_social_impact'))|vD0]" # ciso_ci_tammany_hall_ms_weights
+
 
   CISO_SOCIETY_POTENTIAL_CIVINSTS: "Potential Civil Institutions"
   CISO_SOCIETY_NEEDS: "Needs"
@@ -13,6 +15,6 @@
 
   CISO_SOCIETY_MEASURE_INITIAL_INVESTMENT: "Invest"
   CISO_SOCIETY_MEASURE_POTENTIAL_MEASURE: "Can Invest"
-
+ 
 
   ciso_ne_welfare_name: "Welfare"

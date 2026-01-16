@@ -47,50 +47,63 @@ ciso_need_process_tooling_handle_needs = {
 }
 
 
+
 #### THE BULK ####
 
 ciso_calculate_allocation = {
 	save_scope_as = state
 	
-
-	# First we need to calculate λ
-	set_local_variable = { 
-		name = avg_sqrt_w
-		value = $ci$_avg_sqrt_weight
-	}
-
-	set_local_variable = {
-		name = avg_shift
-		value = ciso_avg_already_allocated
-	}
-	# lambda = (B * avg_sqrt_w / (M / n + avg_shift)) ** 2
-	save_scope_value_as = {
-		name = lambda
-		value = {
-			value = {
-				value = ciso_B
-				multiply = local_var:avg_sqrt_w
-				divide = {
-					value = {
-						value = $ci$_social_impact
-						divide = $ci$_num_measures
-					}
-					add = local_var:avg_shift
-				}
+	if = {
+		limit = {
+			is_target_in_variable_list = {
+				name = ciso_civil_institutions
+				target = flag:$ci$
 			}
-			multiply = {
-				value = $B$
-				multiply = local_var:avg_sqrt_w
-				divide = {
-					value = {
-						value = $ci$_social_impact
-						divide = $ci$_num_measures
+		}
+		# First we need to calculate λ
+		save_scope_value_as = { 
+			name = avg_sqrt_w
+			value = $ci$_avg_sqrt_weight
+		}
+
+		clear_saved_scope = measure
+
+		save_scope_value_as = {
+			name = avg_shift
+			value = ciso_avg_already_allocated
+		}
+
+		clear_saved_scope = measure
+		# lambda = (B * avg_sqrt_w / (M / n + avg_shift)) ** 2
+		save_scope_value_as = {
+			name = lambda
+			value = {
+				value = {
+					value = ciso_B
+					multiply = scope:avg_sqrt_w
+					divide = {
+						value = {
+							value = $ci$_social_impact
+							divide = $ci$_num_measures
+						}
+						add = scope:avg_shift
 					}
-					add = local_var:avg_shift
+				}
+				multiply = {
+					value = ciso_B
+					multiply = scope:avg_sqrt_w
+					divide = {
+						value = {
+							value = $ci$_social_impact
+							divide = $ci$_num_measures
+						}
+						add = scope:avg_shift
+					}
 				}
 			}
 		}
-	}
+		clear_saved_scope = measure
 
-	ciso_do_every_measure_with_ci = { ci = $ci$ } #{
+		ciso_do_every_measure_with_ci = { ci = $ci$ } 
+	}
 }

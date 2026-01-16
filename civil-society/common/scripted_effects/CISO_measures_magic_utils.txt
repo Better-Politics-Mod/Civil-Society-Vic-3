@@ -7,175 +7,507 @@ ciso_do_every_measure_with_ci = {
 		value = 0
 	}
 	flag:ciso_ms_insurance = {
-		save_scope_as = measure
+		save_scope_as = ms
 	}
-	set_local_variable = {
+	clear_saved_scope = measure
+	save_scope_value_as = {
 		name = ciso_raw_alloc_ciso_ms_insurance
 		value = {
 			value = {
-				value = $ci$_weight
-				divide = local_var:lambda
+				value = $ci$_ms_weights
+				divide = scope:lambda
 				round_to = 0.1
 				pow = 0.5
 			}
 			multiply = ciso_B
 			subtract = ciso_B
-			subtract = var:ciso_ciso_ms_insurance_ci_investment_var
+			subtract = var:ciso_ms_insurance_ci_investment_var
+			min = 0
 		}
 	}
 	change_local_variable = {
 		name = ciso_raw_alloc_total
-		add = local_var:ciso_raw_alloc
+		add = scope:ciso_raw_alloc_ciso_ms_insurance
+	}
+	set_variable = {
+		name = ciso_ms_insurance_$ci$_investment_alloc
+		value = 0
+	}
+	add_to_variable_list = {
+		name = ciso_ms_insurance_PTRs
+		target = flag:ciso_ms_insurance_$ci$_ptr
+	}
+	set_variable = {
+		name = ciso_ms_insurance_$ci$_ptr_getci
+		value = flag:$ci$
+	}
+	set_variable = {
+		name = ciso_ms_insurance_$ci$_ptr_getms
+		value = flag:ciso_ms_insurance
 	}
 	flag:ciso_ms_soup_kitchen = {
-		save_scope_as = measure
+		save_scope_as = ms
 	}
-	set_local_variable = {
+	clear_saved_scope = measure
+	save_scope_value_as = {
 		name = ciso_raw_alloc_ciso_ms_soup_kitchen
 		value = {
 			value = {
-				value = $ci$_weight
-				divide = local_var:lambda
+				value = $ci$_ms_weights
+				divide = scope:lambda
 				round_to = 0.1
 				pow = 0.5
 			}
 			multiply = ciso_B
 			subtract = ciso_B
-			subtract = var:ciso_ciso_ms_soup_kitchen_ci_investment_var
+			subtract = var:ciso_ms_soup_kitchen_ci_investment_var
+			min = 0
 		}
 	}
 	change_local_variable = {
 		name = ciso_raw_alloc_total
-		add = local_var:ciso_raw_alloc
+		add = scope:ciso_raw_alloc_ciso_ms_soup_kitchen
+	}
+	set_variable = {
+		name = ciso_ms_soup_kitchen_$ci$_investment_alloc
+		value = 0
+	}
+	add_to_variable_list = {
+		name = ciso_ms_soup_kitchen_PTRs
+		target = flag:ciso_ms_soup_kitchen_$ci$_ptr
+	}
+	set_variable = {
+		name = ciso_ms_soup_kitchen_$ci$_ptr_getci
+		value = flag:$ci$
+	}
+	set_variable = {
+		name = ciso_ms_soup_kitchen_$ci$_ptr_getms
+		value = flag:ciso_ms_soup_kitchen
 	}
 	flag:ciso_ms_library = {
-		save_scope_as = measure
+		save_scope_as = ms
 	}
-	set_local_variable = {
+	clear_saved_scope = measure
+	save_scope_value_as = {
 		name = ciso_raw_alloc_ciso_ms_library
 		value = {
 			value = {
-				value = $ci$_weight
-				divide = local_var:lambda
+				value = $ci$_ms_weights
+				divide = scope:lambda
 				round_to = 0.1
 				pow = 0.5
 			}
 			multiply = ciso_B
 			subtract = ciso_B
-			subtract = var:ciso_ciso_ms_library_ci_investment_var
+			subtract = var:ciso_ms_library_ci_investment_var
+			min = 0
 		}
 	}
 	change_local_variable = {
 		name = ciso_raw_alloc_total
-		add = local_var:ciso_raw_alloc
+		add = scope:ciso_raw_alloc_ciso_ms_library
+	}
+	set_variable = {
+		name = ciso_ms_library_$ci$_investment_alloc
+		value = 0
+	}
+	add_to_variable_list = {
+		name = ciso_ms_library_PTRs
+		target = flag:ciso_ms_library_$ci$_ptr
+	}
+	set_variable = {
+		name = ciso_ms_library_$ci$_ptr_getci
+		value = flag:$ci$
+	}
+	set_variable = {
+		name = ciso_ms_library_$ci$_ptr_getms
+		value = flag:ciso_ms_library
 	}
 	flag:ciso_ms_schooling = {
-		save_scope_as = measure
+		save_scope_as = ms
 	}
-	set_local_variable = {
+	clear_saved_scope = measure
+	save_scope_value_as = {
 		name = ciso_raw_alloc_ciso_ms_schooling
 		value = {
 			value = {
-				value = $ci$_weight
-				divide = local_var:lambda
+				value = $ci$_ms_weights
+				divide = scope:lambda
 				round_to = 0.1
 				pow = 0.5
 			}
 			multiply = ciso_B
 			subtract = ciso_B
-			subtract = var:ciso_ciso_ms_schooling_ci_investment_var
+			subtract = var:ciso_ms_schooling_ci_investment_var
+			min = 0
 		}
 	}
 	change_local_variable = {
 		name = ciso_raw_alloc_total
-		add = local_var:ciso_raw_alloc
+		add = scope:ciso_raw_alloc_ciso_ms_schooling
+	}
+	set_variable = {
+		name = ciso_ms_schooling_$ci$_investment_alloc
+		value = 0
+	}
+	add_to_variable_list = {
+		name = ciso_ms_schooling_PTRs
+		target = flag:ciso_ms_schooling_$ci$_ptr
+	}
+	set_variable = {
+		name = ciso_ms_schooling_$ci$_ptr_getci
+		value = flag:$ci$
+	}
+	set_variable = {
+		name = ciso_ms_schooling_$ci$_ptr_getms
+		value = flag:ciso_ms_schooling
 	}
 	flag:ciso_ms_union_hall = {
-		save_scope_as = measure
+		save_scope_as = ms
 	}
-	set_local_variable = {
+	clear_saved_scope = measure
+	save_scope_value_as = {
 		name = ciso_raw_alloc_ciso_ms_union_hall
 		value = {
 			value = {
-				value = $ci$_weight
-				divide = local_var:lambda
+				value = $ci$_ms_weights
+				divide = scope:lambda
 				round_to = 0.1
 				pow = 0.5
 			}
 			multiply = ciso_B
 			subtract = ciso_B
-			subtract = var:ciso_ciso_ms_union_hall_ci_investment_var
+			subtract = var:ciso_ms_union_hall_ci_investment_var
+			min = 0
 		}
 	}
 	change_local_variable = {
 		name = ciso_raw_alloc_total
-		add = local_var:ciso_raw_alloc
+		add = scope:ciso_raw_alloc_ciso_ms_union_hall
+	}
+	set_variable = {
+		name = ciso_ms_union_hall_$ci$_investment_alloc
+		value = 0
+	}
+	add_to_variable_list = {
+		name = ciso_ms_union_hall_PTRs
+		target = flag:ciso_ms_union_hall_$ci$_ptr
+	}
+	set_variable = {
+		name = ciso_ms_union_hall_$ci$_ptr_getci
+		value = flag:$ci$
+	}
+	set_variable = {
+		name = ciso_ms_union_hall_$ci$_ptr_getms
+		value = flag:ciso_ms_union_hall
 	}
 	flag:ciso_ms_health_center = {
-		save_scope_as = measure
+		save_scope_as = ms
 	}
-	set_local_variable = {
+	clear_saved_scope = measure
+	save_scope_value_as = {
 		name = ciso_raw_alloc_ciso_ms_health_center
 		value = {
 			value = {
-				value = $ci$_weight
-				divide = local_var:lambda
+				value = $ci$_ms_weights
+				divide = scope:lambda
 				round_to = 0.1
 				pow = 0.5
 			}
 			multiply = ciso_B
 			subtract = ciso_B
-			subtract = var:ciso_ciso_ms_health_center_ci_investment_var
+			subtract = var:ciso_ms_health_center_ci_investment_var
+			min = 0
 		}
 	}
 	change_local_variable = {
 		name = ciso_raw_alloc_total
-		add = local_var:ciso_raw_alloc
+		add = scope:ciso_raw_alloc_ciso_ms_health_center
 	}
-	set_local_variable = {
-		name = ciso_raw_alloc_total
+	set_variable = {
+		name = ciso_ms_health_center_$ci$_investment_alloc
 		value = 0
 	}
-	change_variable = {
-		name = ciso_ciso_ms_insurance_ci_investment_var
-		add = {
-			value = local_var:ciso_raw_alloc_ciso_ms_insurance
-			multiply = local_var:ciso_raw_alloc_scale
+	add_to_variable_list = {
+		name = ciso_ms_health_center_PTRs
+		target = flag:ciso_ms_health_center_$ci$_ptr
+	}
+	set_variable = {
+		name = ciso_ms_health_center_$ci$_ptr_getci
+		value = flag:$ci$
+	}
+	set_variable = {
+		name = ciso_ms_health_center_$ci$_ptr_getms
+		value = flag:ciso_ms_health_center
+	}
+	if = {
+		limit = {
+			local_var:ciso_raw_alloc_total > 0
+		}
+		set_local_variable = {
+			name = ciso_raw_alloc_scale
+			value = {
+				value = $ci$_social_impact
+				divide = local_var:ciso_raw_alloc_total
+			}
+		}
+	}
+	else = {
+		set_local_variable = {
+			name = ciso_raw_alloc_scale
+			value = 0
 		}
 	}
 	change_variable = {
-		name = ciso_ciso_ms_soup_kitchen_ci_investment_var
+		name = ciso_ms_insurance_ci_investment_var
 		add = {
-			value = local_var:ciso_raw_alloc_ciso_ms_soup_kitchen
+			value = scope:ciso_raw_alloc_ciso_ms_insurance
 			multiply = local_var:ciso_raw_alloc_scale
 		}
 	}
-	change_variable = {
-		name = ciso_ciso_ms_library_ci_investment_var
-		add = {
-			value = local_var:ciso_raw_alloc_ciso_ms_library
+	set_variable = {
+		name = ciso_ms_insurance_$ci$_investment_alloc
+		value = {
+			value = scope:ciso_raw_alloc_ciso_ms_insurance
 			multiply = local_var:ciso_raw_alloc_scale
 		}
 	}
-	change_variable = {
-		name = ciso_ciso_ms_schooling_ci_investment_var
-		add = {
-			value = local_var:ciso_raw_alloc_ciso_ms_schooling
-			multiply = local_var:ciso_raw_alloc_scale
+	if = {
+		limit = {
+			ciso_ms_insurance_investment > 0
+			NOT = {
+				is_target_in_variable_list = {
+					name = ciso_society_measures
+					target = flag:ciso_ms_insurance
+				}
+			}
+		}
+		add_to_variable_list = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_insurance
+		}
+	}
+	else_if = {
+		limit = {
+			ciso_ms_insurance_investment = 0
+			is_target_in_variable_list = {
+				name = ciso_society_measures
+				target = flag:ciso_ms_insurance
+			}
+		}
+		remove_list_variable = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_insurance
 		}
 	}
 	change_variable = {
-		name = ciso_ciso_ms_union_hall_ci_investment_var
+		name = ciso_ms_soup_kitchen_ci_investment_var
 		add = {
-			value = local_var:ciso_raw_alloc_ciso_ms_union_hall
+			value = scope:ciso_raw_alloc_ciso_ms_soup_kitchen
 			multiply = local_var:ciso_raw_alloc_scale
 		}
 	}
-	change_variable = {
-		name = ciso_ciso_ms_health_center_ci_investment_var
-		add = {
-			value = local_var:ciso_raw_alloc_ciso_ms_health_center
+	set_variable = {
+		name = ciso_ms_soup_kitchen_$ci$_investment_alloc
+		value = {
+			value = scope:ciso_raw_alloc_ciso_ms_soup_kitchen
 			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	if = {
+		limit = {
+			ciso_ms_soup_kitchen_investment > 0
+			NOT = {
+				is_target_in_variable_list = {
+					name = ciso_society_measures
+					target = flag:ciso_ms_soup_kitchen
+				}
+			}
+		}
+		add_to_variable_list = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_soup_kitchen
+		}
+	}
+	else_if = {
+		limit = {
+			ciso_ms_soup_kitchen_investment = 0
+			is_target_in_variable_list = {
+				name = ciso_society_measures
+				target = flag:ciso_ms_soup_kitchen
+			}
+		}
+		remove_list_variable = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_soup_kitchen
+		}
+	}
+	change_variable = {
+		name = ciso_ms_library_ci_investment_var
+		add = {
+			value = scope:ciso_raw_alloc_ciso_ms_library
+			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	set_variable = {
+		name = ciso_ms_library_$ci$_investment_alloc
+		value = {
+			value = scope:ciso_raw_alloc_ciso_ms_library
+			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	if = {
+		limit = {
+			ciso_ms_library_investment > 0
+			NOT = {
+				is_target_in_variable_list = {
+					name = ciso_society_measures
+					target = flag:ciso_ms_library
+				}
+			}
+		}
+		add_to_variable_list = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_library
+		}
+	}
+	else_if = {
+		limit = {
+			ciso_ms_library_investment = 0
+			is_target_in_variable_list = {
+				name = ciso_society_measures
+				target = flag:ciso_ms_library
+			}
+		}
+		remove_list_variable = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_library
+		}
+	}
+	change_variable = {
+		name = ciso_ms_schooling_ci_investment_var
+		add = {
+			value = scope:ciso_raw_alloc_ciso_ms_schooling
+			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	set_variable = {
+		name = ciso_ms_schooling_$ci$_investment_alloc
+		value = {
+			value = scope:ciso_raw_alloc_ciso_ms_schooling
+			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	if = {
+		limit = {
+			ciso_ms_schooling_investment > 0
+			NOT = {
+				is_target_in_variable_list = {
+					name = ciso_society_measures
+					target = flag:ciso_ms_schooling
+				}
+			}
+		}
+		add_to_variable_list = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_schooling
+		}
+	}
+	else_if = {
+		limit = {
+			ciso_ms_schooling_investment = 0
+			is_target_in_variable_list = {
+				name = ciso_society_measures
+				target = flag:ciso_ms_schooling
+			}
+		}
+		remove_list_variable = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_schooling
+		}
+	}
+	change_variable = {
+		name = ciso_ms_union_hall_ci_investment_var
+		add = {
+			value = scope:ciso_raw_alloc_ciso_ms_union_hall
+			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	set_variable = {
+		name = ciso_ms_union_hall_$ci$_investment_alloc
+		value = {
+			value = scope:ciso_raw_alloc_ciso_ms_union_hall
+			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	if = {
+		limit = {
+			ciso_ms_union_hall_investment > 0
+			NOT = {
+				is_target_in_variable_list = {
+					name = ciso_society_measures
+					target = flag:ciso_ms_union_hall
+				}
+			}
+		}
+		add_to_variable_list = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_union_hall
+		}
+	}
+	else_if = {
+		limit = {
+			ciso_ms_union_hall_investment = 0
+			is_target_in_variable_list = {
+				name = ciso_society_measures
+				target = flag:ciso_ms_union_hall
+			}
+		}
+		remove_list_variable = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_union_hall
+		}
+	}
+	change_variable = {
+		name = ciso_ms_health_center_ci_investment_var
+		add = {
+			value = scope:ciso_raw_alloc_ciso_ms_health_center
+			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	set_variable = {
+		name = ciso_ms_health_center_$ci$_investment_alloc
+		value = {
+			value = scope:ciso_raw_alloc_ciso_ms_health_center
+			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	if = {
+		limit = {
+			ciso_ms_health_center_investment > 0
+			NOT = {
+				is_target_in_variable_list = {
+					name = ciso_society_measures
+					target = flag:ciso_ms_health_center
+				}
+			}
+		}
+		add_to_variable_list = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_health_center
+		}
+	}
+	else_if = {
+		limit = {
+			ciso_ms_health_center_investment = 0
+			is_target_in_variable_list = {
+				name = ciso_society_measures
+				target = flag:ciso_ms_health_center
+			}
+		}
+		remove_list_variable = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_health_center
 		}
 	}
 }

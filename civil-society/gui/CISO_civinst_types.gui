@@ -46,7 +46,7 @@ types CISO_civinst_types
 
 					textbox = {
 						layoutpolicy_horizontal = expanding
-						size = { 0 20 }
+						size = { 60 20 }
 						align = nobaseline
 						elide = right
 						fontsize_min = 12
@@ -54,14 +54,43 @@ types CISO_civinst_types
 					}
 				}
 
+
 				expand = {}
 
 				hbox = {
-					layoutpolicy_horizontal = expanding
-					margin_right = 10
-
 					block "right_text_max_width" {
-						max_width = 160
+						max_width = 275
+					}
+					layoutpolicy_horizontal = expanding
+					vbox = {
+						layoutpolicy_horizontal = preferred
+						layoutpolicy_vertical = preferred
+						margin_right = 75
+						hbox = {
+							layoutpolicy_horizontal = expanding
+
+							icon = {
+								size = { 32 32 }
+								texture = "gfx/interface/icons/topbar/bureaucracy_icon.dds"
+							}
+
+							block "additional_support_label" {}
+
+							textbox = {
+								autoresize = yes
+								layoutpolicy_horizontal = expanding
+								size = { 0 20 }
+								align = left|nobaseline
+								elide = right
+								fontsize_min = 14
+
+								block "support_label_text" {
+									text = "CISO_CIVINST_SI"
+								}
+							}
+
+							expand = {}
+						}
 					}
 
 					vbox = {
@@ -69,6 +98,8 @@ types CISO_civinst_types
 						layoutpolicy_vertical = preferred
 						margin = { 0 5 }
 
+						margin_right = 10
+						
 						hbox = {
 							layoutpolicy_horizontal = expanding
 

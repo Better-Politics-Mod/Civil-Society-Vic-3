@@ -1,8 +1,45 @@
 
 change_variable = {
-	name = ciso_<<root>>_ci_investment_var
+	name = <<root>>_ci_investment_var
 	add = {
-		value = local_var:ciso_raw_alloc_<<root>>
+		value = scope:ciso_raw_alloc_<<root>>
 		multiply = local_var:ciso_raw_alloc_scale
+	}
+}
+# tracking variables
+set_variable = {
+	name = <<root>>_$ci$_investment_alloc
+	value = {
+		value = scope:ciso_raw_alloc_<<root>>
+		multiply = local_var:ciso_raw_alloc_scale
+	}
+}
+
+if = {
+	limit = {
+		<<root>>_investment > 0
+		NOT = {
+			is_target_in_variable_list = {
+				name = ciso_society_measures
+				target = flag:<<root>>
+			}
+		}
+	}
+	add_to_variable_list = {
+		name = ciso_society_measures
+		target = flag:<<root>>
+	}
+}
+else_if = {
+	limit = {
+		<<root>>_investment == 0
+		is_target_in_variable_list = {
+			name = ciso_society_measures
+			target = flag:<<root>>
+		}
+	}
+	remove_list_variable = {
+		name = ciso_society_measures
+		target = flag:<<root>>
 	}
 }

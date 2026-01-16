@@ -124,23 +124,95 @@ types CISO_measures_types
 	}
 
     type ciso_state_panel_submeasure_item = widget {
-        background = {
-            using = dropdown_background
-        }
+
         visible = "[GetVariableSystem.Exists(Concatenate(Scope.GetFlagName, '_expanded'))]"
-        size = { 525 240 }
-        textbox = {
-            using = tooltip_above
-            fontsize_min = 12
-            align = nobaseline
-            elide = right
-            text = "[Localize(Concatenate(Scope.GetFlagName, '_desc'))]"
-            margin_left = 10
-            margin_right = 10
-            maximumsize = { 525 240 }
-            multiline = yes
-            autoresize = yes
+        size = { 500 240 }
+        margin = { 5 0 }
+        hbox = {
+            layoutpolicy_horizontal = expanding
+            layoutpolicy_vertical = expanding
+            spacing = 10
+            background = {
+                using = dropdown_background
+            }
+            margin = { 10 5 }
+
+            widget = {
+                size = { 320 240 }
+                flowcontainer = {
+                    direction = vertical
+
+                    datamodel = "[State.MakeScope.GetList(Concatenate(Scope.GetFlagName, '_PTRs'))]"
+                    item = {
+                        widget = {
+                            size = { 220 45 }
+                            visible = "[GreaterThan_CFixedPoint(State.MakeScope.Var(Concatenate(Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getms')).GetFlagName, '_'), Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getci')).GetFlagName, '_investment_alloc'))).GetValue, '(CFixedPoint)0')]"
+                            background = {
+                                using = entry_bg
+                            }
+
+                            hbox = {
+                                layoutpolicy_horizontal = expanding
+                                layoutpolicy_vertical = expanding
+
+                                spacing = 2
+
+                                icon = {
+                                    size = { 32 32 }
+                                    texture = "[GetInstitutionType(Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getci')).GetFlagName, '_icon')).GetIcon]"
+                                }
+
+                                textbox = {
+                                    size = { -1 40 }
+                                    autoresize = yes
+                                    multiline = yes
+                                    maximumsize = { 120 -1 }
+                                    text = "[Localize(Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getci')).GetFlagName, '_name'))]"
+                                    align = nobaseline
+                                    elide = right
+                                    using = fontsize_medium
+                                    default_format = "#bold"
+                                }
+
+                                # alloc number
+                                # it's $ms_$ci$_investment_alloc
+                                # so to getci, we do Scope.GetFlagName + '_getci'
+                                # and to get ms, we do Scope.GetFlagName + '_getms'
+                                textbox = {
+                                    size = { 100 40 }
+                                    align = nobaseline
+                                    elide = right
+                                    margin_left = 15
+                                    text = "@bur![State.MakeScope.Var(Concatenate(Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getms')).GetFlagName, '_'), Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getci')).GetFlagName, '_investment_alloc'))).GetValue|D]"
+                                }
+
+                                expand = {}
+                            }   
+                        }
+                    }
+                }
+            }
+            expand = {}
+            container = {
+                size = { 40% 100% }
+                vbox = {
+                    layoutpolicy_horizontal = expanding
+                    layoutpolicy_vertical = expanding
+                }
+            }
         }
+        # textbox = {
+        #     using = tooltip_above
+        #     fontsize_min = 12
+        #     align = nobaseline
+        #     elide = right
+        #     text = "[Localize(Concatenate(Scope.GetFlagName, '_desc'))]"
+        #     margin_left = 10
+        #     margin_right = 10
+        #     maximumsize = { 525 240 }
+        #     multiline = yes
+        #     autoresize = yes
+        # }
     }
 
 	type ciso_measure_investment_control = container {

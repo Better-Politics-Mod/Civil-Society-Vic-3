@@ -1,21 +1,41 @@
 flag:<<root>> = {
-	save_scope_as = measure
+	save_scope_as = ms
 }
-set_local_variable = {
+clear_saved_scope = measure
+save_scope_value_as = {
 	name = ciso_raw_alloc_<<root>>
 	value = {
 		value = {
-			value = $ci$_weight
-			divide = local_var:lambda
+			value = $ci$_ms_weights
+			divide = scope:lambda
 			round_to = 0.1
 			pow = 0.5
 		}
 		multiply = ciso_B
 		subtract = ciso_B
-		subtract = var:ciso_<<root>>_ci_investment_var
+		subtract = var:<<root>>_ci_investment_var
+
+		min = 0
 	}
 }
 change_local_variable = {
 	name = ciso_raw_alloc_total
-	add = local_var:ciso_raw_alloc
+	add = scope:ciso_raw_alloc_<<root>>
+}
+# tracking variables
+set_variable = {
+	name = <<root>>_$ci$_investment_alloc
+	value = 0
+}
+add_to_variable_list = {
+	name = <<root>>_PTRs
+	target = flag:<<root>>_$ci$_ptr
+}
+set_variable = {
+	name = <<root>>_$ci$_ptr_getci
+	value = flag:$ci$
+}
+set_variable = {
+	name = <<root>>_$ci$_ptr_getms
+	value = flag:<<root>>
 }

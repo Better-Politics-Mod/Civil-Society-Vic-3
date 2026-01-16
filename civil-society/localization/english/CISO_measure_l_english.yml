@@ -1,3 +1,18 @@
 ﻿l_english:
   ciso_ms_soup_kitchen_name: "Soup Kitchens"
   ciso_ms_soup_kitchen_desc: "Ipseum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+
+  ciso_ms_insurance_name: "Insurance Programs"
+  ciso_ms_insurance_desc: "Ipseum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+
+  ciso_ms_library_name: "Libraries"
+  ciso_ms_library_desc: "Ipseum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+
+  ciso_ms_schooling_name: "Schooling"
+  ciso_ms_schooling_desc: "Ipseum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+
+  ciso_ms_union_hall_name: "Union Halls"
+  ciso_ms_union_hall_desc: "Ipseum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  
+  ciso_ms_health_center_name: "Health Centers"
+  ciso_ms_health_center_desc: "Ipseum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
