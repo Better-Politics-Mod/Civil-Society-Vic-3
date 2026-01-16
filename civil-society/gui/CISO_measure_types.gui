@@ -152,7 +152,11 @@ types CISO_measures_types
                             layoutpolicy_horizontal = expanding
                             layoutpolicy_vertical = expanding
 
-                            spacing = 2
+                            spacing = 5
+
+                            hbox = {
+                                minimumsize = { 2 0 }
+                            }
 
                             icon = {
                                 size = { 32 32 }
