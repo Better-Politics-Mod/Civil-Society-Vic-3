@@ -24,6 +24,7 @@ ciso_init_civsoc = {
 		}
 		ciso_civsoc_process_monthly = yes
 		ciso_needs_process_monthly = yes
+		ciso_needs_process_monthly = yes
 		# do something
 	}
 }
@@ -105,5 +106,38 @@ ciso_calculate_allocation = {
 		clear_saved_scope = measure
 
 		ciso_do_every_measure_with_ci = { ci = $ci$ } 
+	}
+}
+
+
+ciso_apply_ms_effect = {
+	if = {
+		limit = {
+			has_modifier = $ms$_effect
+		}
+		remove_modifier = $ms$_effect
+	}
+	if = {
+		limit = {
+			$ms$_investment > 0
+		}
+		# calculate effect value
+		set_local_variable = {
+			name = effect_value
+			# investment * ciso_B / (ciso_B + investment)
+			# this means diminishing returns on investment
+			value = {
+				value = $ms$_investment
+				multiply = ciso_B
+				divide = {
+					value = ciso_B
+					add = $ms$_investment
+				}
+			}
+		}
+		add_modifier = {
+			name = $ms$_effect
+			multiplier = local_var:effect_value
+		}
 	}
 }

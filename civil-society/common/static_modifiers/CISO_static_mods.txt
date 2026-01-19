@@ -1,3 +1,0 @@
-# ciso_cost_of_measures = {
-# 	building_level_bureaucracy_cost_add = 1
-# }

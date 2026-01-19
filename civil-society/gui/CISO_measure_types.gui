@@ -49,6 +49,7 @@ types CISO_measures_types
                 using = default_button
                 size = { 100 25 }
                 text = "CISO_SOCIETY_MEASURE_INITIAL_INVESTMENT"
+                visible = "[State.GetCountry.IsLocalPlayer]"
                 enabled = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_conditions_effect')).IsValid(GuiScope.SetRoot(State.MakeScope).End)]"
                 onclick = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_conditions_effect')).Execute(GuiScope.SetRoot(State.MakeScope).End)]"
             }
@@ -123,6 +124,67 @@ types CISO_measures_types
 
 	}
 
+    type ciso_state_panel_submeasure_listing = widget {
+        size = { 250 45 }
+        block "visible" {
+            visible = "[GreaterThan_CFixedPoint(State.MakeScope.Var(Concatenate(Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getms')).GetFlagName, '_'), Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getci')).GetFlagName, '_investment_alloc'))).GetValue, '(CFixedPoint)0')]"
+        }
+        background = {
+            using = entry_bg
+        }
+
+        hbox = {
+            layoutpolicy_horizontal = expanding
+            layoutpolicy_vertical = expanding
+
+            spacing = 5
+
+            hbox = {
+                minimumsize = { 2 0 }
+            }
+
+            icon = {
+                size = { 32 32 }
+                block "texture" {
+                    texture = "[GetInstitutionType(Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getci')).GetFlagName, '_icon')).GetIcon]"
+                }
+            }
+
+            textbox = {
+                size = { -1 40 }
+                autoresize = yes
+                multiline = yes
+                maximumsize = { 115 -1 }
+                minimumsize = { 115 -1 }
+                block "name" {
+                    text = "[Localize(Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getci')).GetFlagName, '_name'))]"
+                }
+                align = nobaseline
+                elide = right
+                using = fontsize_medium
+                default_format = "#bold"
+            }
+
+            # alloc number
+            # it's $ms_$ci$_investment_alloc
+            # so to getci, we do Scope.GetFlagName + '_getci'
+            # and to get ms, we do Scope.GetFlagName + '_getms'
+            textbox = {
+                size = { -1 40 }
+                autoresize = yes
+                align = nobaseline
+                elide = right
+                margin_left = 15
+                block "value" {
+                    text = "@bur![State.MakeScope.Var(Concatenate(Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getms')).GetFlagName, '_'), Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getci')).GetFlagName, '_investment_alloc'))).GetValue|D]"
+                }
+            }
+
+            expand = {}
+        }   
+    }
+
+
     type ciso_state_panel_submeasure_item = flowcontainer {
 
         visible = "[GetVariableSystem.Exists(Concatenate(Scope.GetFlagName, '_expanded'))]"
@@ -140,55 +202,49 @@ types CISO_measures_types
                 direction = vertical
 
                 datamodel = "[State.MakeScope.GetList(Concatenate(Scope.GetFlagName, '_PTRs'))]"
+                ciso_state_panel_submeasure_listing = {
+                    blockoverride "visible" {
+                        visible = "[GreaterThan_CFixedPoint(State.MakeScope.ScriptValue(Concatenate(Scope.GetFlagName, '_investment_gov')), '(CFixedPoint)0')]"
+                    }
+                    blockoverride "texture" {
+                        texture = "gfx/interface/icons/civil_institution_icons/the_state.dds"
+                    }
+                    blockoverride "name" {
+                        text = "[State.GetCountry.GetName]"
+                    }
+                    blockoverride "value" {
+                        text = "@bur![State.MakeScope.ScriptValue(Concatenate(Scope.GetFlagName, '_investment_gov'))|D]"
+                    }
+                }
                 item = {
-                    widget = {
-                        size = { 220 45 }
-                        visible = "[GreaterThan_CFixedPoint(State.MakeScope.Var(Concatenate(Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getms')).GetFlagName, '_'), Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getci')).GetFlagName, '_investment_alloc'))).GetValue, '(CFixedPoint)0')]"
-                        background = {
-                            using = entry_bg
+                    ciso_state_panel_submeasure_listing = {}
+                }
+            }
+
+            ## modifier
+            vertical_divider = {
+                parentanchor = vcenter
+            }
+            flowcontainer = {
+                direction = vertical
+                datamodel = "[State.GetTimedModifiers]"
+                visible = "[Not(IsDataModelEmpty(State.GetTimedModifiers))]"
+
+                item = {
+                    textbox = {
+                        visible = "[EqualTo_string(TimedModifier.GetName, GetStaticModifier(Concatenate(Scope.GetFlagName, '_effect')).GetName)]"
+                        size = { 80 -1 }
+                        minimumsize = { 195 -1 }
+                        maximumsize = { 195 -1 }
+                        autoresize = yes
+                        multiline = yes
+                        align = nobaseline
+                        elide = right
+                        margin_left = 15
+                        margin = { 8 8 }
+                        block "value" {
+                            text = "[TimedModifier.GetDesc]"
                         }
-
-                        hbox = {
-                            layoutpolicy_horizontal = expanding
-                            layoutpolicy_vertical = expanding
-
-                            spacing = 5
-
-                            hbox = {
-                                minimumsize = { 2 0 }
-                            }
-
-                            icon = {
-                                size = { 32 32 }
-                                texture = "[GetInstitutionType(Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getci')).GetFlagName, '_icon')).GetIcon]"
-                            }
-
-                            textbox = {
-                                size = { -1 40 }
-                                autoresize = yes
-                                multiline = yes
-                                maximumsize = { 120 -1 }
-                                text = "[Localize(Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getci')).GetFlagName, '_name'))]"
-                                align = nobaseline
-                                elide = right
-                                using = fontsize_medium
-                                default_format = "#bold"
-                            }
-
-                            # alloc number
-                            # it's $ms_$ci$_investment_alloc
-                            # so to getci, we do Scope.GetFlagName + '_getci'
-                            # and to get ms, we do Scope.GetFlagName + '_getms'
-                            textbox = {
-                                size = { 100 40 }
-                                align = nobaseline
-                                elide = right
-                                margin_left = 15
-                                text = "@bur![State.MakeScope.Var(Concatenate(Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getms')).GetFlagName, '_'), Concatenate(State.MakeScope.Var(Concatenate(Scope.GetFlagName, '_getci')).GetFlagName, '_investment_alloc'))).GetValue|D]"
-                            }
-
-                            expand = {}
-                        }   
                     }
                 }
             }
@@ -246,7 +302,7 @@ types CISO_measures_types
 			parentanchor = vcenter
 			# tooltip = "[Building.GetDownsizeTooltip]"
 			# onclick = "[Execute( Building.Downsize )]"
-			# enabled = "[IsValid( Building.Downsize )]"
+			enabled = "[State.GetCountry.IsLocalPlayer)]"
 			using = tooltip_below
 
 			block "button_size" {
@@ -273,7 +329,7 @@ types CISO_measures_types
                 onalt = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_increment_alittle_effect')).Execute(GuiScope.SetRoot(State.MakeScope).End)]"
             }
 			# onclick = "[Execute( Building.QueueConstruction )]"
-			# enabled = "[IsValid( Building.QueueConstruction )]"
+			enabled = "[State.GetCountry.IsLocalPlayer)]"
 		}
 	}
 }

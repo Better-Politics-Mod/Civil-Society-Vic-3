@@ -4,4 +4,10 @@ ciso_ms_health_center = {
 	visible = {
 		always = yes
 	}
+
+	modifier = {
+		state_mortality_mult = -0.0002
+		state_pollution_reduction_health_mult = -0.001
+		state_standard_of_living_add = 0.002
+	}
 }

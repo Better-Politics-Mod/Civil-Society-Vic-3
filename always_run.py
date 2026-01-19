@@ -731,6 +731,42 @@ class MeasureHandler(BaseHandler):
 
         return institution_icon_file
 
+    @handler(lambda c: c / "scripted_effects", "CISO_measures_process.txt")
+    def handle_process(self):
+        trees = self.trees
+        process_file_monthly = []
+        
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            process_file_monthly.append({
+                "ciso_apply_ms_effect": [
+                    {"ms": root }
+                ]
+            })
+        
+        return {
+            "ciso_measures_process_monthly": process_file_monthly
+        }
+
+    @handler(lambda c: c / "static_modifiers", "CISO_measure_modifiers.txt")
+    def handle_modifiers(self):
+        trees = self.trees
+        modifiers_file = {}
+        
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            icon = tree[root].get("icon", None)
+            effects = ParadoxHelper.get_script_block(tree, "modifier")
+            if icon:
+                modifiers_file[f"{root}_effect"] = [
+                    {"icon": f"\"{icon}\""}
+                ] + effects
+            else:
+                modifiers_file[f"{root}_effect"] = effects
+
+        return modifiers_file
+
+
     @handler(lambda c: c / "scripted_effects", "CISO_setup_measures.txt")
     def handle_setup(self):
         trees = self.trees
@@ -911,7 +947,10 @@ class MeasureHandler(BaseHandler):
                             {"target": f"flag:{root}"}
                         ]
                     },
-                    {"ciso_update_cost": "yes"}
+                    {"ciso_update_cost": "yes"},
+                    {"ciso_apply_ms_effect": [
+                        {"ms": root}
+                    ]}
                     ]
                 }
             ]
@@ -974,7 +1013,10 @@ class MeasureHandler(BaseHandler):
                         {"max": "100000000"}
                     ]
                 },
-                {"ciso_update_cost": "yes"}
+                {"ciso_update_cost": "yes"},
+                {"ciso_apply_ms_effect": [
+                    {"ms": root}
+                ]}
             ]}
         ]
 class Needs(BaseHandler):
