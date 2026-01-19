@@ -1,0 +1,3 @@
+NPolitics = {
+	STATE_BUREAUCRACY_POP_BASE_COST = 0		# The base BUR multiplier per population multiple
+}

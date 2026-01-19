@@ -28,15 +28,13 @@ ciso_reset_all_measures_ci_invest = {
 	}
 }
 ciso_update_cost = {
-	owner = {
-		set_local_variable = {
-			name = temp
-			value = ciso_total_government_investment
-		}
-		remove_modifier = ciso_cost_of_measures
-		add_modifier = {
-			name = ciso_cost_of_measures
-			multiplier = local_var:temp
-		}
+	set_local_variable = {
+		name = temp
+		value = ciso_total_government_investment
+	}
+	remove_building = building_ciso_magic_building
+	create_building = {
+		building = building_ciso_magic_building
+		level = local_var:temp
 	}
 }

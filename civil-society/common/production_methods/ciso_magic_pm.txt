@@ -1,0 +1,9 @@
+pm_ciso_magic_pm = {
+	texture = "gfx/interface/icons/production_method_icons/market_stalls.dds"
+
+	building_modifiers = {
+		level_scaled = {
+			building_level_bureaucracy_cost_add = 1
+		}
+	}
+}

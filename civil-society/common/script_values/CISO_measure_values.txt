@@ -171,14 +171,12 @@ ciso_ms_health_center_investment_gov = {
 }
 ciso_total_government_investment = {
 	value = 0
-	every_scope_state = {
-		add = ciso_ms_insurance_investment_gov
-		add = ciso_ms_soup_kitchen_investment_gov
-		add = ciso_ms_library_investment_gov
-		add = ciso_ms_schooling_investment_gov
-		add = ciso_ms_union_hall_investment_gov
-		add = ciso_ms_health_center_investment_gov
-	}
+	add = ciso_ms_insurance_investment_gov
+	add = ciso_ms_soup_kitchen_investment_gov
+	add = ciso_ms_library_investment_gov
+	add = ciso_ms_schooling_investment_gov
+	add = ciso_ms_union_hall_investment_gov
+	add = ciso_ms_health_center_investment_gov
 }
 ciso_avg_already_allocated = {
 	value = 0

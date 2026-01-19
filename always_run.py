@@ -756,10 +756,10 @@ class MeasureHandler(BaseHandler):
                 {"name": "temp"},
                 {"value": "ciso_total_government_investment"}
             ]},
-            {"remove_modifier": "ciso_cost_of_measures"},
-            {"add_modifier": [
-                {"name": "ciso_cost_of_measures" },
-                {"multiplier": "local_var:temp" }
+            {"remove_building": "building_ciso_magic_building"},
+            {"create_building": [
+                {"building": "building_ciso_magic_building" },
+                {"level": "local_var:temp" }
             ]}
         ]
         
@@ -776,7 +776,7 @@ class MeasureHandler(BaseHandler):
 
         return {
             "ciso_reset_all_measures_ci_invest": reset,
-            "ciso_update_cost": [{"owner": calc}]
+            "ciso_update_cost": calc
         }
 
     @handler(lambda c: c / "script_values", "CISO_measure_values.txt")
@@ -784,7 +784,7 @@ class MeasureHandler(BaseHandler):
         trees = self.trees
         script_value_file = {}
         avg_alr_invested = [{"value": "0"}]
-        total_gov_inv = []
+        total_gov_inv = [{"value": "0"}]
         
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
@@ -858,7 +858,7 @@ class MeasureHandler(BaseHandler):
             }
         })
 
-        script_value_file["ciso_total_government_investment"] = [{"value": "0"}, {"every_scope_state": total_gov_inv}]
+        script_value_file["ciso_total_government_investment"] = total_gov_inv
         script_value_file["ciso_avg_already_allocated"] = avg_alr_invested
         return script_value_file
 

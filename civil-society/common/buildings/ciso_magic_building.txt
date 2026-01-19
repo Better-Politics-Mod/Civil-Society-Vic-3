@@ -1,0 +1,21 @@
+# URBANIZATION
+
+building_ciso_magic_building = {
+	building_group = bg_service
+	icon = "gfx/interface/icons/building_icons/urban_center.dds"
+	city_type = city
+	residence_points_per_level = 0
+
+	production_method_groups = {
+		pmg_ciso_hidden
+	}
+
+	buildable = no
+	expandable = no
+	downsizeable = no
+	can_switch_owner = no
+
+	ownership_type = self
+
+	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_monuments.dds"
+}

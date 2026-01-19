@@ -1,3 +1,3 @@
-ciso_cost_of_measures = {
-	country_bureaucracy_add = -1
-}
+# ciso_cost_of_measures = {
+# 	building_level_bureaucracy_cost_add = 1
+# }
