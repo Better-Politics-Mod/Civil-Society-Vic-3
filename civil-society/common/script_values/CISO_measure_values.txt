@@ -18,6 +18,17 @@ ciso_ms_insurance_investment = {
 		add = var:ciso_ms_insurance_ci_investment_var
 	}
 }
+ciso_ms_insurance_investment_gov = {
+	if = {
+		limit = {
+			has_variable = ciso_ms_insurance_investment_var
+		}
+		value = var:ciso_ms_insurance_investment_var
+	}
+	else = {
+		value = 0
+	}
+}
 ciso_ms_soup_kitchen_investment = {
 	if = {
 		limit = {
@@ -33,6 +44,17 @@ ciso_ms_soup_kitchen_investment = {
 			has_variable = ciso_ms_soup_kitchen_ci_investment_var
 		}
 		add = var:ciso_ms_soup_kitchen_ci_investment_var
+	}
+}
+ciso_ms_soup_kitchen_investment_gov = {
+	if = {
+		limit = {
+			has_variable = ciso_ms_soup_kitchen_investment_var
+		}
+		value = var:ciso_ms_soup_kitchen_investment_var
+	}
+	else = {
+		value = 0
 	}
 }
 ciso_ms_library_investment = {
@@ -52,6 +74,17 @@ ciso_ms_library_investment = {
 		add = var:ciso_ms_library_ci_investment_var
 	}
 }
+ciso_ms_library_investment_gov = {
+	if = {
+		limit = {
+			has_variable = ciso_ms_library_investment_var
+		}
+		value = var:ciso_ms_library_investment_var
+	}
+	else = {
+		value = 0
+	}
+}
 ciso_ms_schooling_investment = {
 	if = {
 		limit = {
@@ -67,6 +100,17 @@ ciso_ms_schooling_investment = {
 			has_variable = ciso_ms_schooling_ci_investment_var
 		}
 		add = var:ciso_ms_schooling_ci_investment_var
+	}
+}
+ciso_ms_schooling_investment_gov = {
+	if = {
+		limit = {
+			has_variable = ciso_ms_schooling_investment_var
+		}
+		value = var:ciso_ms_schooling_investment_var
+	}
+	else = {
+		value = 0
 	}
 }
 ciso_ms_union_hall_investment = {
@@ -86,6 +130,17 @@ ciso_ms_union_hall_investment = {
 		add = var:ciso_ms_union_hall_ci_investment_var
 	}
 }
+ciso_ms_union_hall_investment_gov = {
+	if = {
+		limit = {
+			has_variable = ciso_ms_union_hall_investment_var
+		}
+		value = var:ciso_ms_union_hall_investment_var
+	}
+	else = {
+		value = 0
+	}
+}
 ciso_ms_health_center_investment = {
 	if = {
 		limit = {
@@ -101,6 +156,28 @@ ciso_ms_health_center_investment = {
 			has_variable = ciso_ms_health_center_ci_investment_var
 		}
 		add = var:ciso_ms_health_center_ci_investment_var
+	}
+}
+ciso_ms_health_center_investment_gov = {
+	if = {
+		limit = {
+			has_variable = ciso_ms_health_center_investment_var
+		}
+		value = var:ciso_ms_health_center_investment_var
+	}
+	else = {
+		value = 0
+	}
+}
+ciso_total_government_investment = {
+	value = 0
+	every_scope_state = {
+		add = ciso_ms_insurance_investment_gov
+		add = ciso_ms_soup_kitchen_investment_gov
+		add = ciso_ms_library_investment_gov
+		add = ciso_ms_schooling_investment_gov
+		add = ciso_ms_union_hall_investment_gov
+		add = ciso_ms_health_center_investment_gov
 	}
 }
 ciso_avg_already_allocated = {

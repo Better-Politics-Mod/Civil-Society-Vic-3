@@ -750,11 +750,22 @@ class MeasureHandler(BaseHandler):
     @handler(lambda c: c / "scripted_effects", "CISO_measure_utils.txt")
     def handle_utils(self):
         trees = self.trees
-        utils = []
+        reset = []
+        calc = [
+            {"set_local_variable": [
+                {"name": "temp"},
+                {"value": "ciso_total_government_investment"}
+            ]},
+            {"remove_modifier": "ciso_cost_of_measures"},
+            {"add_modifier": [
+                {"name": "ciso_cost_of_measures" },
+                {"multiplier": "local_var:temp" }
+            ]}
+        ]
         
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
-            utils.extend([
+            reset.extend([
                 {
                 "set_variable": [
                     {"name": f"{root}_ci_investment_var" },
@@ -763,13 +774,17 @@ class MeasureHandler(BaseHandler):
                 }
             ])
 
-        return {"ciso_reset_all_measures_ci_invest": utils}
+        return {
+            "ciso_reset_all_measures_ci_invest": reset,
+            "ciso_update_cost": [{"owner": calc}]
+        }
 
     @handler(lambda c: c / "script_values", "CISO_measure_values.txt")
     def handle_script_value(self):
         trees = self.trees
         script_value_file = {}
         avg_alr_invested = [{"value": "0"}]
+        total_gov_inv = []
         
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
@@ -784,26 +799,52 @@ class MeasureHandler(BaseHandler):
                         "value": f"var:{root}_investment_var"
                     }
                 ],
-            },
-            {
-                "else": [
-                    {
-                        "value": "0"
-                    }
-                ]
-            },
-            {
+                },
+                {
+                    "else": [
+                        {
+                            "value": "0"
+                        }
+                    ]
+                },
+                {
+                    "if": [
+                        {
+                            "limit": [
+                                {"has_variable": f"{root}_ci_investment_var"}
+                            ]
+                        },
+                        {
+                            "add": f"var:{root}_ci_investment_var"
+                        }
+                    ],
+                }
+            ]
+
+            script_value_file[f"{root}_investment_gov"] = [{
                 "if": [
                     {
                         "limit": [
-                            {"has_variable": f"{root}_ci_investment_var"}
+                            {"has_variable": f"{root}_investment_var"}
                         ]
                     },
                     {
-                        "add": f"var:{root}_ci_investment_var"
+                        "value": f"var:{root}_investment_var"
                     }
-                ],
-            }]
+                ]
+                },
+                {
+                    "else": [
+                        {
+                            "value": "0"
+                        }
+                    ]
+                }
+            ]
+
+            total_gov_inv.append({
+                "add": f"{root}_investment_gov"
+            })
 
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
@@ -817,6 +858,7 @@ class MeasureHandler(BaseHandler):
             }
         })
 
+        script_value_file["ciso_total_government_investment"] = [{"value": "0"}, {"every_scope_state": total_gov_inv}]
         script_value_file["ciso_avg_already_allocated"] = avg_alr_invested
         return script_value_file
 
@@ -868,7 +910,8 @@ class MeasureHandler(BaseHandler):
                             {"name": "ciso_society_measures"},
                             {"target": f"flag:{root}"}
                         ]
-                    }
+                    },
+                    {"ciso_update_cost": "yes"}
                     ]
                 }
             ]
@@ -930,7 +973,8 @@ class MeasureHandler(BaseHandler):
                         {"min": "0"},
                         {"max": "100000000"}
                     ]
-                }
+                },
+                {"ciso_update_cost": "yes"}
             ]}
         ]
 class Needs(BaseHandler):

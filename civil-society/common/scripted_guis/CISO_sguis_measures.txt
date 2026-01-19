@@ -32,6 +32,7 @@ ciso_ms_insurance_conditions_effect = {
 			name = ciso_society_measures
 			target = flag:ciso_ms_insurance
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_insurance_increment_effect = {
@@ -57,6 +58,7 @@ ciso_ms_insurance_increment_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_insurance_decrement_effect = {
@@ -82,6 +84,7 @@ ciso_ms_insurance_decrement_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_insurance_increment_alot_effect = {
@@ -107,6 +110,7 @@ ciso_ms_insurance_increment_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_insurance_decrement_alot_effect = {
@@ -132,6 +136,7 @@ ciso_ms_insurance_decrement_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_insurance_increment_very_alot_effect = {
@@ -157,6 +162,7 @@ ciso_ms_insurance_increment_very_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_insurance_decrement_very_alot_effect = {
@@ -182,6 +188,7 @@ ciso_ms_insurance_decrement_very_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_insurance_increment_alittle_effect = {
@@ -207,6 +214,7 @@ ciso_ms_insurance_increment_alittle_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_insurance_decrement_alittle_effect = {
@@ -232,6 +240,7 @@ ciso_ms_insurance_decrement_alittle_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_soup_kitchen_conditions_effect = {
@@ -265,6 +274,7 @@ ciso_ms_soup_kitchen_conditions_effect = {
 			name = ciso_society_measures
 			target = flag:ciso_ms_soup_kitchen
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_soup_kitchen_increment_effect = {
@@ -290,6 +300,7 @@ ciso_ms_soup_kitchen_increment_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_soup_kitchen_decrement_effect = {
@@ -315,6 +326,7 @@ ciso_ms_soup_kitchen_decrement_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_soup_kitchen_increment_alot_effect = {
@@ -340,6 +352,7 @@ ciso_ms_soup_kitchen_increment_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_soup_kitchen_decrement_alot_effect = {
@@ -365,6 +378,7 @@ ciso_ms_soup_kitchen_decrement_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_soup_kitchen_increment_very_alot_effect = {
@@ -390,6 +404,7 @@ ciso_ms_soup_kitchen_increment_very_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_soup_kitchen_decrement_very_alot_effect = {
@@ -415,6 +430,7 @@ ciso_ms_soup_kitchen_decrement_very_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_soup_kitchen_increment_alittle_effect = {
@@ -440,6 +456,7 @@ ciso_ms_soup_kitchen_increment_alittle_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_soup_kitchen_decrement_alittle_effect = {
@@ -465,6 +482,7 @@ ciso_ms_soup_kitchen_decrement_alittle_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_library_conditions_effect = {
@@ -498,6 +516,7 @@ ciso_ms_library_conditions_effect = {
 			name = ciso_society_measures
 			target = flag:ciso_ms_library
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_library_increment_effect = {
@@ -523,6 +542,7 @@ ciso_ms_library_increment_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_library_decrement_effect = {
@@ -548,6 +568,7 @@ ciso_ms_library_decrement_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_library_increment_alot_effect = {
@@ -573,6 +594,7 @@ ciso_ms_library_increment_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_library_decrement_alot_effect = {
@@ -598,6 +620,7 @@ ciso_ms_library_decrement_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_library_increment_very_alot_effect = {
@@ -623,6 +646,7 @@ ciso_ms_library_increment_very_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_library_decrement_very_alot_effect = {
@@ -648,6 +672,7 @@ ciso_ms_library_decrement_very_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_library_increment_alittle_effect = {
@@ -673,6 +698,7 @@ ciso_ms_library_increment_alittle_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_library_decrement_alittle_effect = {
@@ -698,6 +724,7 @@ ciso_ms_library_decrement_alittle_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_schooling_conditions_effect = {
@@ -731,6 +758,7 @@ ciso_ms_schooling_conditions_effect = {
 			name = ciso_society_measures
 			target = flag:ciso_ms_schooling
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_schooling_increment_effect = {
@@ -756,6 +784,7 @@ ciso_ms_schooling_increment_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_schooling_decrement_effect = {
@@ -781,6 +810,7 @@ ciso_ms_schooling_decrement_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_schooling_increment_alot_effect = {
@@ -806,6 +836,7 @@ ciso_ms_schooling_increment_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_schooling_decrement_alot_effect = {
@@ -831,6 +862,7 @@ ciso_ms_schooling_decrement_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_schooling_increment_very_alot_effect = {
@@ -856,6 +888,7 @@ ciso_ms_schooling_increment_very_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_schooling_decrement_very_alot_effect = {
@@ -881,6 +914,7 @@ ciso_ms_schooling_decrement_very_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_schooling_increment_alittle_effect = {
@@ -906,6 +940,7 @@ ciso_ms_schooling_increment_alittle_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_schooling_decrement_alittle_effect = {
@@ -931,6 +966,7 @@ ciso_ms_schooling_decrement_alittle_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_union_hall_conditions_effect = {
@@ -964,6 +1000,7 @@ ciso_ms_union_hall_conditions_effect = {
 			name = ciso_society_measures
 			target = flag:ciso_ms_union_hall
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_union_hall_increment_effect = {
@@ -989,6 +1026,7 @@ ciso_ms_union_hall_increment_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_union_hall_decrement_effect = {
@@ -1014,6 +1052,7 @@ ciso_ms_union_hall_decrement_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_union_hall_increment_alot_effect = {
@@ -1039,6 +1078,7 @@ ciso_ms_union_hall_increment_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_union_hall_decrement_alot_effect = {
@@ -1064,6 +1104,7 @@ ciso_ms_union_hall_decrement_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_union_hall_increment_very_alot_effect = {
@@ -1089,6 +1130,7 @@ ciso_ms_union_hall_increment_very_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_union_hall_decrement_very_alot_effect = {
@@ -1114,6 +1156,7 @@ ciso_ms_union_hall_decrement_very_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_union_hall_increment_alittle_effect = {
@@ -1139,6 +1182,7 @@ ciso_ms_union_hall_increment_alittle_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_union_hall_decrement_alittle_effect = {
@@ -1164,6 +1208,7 @@ ciso_ms_union_hall_decrement_alittle_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_health_center_conditions_effect = {
@@ -1197,6 +1242,7 @@ ciso_ms_health_center_conditions_effect = {
 			name = ciso_society_measures
 			target = flag:ciso_ms_health_center
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_health_center_increment_effect = {
@@ -1222,6 +1268,7 @@ ciso_ms_health_center_increment_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_health_center_decrement_effect = {
@@ -1247,6 +1294,7 @@ ciso_ms_health_center_decrement_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_health_center_increment_alot_effect = {
@@ -1272,6 +1320,7 @@ ciso_ms_health_center_increment_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_health_center_decrement_alot_effect = {
@@ -1297,6 +1346,7 @@ ciso_ms_health_center_decrement_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_health_center_increment_very_alot_effect = {
@@ -1322,6 +1372,7 @@ ciso_ms_health_center_increment_very_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_health_center_decrement_very_alot_effect = {
@@ -1347,6 +1398,7 @@ ciso_ms_health_center_decrement_very_alot_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_health_center_increment_alittle_effect = {
@@ -1372,6 +1424,7 @@ ciso_ms_health_center_increment_alittle_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
 ciso_ms_health_center_decrement_alittle_effect = {
@@ -1397,5 +1450,6 @@ ciso_ms_health_center_decrement_alittle_effect = {
 			min = 0
 			max = 100000000
 		}
+		ciso_update_cost = yes
 	}
 }
