@@ -4,4 +4,8 @@ ciso_ms_soup_kitchen = {
 	visible = {
 		always = yes
 	}
+
+	pop_weights = {
+		value = 1
+	}
 }

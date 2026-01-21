@@ -28,3 +28,65 @@ ciso_civsoc_process_monthly = {
 		ci = ciso_ci_manufacturing_corporations
 	}
 }
+ciso_update_ci_pop = {
+	if = {
+		limit = {
+			is_target_in_variable_list = {
+				name = ciso_civil_institutions
+				target = flag:ciso_ci_tammany_hall
+			}
+		}
+		ciso_get_ci_attraction_num = {
+			ci = ciso_ci_tammany_hall
+		}
+		set_variable = {
+			name = ciso_ci_tammany_hall_population
+			value = scope:ciso_total_ci_attraction_num_out
+		}
+	}
+	if = {
+		limit = {
+			is_target_in_variable_list = {
+				name = ciso_civil_institutions
+				target = flag:ciso_ci_heavy_industry_unions
+			}
+		}
+		ciso_get_ci_attraction_num = {
+			ci = ciso_ci_heavy_industry_unions
+		}
+		set_variable = {
+			name = ciso_ci_heavy_industry_unions_population
+			value = scope:ciso_total_ci_attraction_num_out
+		}
+	}
+	if = {
+		limit = {
+			is_target_in_variable_list = {
+				name = ciso_civil_institutions
+				target = flag:ciso_ci_royal_court
+			}
+		}
+		ciso_get_ci_attraction_num = {
+			ci = ciso_ci_royal_court
+		}
+		set_variable = {
+			name = ciso_ci_royal_court_population
+			value = scope:ciso_total_ci_attraction_num_out
+		}
+	}
+	if = {
+		limit = {
+			is_target_in_variable_list = {
+				name = ciso_civil_institutions
+				target = flag:ciso_ci_manufacturing_corporations
+			}
+		}
+		ciso_get_ci_attraction_num = {
+			ci = ciso_ci_manufacturing_corporations
+		}
+		set_variable = {
+			name = ciso_ci_manufacturing_corporations_population
+			value = scope:ciso_total_ci_attraction_num_out
+		}
+	}
+}

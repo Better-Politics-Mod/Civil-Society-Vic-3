@@ -20,4 +20,13 @@ ciso_measures_process_monthly = {
 	ciso_apply_ms_effect = {
 		ms = ciso_ms_health_center
 	}
+	if = {
+		limit = {
+			is_player = yes
+		}
+		ciso_update_ci_pop = yes
+	}
+}
+ciso_measures_process_halfyearly = {
+	ciso_update_ci_pop = yes
 }

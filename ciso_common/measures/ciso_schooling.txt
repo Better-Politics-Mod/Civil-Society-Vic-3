@@ -4,4 +4,8 @@ ciso_ms_schooling = {
 	visible = {
 		always = yes
 	}
+
+	pop_weights = {
+		value = 1
+	}
 }

@@ -24,7 +24,8 @@ ciso_init_civsoc = {
 		}
 		ciso_civsoc_process_monthly = yes
 		ciso_needs_process_monthly = yes
-		ciso_needs_process_monthly = yes
+		ciso_measures_process_monthly = yes
+		ciso_measures_process_halfyearly = yes
 		# do something
 	}
 }

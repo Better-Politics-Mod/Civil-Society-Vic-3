@@ -1,0 +1,14 @@
+add = {
+	value = 0
+	if = {
+		limit = {
+			state = { has_variable = <<root>>_$ci$_investment_alloc }
+		}
+		add = state.var:<<root>>_$ci$_investment_alloc
+	}
+	divide = ciso_B
+	divide = 8
+	multiply = <<root>>_pop_weights
+	max = 1
+	multiply = total_size
+}

@@ -97,32 +97,32 @@ types CISO_civinst_types
 						layoutpolicy_horizontal = expanding
 						layoutpolicy_vertical = preferred
 						margin = { 0 5 }
-
-						margin_right = 10
 						
 						hbox = {
 							layoutpolicy_horizontal = expanding
+
+							block "additional_support_label" {}
+
+							expand = {}
+							textbox = {
+								autoresize = yes
+								size = { 0 20 }
+								align = left|nobaseline
+								elide = left
+								fontsize = 18
+								margin_right = 8
+
+								block "support_label_text" {
+									text = "CISO_CIVINST_SUPPORT"
+								}
+							}
 
 							icon = {
 								size = { 25 25 }
 								texture = "gfx/interface/icons/generic_icons/population.dds"
 							}
 
-							block "additional_support_label" {}
-
 							expand = {}
-
-							textbox = {
-								layoutpolicy_horizontal = expanding
-								size = { 0 20 }
-								align = right|nobaseline
-								elide = right
-								fontsize_min = 12
-
-								block "support_label_text" {
-									text = "CISO_CIVINST_SUPPORT"
-								}
-							}
 						}
 
 						hbox = {
@@ -134,27 +134,31 @@ types CISO_civinst_types
 							# 	texture = "gfx/interface/icons/political_movement_icons/political_activism_red.dds"
 							# }
 
-							icon = {
-								#visible = "[Not(GreaterThanOrEqualTo_CFixedPoint(PoliticalMovement.GetRadicalism, '(CFixedPoint)0.5'))]"
-								size = { 25 25 }
-								texture = "gfx/interface/icons/political_movement_icons/political_activism.dds"
-							}
+
 
 							block "additional_activism_label" {}
 
 							expand = {}
 
 							textbox = {
-								layoutpolicy_horizontal = expanding
 								size = { 0 20 }
-								align = right|nobaseline
+								autoresize = yes
+								align = left|nobaseline
 								elide = right
-								fontsize_min = 12
+								fontsize = 14
 
 								block "activism_label_text" {
 									text = "CISO_CIVINST_ORGANIZATION"
 								}
 							}
+
+							icon = {
+								#visible = "[Not(GreaterThanOrEqualTo_CFixedPoint(PoliticalMovement.GetRadicalism, '(CFixedPoint)0.5'))]"
+								size = { 25 25 }
+								texture = "gfx/interface/icons/political_movement_icons/political_activism.dds"
+							}
+
+							expand = {}
 						}
 					}
 				}

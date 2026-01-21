@@ -36,6 +36,7 @@ ciso_on_halfyearly = {
 				ciso_state_has_civil_society = yes
 			}
 			ciso_civsoc_process_halfyearly = yes
+			ciso_measures_process_halfyearly = yes
 		}
 	}
 }

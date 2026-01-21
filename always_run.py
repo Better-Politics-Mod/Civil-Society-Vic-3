@@ -512,6 +512,26 @@ class CivInstHandler(BaseHandler):
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
             ms_weights = ParadoxHelper.get_script_block(tree, "measure_weights")
+
+            values_file[f"{root}_population"] = ParadoxParser("""
+                value = 0
+                if = {
+                    limit = {
+                        has_variable = <<root>>_population
+                    }
+                    add = var:<<root>>_population
+                }
+            """.replace("<<root>>", root)).parse()
+            values_file[f"{root}_organization"] = ParadoxParser("""
+                value = 0
+                if = {
+                    limit = {
+                        has_variable = <<root>>_organization
+                    }
+                    add = var:<<root>>_organization
+                }
+            """.replace("<<root>>", root)).parse()
+
             values_file[f"{root}_ms_weights"] = [{
                 "if": [
                 {
@@ -603,9 +623,25 @@ class CivInstHandler(BaseHandler):
     def handle_process(self):
         trees = self.trees
         process_file_monthly = []
+        process_file_size = []
 
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
+            process_file_size.append({
+                "if": [
+                {"limit": [
+                    {"is_target_in_variable_list": [
+                        {"name": "ciso_civil_institutions"},
+                        {"target": f"flag:{root}"}
+                    ]}
+                ]},
+                {"ciso_get_ci_attraction_num": [ { "ci": root } ] },
+                {"set_variable": [
+                    {"name": f"{root}_population" },
+                    {"value": "scope:ciso_total_ci_attraction_num_out" }
+                ]}
+            ]})
+
             process_file_monthly.append({
                 "ciso_civsoc_process_tooling_handle_creation": [
                     {"ci": root }
@@ -618,10 +654,12 @@ class CivInstHandler(BaseHandler):
                 "ciso_calculate_allocation": [ { "ci": root } ]
             })
 
+
         return {
             "ciso_civsoc_process_monthly": [
                 {"ciso_reset_all_measures_ci_invest": "yes"}
-            ] + process_file_monthly
+            ] + process_file_monthly,
+            "ciso_update_ci_pop": process_file_size
         }
 
     @handler(lambda c: c / "scripted_effects", "CISO_setup.txt")
@@ -685,6 +723,7 @@ class CivInstHandler(BaseHandler):
             triggers_file[f"{root}_creation_trigger"] = possible
         
         return triggers_file
+
 class MeasureHandler(BaseHandler):
 
     @handler(lambda c: c / "scripted_effects", "CISO_measures_magic_utils.txt")
@@ -715,6 +754,26 @@ class MeasureHandler(BaseHandler):
         import json
         #print(json.dumps({"ciso_do_every_measure_with_ci": magic_file}, indent=4))
         return {"ciso_do_every_measure_with_ci": magic_file}
+    @handler(lambda c: c / "scripted_effects", "CISO_measures_magic_values.txt")
+    def handle_magic_values(self):
+        trees = self.trees
+        magic_file = [{"value": "0"}]
+
+        with open(script_directory / "repetitemplate" / "repetinew-p1.txt") as f:
+            p1 = f.read()
+
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            magic_file.append({
+                "every_scope_pop": ParadoxParser(p1.replace("<<root>>", root)).parse()
+            })
+
+        return {"ciso_get_ci_attraction_num": [
+            {"save_scope_value_as": [
+                {"name": "ciso_total_ci_attraction_num_out" },
+                {"value": magic_file}
+            ]}
+        ]}
 
     @handler(lambda c: c / "institutions", "CISO_measures.txt")
     def handle_institution_icon(self):
@@ -735,6 +794,7 @@ class MeasureHandler(BaseHandler):
     def handle_process(self):
         trees = self.trees
         process_file_monthly = []
+        process_file_halfyearly = []
         
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
@@ -743,9 +803,23 @@ class MeasureHandler(BaseHandler):
                     {"ms": root }
                 ]
             })
-        
+            
+        process_file_monthly.append({
+            "if": [
+                {"limit": [
+                    {"is_player": "yes"}
+                ]},
+                { "ciso_update_ci_pop": "yes" }
+            ]
+        })
+
+        process_file_halfyearly.append({
+            "ciso_update_ci_pop": "yes"
+        })
+
         return {
-            "ciso_measures_process_monthly": process_file_monthly
+            "ciso_measures_process_monthly": process_file_monthly,
+            "ciso_measures_process_halfyearly": process_file_halfyearly
         }
 
     @handler(lambda c: c / "static_modifiers", "CISO_measure_modifiers.txt")
@@ -824,6 +898,9 @@ class MeasureHandler(BaseHandler):
         
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
+            attraction = ParadoxHelper.get_script_block(tree, "pop_weights")
+            script_value_file[f"{root}_pop_weights"] = attraction
+
             script_value_file[f"{root}_investment"] = [{
                 "if": [
                     {

@@ -4,4 +4,8 @@ ciso_ms_union_hall = {
 	visible = {
 		always = yes
 	}
+
+	pop_weights = {
+		value = 1
+	}
 }
