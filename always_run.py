@@ -532,6 +532,24 @@ class CivInstHandler(BaseHandler):
                 }
             """.replace("<<root>>", root)).parse()
 
+            values_file[f"{root}_org_trend"] = [
+                {"value": "0"},
+                {"substract": "-0.1"},
+                {"add": "ciso_total_unfulfilled_needs"},
+                {"if": [
+                    {"limit": [
+                        {"ciso_ci_is_radical": { "ci": root }}
+                    ]},
+                    {
+                        "add": "ciso_total_ci_attraction_num_out"
+                    }
+                ]},
+                {"multiply": [
+                    {"value": f"{root}_population" },
+                    { "divide": "state_population" }
+                ]}
+            ]
+
             values_file[f"{root}_ms_weights"] = [{
                 "if": [
                 {
@@ -639,6 +657,10 @@ class CivInstHandler(BaseHandler):
                 {"set_variable": [
                     {"name": f"{root}_population" },
                     {"value": "scope:ciso_total_ci_attraction_num_out" }
+                ]},
+                {"change_variable": [
+                    {"name": f"{root}_organization" },
+                    {"add": f"{root}_org_trend" }
                 ]}
             ]})
 
@@ -1152,6 +1174,7 @@ class Needs(BaseHandler):
     def handle_script_value(self):
         trees = self.trees
         script_value_file = {}
+        unfulfilled_needs = [{"value": 0}]
         
         for tree in trees:
             required_value = ParadoxHelper.get_script_block(tree, "required_value")
@@ -1160,6 +1183,26 @@ class Needs(BaseHandler):
                 "value": f"modifier:state_{root}_fp"
             }]
             script_value_file[f"{root}_rfp"] = required_value
+
+            unfulfilled_needs.append({
+                "if": [
+                    {"limit": [{
+                        "is_target_in_variable_list": [
+                            {"name": "ciso_needs"},
+                            {"target": f"flag:{root}"}
+                        ]
+                    }]},
+                    {
+                        "add": [
+                            { "value": f"{root}_rfp" },
+                            { "subtract": f"{root}_fp" },
+                            { "min": 0 }
+                        ]
+                    }
+                ]
+            })
+
+        script_value_file["ciso_total_unfulfilled_needs"] = unfulfilled_needs
 
         return script_value_file
 

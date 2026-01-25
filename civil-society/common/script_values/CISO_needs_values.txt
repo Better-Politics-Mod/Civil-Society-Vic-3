@@ -8,3 +8,19 @@ ciso_ne_welfare_rfp = {
 	value = state_population
 	divide = 400000
 }
+ciso_total_unfulfilled_needs = {
+	value = 0
+	if = {
+		limit = {
+			is_target_in_variable_list = {
+				name = ciso_needs
+				target = flag:ciso_ne_welfare
+			}
+		}
+		add = {
+			value = ciso_ne_welfare_rfp
+			subtract = ciso_ne_welfare_fp
+			min = 0
+		}
+	}
+}

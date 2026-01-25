@@ -19,6 +19,23 @@ ciso_ci_tammany_hall_organization = {
 		add = var:ciso_ci_tammany_hall_organization
 	}
 }
+ciso_ci_tammany_hall_org_trend = {
+	value = 0
+	substract = -0.1
+	add = ciso_total_unfulfilled_needs
+	if = {
+		limit = {
+			ciso_ci_is_radical = {
+				ci = ciso_ci_tammany_hall
+			}
+		}
+		add = ciso_total_ci_attraction_num_out
+	}
+	multiply = {
+		value = ciso_ci_tammany_hall_population
+		divide = state_population
+	}
+}
 ciso_ci_tammany_hall_ms_weights = {
 	if = {
 		limit = {
@@ -107,6 +124,23 @@ ciso_ci_heavy_industry_unions_organization = {
 			has_variable = ciso_ci_heavy_industry_unions_organization
 		}
 		add = var:ciso_ci_heavy_industry_unions_organization
+	}
+}
+ciso_ci_heavy_industry_unions_org_trend = {
+	value = 0
+	substract = -0.1
+	add = ciso_total_unfulfilled_needs
+	if = {
+		limit = {
+			ciso_ci_is_radical = {
+				ci = ciso_ci_heavy_industry_unions
+			}
+		}
+		add = ciso_total_ci_attraction_num_out
+	}
+	multiply = {
+		value = ciso_ci_heavy_industry_unions_population
+		divide = state_population
 	}
 }
 ciso_ci_heavy_industry_unions_ms_weights = {
@@ -199,6 +233,23 @@ ciso_ci_royal_court_organization = {
 		add = var:ciso_ci_royal_court_organization
 	}
 }
+ciso_ci_royal_court_org_trend = {
+	value = 0
+	substract = -0.1
+	add = ciso_total_unfulfilled_needs
+	if = {
+		limit = {
+			ciso_ci_is_radical = {
+				ci = ciso_ci_royal_court
+			}
+		}
+		add = ciso_total_ci_attraction_num_out
+	}
+	multiply = {
+		value = ciso_ci_royal_court_population
+		divide = state_population
+	}
+}
 ciso_ci_royal_court_ms_weights = {
 	if = {
 		limit = {
@@ -287,6 +338,23 @@ ciso_ci_manufacturing_corporations_organization = {
 			has_variable = ciso_ci_manufacturing_corporations_organization
 		}
 		add = var:ciso_ci_manufacturing_corporations_organization
+	}
+}
+ciso_ci_manufacturing_corporations_org_trend = {
+	value = 0
+	substract = -0.1
+	add = ciso_total_unfulfilled_needs
+	if = {
+		limit = {
+			ciso_ci_is_radical = {
+				ci = ciso_ci_manufacturing_corporations
+			}
+		}
+		add = ciso_total_ci_attraction_num_out
+	}
+	multiply = {
+		value = ciso_ci_manufacturing_corporations_population
+		divide = state_population
 	}
 }
 ciso_ci_manufacturing_corporations_ms_weights = {
