@@ -5,7 +5,7 @@
 
   CISO_CIVINST_NAME: "Heavy Industry Unions"
   CISO_CIVINST_SUPPORT: "[State.MakeScope.ScriptValue(Concatenate(Scope.GetFlagName, '_population'))|vD0]"
-  CISO_CIVINST_ORGANIZATION: "#green;b Disciplined#! (#v 100%#!)"
+  CISO_CIVINST_ORGANIZATION: "[State.MakeScope.ScriptValue(Concatenate(Scope.GetFlagName, '_organization'))|vD0] ([State.MakeScope.ScriptValue(Concatenate(Scope.GetFlagName, '_org_trend'))|v=2])"
   CISO_CIVINST_SI: "[State.MakeScope.ScriptValue(Concatenate(Scope.GetFlagName, '_social_impact'))|vD0]" # ciso_ci_tammany_hall_ms_weights
 
 

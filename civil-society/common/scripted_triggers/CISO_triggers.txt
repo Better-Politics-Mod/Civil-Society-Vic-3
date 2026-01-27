@@ -5,6 +5,19 @@ ciso_ci_tammany_hall_creation_trigger = {
 	always = yes
 	state_region = s:STATE_NEW_YORK
 }
+ciso_ci_tammany_hall_is_radical = {
+	OWNER = {
+		OR = {
+			has_law = law_type:law_censorship
+			has_law = law_type:law_outlawed_dissent
+		}
+	}
+}
+ciso_ci_tammany_hall_is_loyalist = {
+	OWNER = {
+		has_law = law_type:law_guaranteed_liberties
+	}
+}
 ciso_ci_heavy_industry_unions_creation_trigger = {
 	custom_tooltip = {
 		text = ciso_ci_heavy_industry_unions_creation_trigger_heavy_industry
@@ -22,6 +35,19 @@ ciso_ci_heavy_industry_unions_creation_trigger = {
 	}
 	always = yes
 }
+ciso_ci_heavy_industry_unions_is_radical = {
+	OWNER = {
+		has_law = law_type:law_combination_acts
+	}
+}
+ciso_ci_heavy_industry_unions_is_loyalist = {
+	OWNER = {
+		OR = {
+			has_law = law_type:law_corporatized_unions
+			has_law = law_type:law_factory_councils
+		}
+	}
+}
 ciso_ci_royal_court_creation_trigger = {
 	custom_tooltip = {
 		text = ciso_ci_royal_court_creation_trigger_is_royal_capital
@@ -30,6 +56,12 @@ ciso_ci_royal_court_creation_trigger = {
 			has_law = law_type:law_monarchy
 		}
 	}
+	always = yes
+}
+ciso_ci_royal_court_is_radical = {
+	always = no
+}
+ciso_ci_royal_court_is_loyalist = {
 	always = yes
 }
 ciso_ci_manufacturing_corporations_creation_trigger = {
@@ -49,4 +81,14 @@ ciso_ci_manufacturing_corporations_creation_trigger = {
 		}
 	}
 	always = yes
+}
+ciso_ci_manufacturing_corporations_is_radical = {
+	OWNER = {
+		has_law = law_type:law_industry_banned
+	}
+}
+ciso_ci_manufacturing_corporations_is_loyalist = {
+	OWNER = {
+		has_law = law_type:law_laissez_faire
+	}
 }

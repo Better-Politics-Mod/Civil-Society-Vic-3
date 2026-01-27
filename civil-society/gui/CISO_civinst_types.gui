@@ -50,7 +50,26 @@ types CISO_civinst_types
 						align = nobaseline
 						elide = right
 						fontsize_min = 12
+						text = "#N [Localize(Concatenate(Scope.GetFlagName, '_name')))]#!"
+						visible = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_is_radical_trigger_sgui')).IsShown(GuiScope.SetRoot(State.MakeScope).End)]"
+					}
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						size = { 60 20 }
+						align = nobaseline
+						elide = right
+						fontsize_min = 12
+						text = "#green [Localize(Concatenate(Scope.GetFlagName, '_name')))]#!"
+						visible = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_is_loyalist_trigger_sgui')).IsShown(GuiScope.SetRoot(State.MakeScope).End)]"
+					}
+					textbox = {
+						layoutpolicy_horizontal = expanding
+						size = { 60 20 }
+						align = nobaseline
+						elide = right
+						fontsize_min = 12
 						text = "[Localize(Concatenate(Scope.GetFlagName, '_name')))]"
+						visible = "[And(Not(GetScriptedGui(Concatenate(Scope.GetFlagName, '_is_radical_trigger_sgui')).IsShown(GuiScope.SetRoot(State.MakeScope).End)), Not(GetScriptedGui(Concatenate(Scope.GetFlagName, '_is_loyalist_trigger_sgui')).IsShown(GuiScope.SetRoot(State.MakeScope).End)))]"
 					}
 				}
 

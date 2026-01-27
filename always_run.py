@@ -535,7 +535,10 @@ class CivInstHandler(BaseHandler):
             values_file[f"{root}_org_trend"] = [
                 {"value": "0"},
                 {"substract": "-0.1"},
-                {"add": "ciso_total_unfulfilled_needs"},
+                {"add": [
+                    {"value": "ciso_total_unfulfilled_needs"},
+                    {"divide": 10},
+                ]},
                 {"if": [
                     {"limit": [
                         {"ciso_ci_is_radical": { "ci": root }}
@@ -658,9 +661,12 @@ class CivInstHandler(BaseHandler):
                     {"name": f"{root}_population" },
                     {"value": "scope:ciso_total_ci_attraction_num_out" }
                 ]},
-                {"change_variable": [
+                {"set_variable": [
                     {"name": f"{root}_organization" },
-                    {"add": f"{root}_org_trend" }
+                    {"value": [
+                        {"value": f"{root}_organization" },
+                        {"add": f"{root}_org_trend" }
+                    ]}
                 ]}
             ]})
 
@@ -708,6 +714,20 @@ class CivInstHandler(BaseHandler):
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
             visible = ParadoxHelper.get_script_block(tree, "visible")
+
+            sgui_file[f"{root}_is_radical_trigger_sgui"] = [
+                {"scope": "state"},
+                {
+                    "is_shown": [{ f"{root}_is_radical": "yes" }]
+                }
+            ]
+
+            sgui_file[f"{root}_is_loyalist_trigger_sgui"] = [
+                {"scope": "state"},
+                {
+                    "is_shown": [{ f"{root}_is_loyalist": "yes" }]
+                }
+            ]
             
             sgui_file[f"{root}_creation_trigger_sgui"] = [
                 {"scope": "state"},
@@ -739,10 +759,13 @@ class CivInstHandler(BaseHandler):
             root = ParadoxHelper.get_root(tree)
             possible = ParadoxHelper.get_script_block(tree, "possible")
             visible = ParadoxHelper.get_script_block(tree, "visible")
-
+            is_radical = ParadoxHelper.get_script_block(tree, "is_radical")
+            is_loyalist = ParadoxHelper.get_script_block(tree, "is_loyalist")
             possible.extend(visible)
 
             triggers_file[f"{root}_creation_trigger"] = possible
+            triggers_file[f"{root}_is_radical"] = is_radical
+            triggers_file[f"{root}_is_loyalist"] = is_loyalist
         
         return triggers_file
 

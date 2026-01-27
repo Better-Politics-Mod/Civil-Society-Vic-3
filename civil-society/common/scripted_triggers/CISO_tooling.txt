@@ -15,3 +15,7 @@ ciso_state_has_civil_society = {
 		}
 	}
 }
+
+ciso_ci_is_radical = {
+	$ci$_is_radical = yes
+}

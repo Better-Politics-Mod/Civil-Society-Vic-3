@@ -24,4 +24,12 @@ ciso_ci_royal_court = {
 			add = 1
 		}
 	}
+
+	is_radical = {
+		always = no
+	}
+
+	is_loyalist = {
+		always = yes
+	}
 }

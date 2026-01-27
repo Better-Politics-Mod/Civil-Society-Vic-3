@@ -43,9 +43,12 @@ ciso_update_ci_pop = {
 			name = ciso_ci_tammany_hall_population
 			value = scope:ciso_total_ci_attraction_num_out
 		}
-		change_variable = {
+		set_variable = {
 			name = ciso_ci_tammany_hall_organization
-			add = ciso_ci_tammany_hall_org_trend
+			value = {
+				value = ciso_ci_tammany_hall_organization
+				add = ciso_ci_tammany_hall_org_trend
+			}
 		}
 	}
 	if = {
@@ -62,9 +65,12 @@ ciso_update_ci_pop = {
 			name = ciso_ci_heavy_industry_unions_population
 			value = scope:ciso_total_ci_attraction_num_out
 		}
-		change_variable = {
+		set_variable = {
 			name = ciso_ci_heavy_industry_unions_organization
-			add = ciso_ci_heavy_industry_unions_org_trend
+			value = {
+				value = ciso_ci_heavy_industry_unions_organization
+				add = ciso_ci_heavy_industry_unions_org_trend
+			}
 		}
 	}
 	if = {
@@ -81,9 +87,12 @@ ciso_update_ci_pop = {
 			name = ciso_ci_royal_court_population
 			value = scope:ciso_total_ci_attraction_num_out
 		}
-		change_variable = {
+		set_variable = {
 			name = ciso_ci_royal_court_organization
-			add = ciso_ci_royal_court_org_trend
+			value = {
+				value = ciso_ci_royal_court_organization
+				add = ciso_ci_royal_court_org_trend
+			}
 		}
 	}
 	if = {
@@ -100,9 +109,12 @@ ciso_update_ci_pop = {
 			name = ciso_ci_manufacturing_corporations_population
 			value = scope:ciso_total_ci_attraction_num_out
 		}
-		change_variable = {
+		set_variable = {
 			name = ciso_ci_manufacturing_corporations_organization
-			add = ciso_ci_manufacturing_corporations_org_trend
+			value = {
+				value = ciso_ci_manufacturing_corporations_organization
+				add = ciso_ci_manufacturing_corporations_org_trend
+			}
 		}
 	}
 }
