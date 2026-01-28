@@ -18,8 +18,15 @@ ciso_get_ci_attraction_num = {
 						add = state.var:ciso_ms_insurance_$ci$_investment_alloc
 					}
 					divide = ciso_B
-					divide = 8
 					multiply = ciso_ms_insurance_pop_weights
+					multiply = {
+						value = state.$ci$_organization
+						divide = 100
+						min = 0.1
+						max = 1
+						pow = 0.5
+					}
+					multiply = state.ciso_ms_insurance_efficiency
 					multiply = state.ciso_ms_insurance_efficiency
 					max = 1
 					multiply = total_size
@@ -37,8 +44,15 @@ ciso_get_ci_attraction_num = {
 						add = state.var:ciso_ms_soup_kitchen_$ci$_investment_alloc
 					}
 					divide = ciso_B
-					divide = 8
 					multiply = ciso_ms_soup_kitchen_pop_weights
+					multiply = {
+						value = state.$ci$_organization
+						divide = 100
+						min = 0.1
+						max = 1
+						pow = 0.5
+					}
+					multiply = state.ciso_ms_soup_kitchen_efficiency
 					multiply = state.ciso_ms_soup_kitchen_efficiency
 					max = 1
 					multiply = total_size
@@ -56,8 +70,15 @@ ciso_get_ci_attraction_num = {
 						add = state.var:ciso_ms_library_$ci$_investment_alloc
 					}
 					divide = ciso_B
-					divide = 8
 					multiply = ciso_ms_library_pop_weights
+					multiply = {
+						value = state.$ci$_organization
+						divide = 100
+						min = 0.1
+						max = 1
+						pow = 0.5
+					}
+					multiply = state.ciso_ms_library_efficiency
 					multiply = state.ciso_ms_library_efficiency
 					max = 1
 					multiply = total_size
@@ -75,8 +96,15 @@ ciso_get_ci_attraction_num = {
 						add = state.var:ciso_ms_schooling_$ci$_investment_alloc
 					}
 					divide = ciso_B
-					divide = 8
 					multiply = ciso_ms_schooling_pop_weights
+					multiply = {
+						value = state.$ci$_organization
+						divide = 100
+						min = 0.1
+						max = 1
+						pow = 0.5
+					}
+					multiply = state.ciso_ms_schooling_efficiency
 					multiply = state.ciso_ms_schooling_efficiency
 					max = 1
 					multiply = total_size
@@ -94,8 +122,15 @@ ciso_get_ci_attraction_num = {
 						add = state.var:ciso_ms_union_hall_$ci$_investment_alloc
 					}
 					divide = ciso_B
-					divide = 8
 					multiply = ciso_ms_union_hall_pop_weights
+					multiply = {
+						value = state.$ci$_organization
+						divide = 100
+						min = 0.1
+						max = 1
+						pow = 0.5
+					}
+					multiply = state.ciso_ms_union_hall_efficiency
 					multiply = state.ciso_ms_union_hall_efficiency
 					max = 1
 					multiply = total_size
@@ -113,8 +148,15 @@ ciso_get_ci_attraction_num = {
 						add = state.var:ciso_ms_health_center_$ci$_investment_alloc
 					}
 					divide = ciso_B
-					divide = 8
 					multiply = ciso_ms_health_center_pop_weights
+					multiply = {
+						value = state.$ci$_organization
+						divide = 100
+						min = 0.1
+						max = 1
+						pow = 0.5
+					}
+					multiply = state.ciso_ms_health_center_efficiency
 					multiply = state.ciso_ms_health_center_efficiency
 					max = 1
 					multiply = total_size

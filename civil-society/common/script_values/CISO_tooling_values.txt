@@ -3,5 +3,5 @@ ciso_B = {
 }
 
 ciso_size_scaling_factor = {
-	value = 100000
+	value = 10000
 }

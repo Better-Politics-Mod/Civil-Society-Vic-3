@@ -52,6 +52,7 @@ ciso_ci_heavy_industry_unions = {
 		multiply = size # the numbers of pops supporting the institution
 		divide = ciso_size_scaling_factor # usu. 100,000
 		multiply = average_sol
+		divide = 10
 		round = yes
 	}
 }

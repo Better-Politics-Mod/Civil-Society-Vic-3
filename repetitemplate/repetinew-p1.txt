@@ -7,8 +7,16 @@ add = {
 		add = state.var:<<root>>_$ci$_investment_alloc
 	}
 	divide = ciso_B
-	divide = 8
 	multiply = <<root>>_pop_weights
+	# exponentially diminishing returns
+	multiply = {
+		value = state.$ci$_organization
+		divide = 100
+		min = 0.1
+		max = 1
+		pow = 0.5
+	}
+	multiply = state.<<root>>_efficiency
 	multiply = state.<<root>>_efficiency
 	max = 1
 	multiply = total_size

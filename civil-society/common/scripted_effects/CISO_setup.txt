@@ -24,7 +24,7 @@ ciso_init_civsoc_global = {
 		}
 		set_variable = {
 			name = ciso_ci_tammany_hall_organization
-			value = 20
+			value = 80
 		}
 		set_variable = {
 			name = ciso_ci_heavy_industry_unions_organization

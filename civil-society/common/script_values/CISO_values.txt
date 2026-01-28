@@ -3,12 +3,8 @@
 
 ciso_ci_tammany_hall_social_impact_base = {
 	value = ciso_ci_tammany_hall_organization
-	multiply = ciso_ci_tammany_hall_organization
-	multiply = ciso_ci_tammany_hall_organization
-	divide = 10000
 	multiply = ciso_ci_tammany_hall_population
 	divide = ciso_size_scaling_factor
-	multiply = 80
 	round = yes
 }
 ciso_ci_tammany_hall_population = {
@@ -79,13 +75,13 @@ ciso_ci_tammany_hall_ms_weights = {
 	}
 }
 ciso_ci_tammany_hall_social_impact = {
-	value = 300
+	value = 100
 	if = {
 		limit = {
 			has_variable = ciso_ci_tammany_hall_social_impact
 		}
 		value = var:ciso_ci_tammany_hall_social_impact
-		min = 300
+		min = 100
 	}
 }
 ciso_ci_tammany_hall_avg_sqrt_weight = {
@@ -137,6 +133,7 @@ ciso_ci_heavy_industry_unions_social_impact_base = {
 	multiply = ciso_ci_heavy_industry_unions_population
 	divide = ciso_size_scaling_factor
 	multiply = average_sol
+	divide = 10
 	round = yes
 }
 ciso_ci_heavy_industry_unions_population = {
@@ -204,13 +201,13 @@ ciso_ci_heavy_industry_unions_ms_weights = {
 	}
 }
 ciso_ci_heavy_industry_unions_social_impact = {
-	value = 300
+	value = 100
 	if = {
 		limit = {
 			has_variable = ciso_ci_heavy_industry_unions_social_impact
 		}
 		value = var:ciso_ci_heavy_industry_unions_social_impact
-		min = 300
+		min = 100
 	}
 }
 ciso_ci_heavy_industry_unions_avg_sqrt_weight = {
@@ -261,7 +258,6 @@ ciso_ci_royal_court_social_impact_base = {
 	value = ciso_ci_royal_court_organization
 	multiply = ciso_ci_royal_court_population
 	divide = ciso_size_scaling_factor
-	multiply = 10
 	round = yes
 }
 ciso_ci_royal_court_population = {
@@ -329,13 +325,13 @@ ciso_ci_royal_court_ms_weights = {
 	}
 }
 ciso_ci_royal_court_social_impact = {
-	value = 300
+	value = 100
 	if = {
 		limit = {
 			has_variable = ciso_ci_royal_court_social_impact
 		}
 		value = var:ciso_ci_royal_court_social_impact
-		min = 300
+		min = 100
 	}
 }
 ciso_ci_royal_court_avg_sqrt_weight = {
@@ -384,11 +380,8 @@ ciso_ci_royal_court_num_measures = {
 }
 ciso_ci_manufacturing_corporations_social_impact_base = {
 	value = ciso_ci_manufacturing_corporations_organization
-	multiply = ciso_ci_manufacturing_corporations_organization
-	divide = 100
 	multiply = ciso_ci_manufacturing_corporations_population
 	divide = ciso_size_scaling_factor
-	multiply = 20
 	round = yes
 }
 ciso_ci_manufacturing_corporations_population = {
@@ -456,13 +449,13 @@ ciso_ci_manufacturing_corporations_ms_weights = {
 	}
 }
 ciso_ci_manufacturing_corporations_social_impact = {
-	value = 300
+	value = 100
 	if = {
 		limit = {
 			has_variable = ciso_ci_manufacturing_corporations_social_impact
 		}
 		value = var:ciso_ci_manufacturing_corporations_social_impact
-		min = 300
+		min = 100
 	}
 }
 ciso_ci_manufacturing_corporations_avg_sqrt_weight = {

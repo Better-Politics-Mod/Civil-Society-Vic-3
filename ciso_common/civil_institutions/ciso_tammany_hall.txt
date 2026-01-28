@@ -36,12 +36,8 @@ ciso_ci_tammany_hall = {
 
 	social_impact = {
 		value = organization # %
-		multiply = organization
-		multiply = organization
-		divide = 10000 # organization is 1-100 so we need to divide by 100^2 (10,000) to get proper scaling
 		multiply = size # the numbers of pops supporting the institution
 		divide = ciso_size_scaling_factor # usu. 100,000
-		multiply = 80
 		round = yes
 	}
 

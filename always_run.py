@@ -645,13 +645,13 @@ class CivInstHandler(BaseHandler):
                 ]
             }] + ms_weights
             values_file[f"{root}_social_impact"] = ParadoxParser("""
-                value = 300
+                value = 100
                 if = {
                     limit = {
                         has_variable = <<root>>_social_impact
                     }
                     value = var:<<root>>_social_impact
-                    min = 300
+                    min = 100
                 }
             """.replace("<<root>>", root)).parse()
             values_file[f"{root}_avg_sqrt_weight"] = ParadoxParser("""
@@ -787,12 +787,20 @@ class CivInstHandler(BaseHandler):
 
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
-            init_global_orgset.append({
-                "set_variable": [
-                    {"name": f"{root}_organization" },
-                    {"value": 20 }
-                ]
-            })
+            if not "tammany" in root:
+                init_global_orgset.append({
+                    "set_variable": [
+                        {"name": f"{root}_organization" },
+                        {"value": 20 }
+                    ]
+                })
+            else:
+                init_global_orgset.append({
+                    "set_variable": [
+                        {"name": f"{root}_organization" },
+                        {"value": 80 }
+                    ]
+                })
         
 
 
