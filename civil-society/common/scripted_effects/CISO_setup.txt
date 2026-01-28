@@ -18,4 +18,25 @@ ciso_init_civsoc_global = {
 		name = ciso_civil_institutions
 		target = flag:ciso_ci_manufacturing_corporations
 	}
+	every_state = {
+		limit = {
+			ciso_state_has_civil_society = yes
+		}
+		set_variable = {
+			name = ciso_ci_tammany_hall_organization
+			value = 20
+		}
+		set_variable = {
+			name = ciso_ci_heavy_industry_unions_organization
+			value = 20
+		}
+		set_variable = {
+			name = ciso_ci_royal_court_organization
+			value = 20
+		}
+		set_variable = {
+			name = ciso_ci_manufacturing_corporations_organization
+			value = 20
+		}
+	}
 }

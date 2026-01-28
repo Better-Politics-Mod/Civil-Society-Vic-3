@@ -4,6 +4,13 @@
 ciso_ms_insurance_pop_weights = {
 	value = 1
 }
+ciso_ms_insurance_efficiency = {
+	value = ciso_B
+	divide = {
+		value = ciso_ms_insurance_investment
+		add = ciso_B
+	}
+}
 ciso_ms_insurance_investment = {
 	if = {
 		limit = {
@@ -34,6 +41,13 @@ ciso_ms_insurance_investment_gov = {
 }
 ciso_ms_soup_kitchen_pop_weights = {
 	value = 1
+}
+ciso_ms_soup_kitchen_efficiency = {
+	value = ciso_B
+	divide = {
+		value = ciso_ms_soup_kitchen_investment
+		add = ciso_B
+	}
 }
 ciso_ms_soup_kitchen_investment = {
 	if = {
@@ -66,6 +80,13 @@ ciso_ms_soup_kitchen_investment_gov = {
 ciso_ms_library_pop_weights = {
 	value = 1
 }
+ciso_ms_library_efficiency = {
+	value = ciso_B
+	divide = {
+		value = ciso_ms_library_investment
+		add = ciso_B
+	}
+}
 ciso_ms_library_investment = {
 	if = {
 		limit = {
@@ -96,6 +117,13 @@ ciso_ms_library_investment_gov = {
 }
 ciso_ms_schooling_pop_weights = {
 	value = 1
+}
+ciso_ms_schooling_efficiency = {
+	value = ciso_B
+	divide = {
+		value = ciso_ms_schooling_investment
+		add = ciso_B
+	}
 }
 ciso_ms_schooling_investment = {
 	if = {
@@ -128,6 +156,13 @@ ciso_ms_schooling_investment_gov = {
 ciso_ms_union_hall_pop_weights = {
 	value = 1
 }
+ciso_ms_union_hall_efficiency = {
+	value = ciso_B
+	divide = {
+		value = ciso_ms_union_hall_investment
+		add = ciso_B
+	}
+}
 ciso_ms_union_hall_investment = {
 	if = {
 		limit = {
@@ -158,6 +193,13 @@ ciso_ms_union_hall_investment_gov = {
 }
 ciso_ms_health_center_pop_weights = {
 	value = 1
+}
+ciso_ms_health_center_efficiency = {
+	value = ciso_B
+	divide = {
+		value = ciso_ms_health_center_investment
+		add = ciso_B
+	}
 }
 ciso_ms_health_center_investment = {
 	if = {

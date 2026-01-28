@@ -22,7 +22,9 @@ ciso_measures_process_monthly = {
 	}
 	if = {
 		limit = {
-			is_player = yes
+			owner = {
+				is_player = yes
+			}
 		}
 		ciso_update_ci_pop = yes
 	}

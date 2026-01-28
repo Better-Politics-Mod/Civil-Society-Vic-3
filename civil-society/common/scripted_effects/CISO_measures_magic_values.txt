@@ -20,6 +20,7 @@ ciso_get_ci_attraction_num = {
 					divide = ciso_B
 					divide = 8
 					multiply = ciso_ms_insurance_pop_weights
+					multiply = state.ciso_ms_insurance_efficiency
 					max = 1
 					multiply = total_size
 				}
@@ -38,6 +39,7 @@ ciso_get_ci_attraction_num = {
 					divide = ciso_B
 					divide = 8
 					multiply = ciso_ms_soup_kitchen_pop_weights
+					multiply = state.ciso_ms_soup_kitchen_efficiency
 					max = 1
 					multiply = total_size
 				}
@@ -56,6 +58,7 @@ ciso_get_ci_attraction_num = {
 					divide = ciso_B
 					divide = 8
 					multiply = ciso_ms_library_pop_weights
+					multiply = state.ciso_ms_library_efficiency
 					max = 1
 					multiply = total_size
 				}
@@ -74,6 +77,7 @@ ciso_get_ci_attraction_num = {
 					divide = ciso_B
 					divide = 8
 					multiply = ciso_ms_schooling_pop_weights
+					multiply = state.ciso_ms_schooling_efficiency
 					max = 1
 					multiply = total_size
 				}
@@ -92,6 +96,7 @@ ciso_get_ci_attraction_num = {
 					divide = ciso_B
 					divide = 8
 					multiply = ciso_ms_union_hall_pop_weights
+					multiply = state.ciso_ms_union_hall_efficiency
 					max = 1
 					multiply = total_size
 				}
@@ -110,6 +115,7 @@ ciso_get_ci_attraction_num = {
 					divide = ciso_B
 					divide = 8
 					multiply = ciso_ms_health_center_pop_weights
+					multiply = state.ciso_ms_health_center_efficiency
 					max = 1
 					multiply = total_size
 				}

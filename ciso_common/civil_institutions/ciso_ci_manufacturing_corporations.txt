@@ -44,4 +44,14 @@ ciso_ci_manufacturing_corporations = {
 			has_law = law_type:law_laissez_faire
 		}
 	}
+
+	social_impact = {
+		value = organization
+		multiply = organization
+		divide = 100 # organization is 1-100 so we need to divide by 100^1 (100) to get proper scaling
+		multiply = size # the numbers of pops supporting the institution
+		divide = ciso_size_scaling_factor # usu. 100,000
+		multiply = 20
+		round = yes
+	}
 }

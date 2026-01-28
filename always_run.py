@@ -365,6 +365,53 @@ class ParadoxHelper:
         return parser.parse()
 
     @staticmethod
+    def replace_leaves(tree, old_str, new_str):
+        """
+        Replace all occurrences of old_str with new_str in all leaf values of the tree.
+        
+        Args:
+            tree: The parsed tree structure (dict, list, or primitive)
+            old_str: String to search for
+            new_str: String to replace with
+            
+        Returns:
+            A new tree with replacements applied
+        """
+        if isinstance(tree, dict):
+            result = {}
+            for key, value in tree.items():
+                # Also check if the key itself contains the old_str
+                new_key = key.replace(old_str, new_str) if (isinstance(key, str) and key.strip() == old_str) else key
+                result[new_key] = ParadoxHelper.replace_leaves(value, old_str, new_str)
+            return result
+        elif isinstance(tree, list):
+            return [ParadoxHelper.replace_leaves(item, old_str, new_str) for item in tree]
+        elif isinstance(tree, str):
+            if tree.strip() == old_str:
+                return tree.replace(old_str, new_str)
+            else:
+                return tree
+        else:
+            # For non-string primitives (int, float, bool, None), return as-is
+            return tree
+    
+
+    @staticmethod
+    def multi_replace_leaves(tree, pairs):
+        """
+        Replace multiple string pairs in all leaf values of the tree.
+        
+        Args:
+            tree: The parsed tree structure (dict, list, or primitive)
+            pairs: List of (old_str, new_str) tuples
+        Returns:
+            A new tree with replacements applied
+        """
+        for old_str, new_str in pairs:
+            tree = ParadoxHelper.replace_leaves(tree, old_str, new_str)
+        return tree
+
+    @staticmethod
     def dict_to_paradox(tree, indent_char='\t'):
         """Convert a parsed tree structure back to Paradox script format."""
         writer = ParadoxWriter(indent_char=indent_char)
@@ -374,6 +421,11 @@ class ParadoxHelper:
     def get_root(tree):
         # this is the only key in the dict
         return next(iter(tree))
+
+    @staticmethod 
+    def has_block(tree, block_name):
+        root = ParadoxHelper.get_root(tree)
+        return block_name in tree[root]
 
     @staticmethod
     def get_script_block(tree, block_name):
@@ -512,6 +564,16 @@ class CivInstHandler(BaseHandler):
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
             ms_weights = ParadoxHelper.get_script_block(tree, "measure_weights")
+            social_impact = ParadoxHelper.multi_replace_leaves(
+                ParadoxHelper.get_script_block(tree, "social_impact"),
+                [
+                    ("organization", f"{root}_organization"),
+                    ("size", f"{root}_population"),
+                ]
+            )
+
+
+            values_file[f"{root}_social_impact_base"] = social_impact
 
             values_file[f"{root}_population"] = ParadoxParser("""
                 value = 0
@@ -550,8 +612,21 @@ class CivInstHandler(BaseHandler):
                 {"multiply": [
                     {"value": f"{root}_population" },
                     { "divide": "state_population" }
-                ]}
+                ]},
+                # higher org makes gains & losses slower
+                {"multiply": [
+                    {"value": 100},
+                    {"subtract": f"{root}_organization" },
+                    {"divide": 100},
+                    {"min": 0.02}
+                ]},
+                {"multiply": 5}
             ]
+
+            if ParadoxHelper.has_block(tree, "organization_trend_mult"):
+                values_file[f"{root}_org_trend"].append({
+                    "multiply": ParadoxHelper.get_script_block(tree, "organization_trend_mult")
+                })
 
             values_file[f"{root}_ms_weights"] = [{
                 "if": [
@@ -570,12 +645,13 @@ class CivInstHandler(BaseHandler):
                 ]
             }] + ms_weights
             values_file[f"{root}_social_impact"] = ParadoxParser("""
-                value = 500
+                value = 300
                 if = {
                     limit = {
                         has_variable = <<root>>_social_impact
                     }
-                    add = var:<<root>>_social_impact
+                    value = var:<<root>>_social_impact
+                    min = 300
                 }
             """.replace("<<root>>", root)).parse()
             values_file[f"{root}_avg_sqrt_weight"] = ParadoxParser("""
@@ -662,6 +738,10 @@ class CivInstHandler(BaseHandler):
                     {"value": "scope:ciso_total_ci_attraction_num_out" }
                 ]},
                 {"set_variable": [
+                    {"name": f"{root}_social_impact" },
+                    {"value": f"{root}_social_impact_base" }
+                ]},
+                {"set_variable": [
                     {"name": f"{root}_organization" },
                     {"value": [
                         {"value": f"{root}_organization" },
@@ -694,6 +774,7 @@ class CivInstHandler(BaseHandler):
     def handle_setup(self):
         trees = self.trees
         init_global = []
+        init_global_orgset = []
         
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
@@ -704,7 +785,24 @@ class CivInstHandler(BaseHandler):
                 ]
             })
 
-        return {"ciso_init_civsoc_global": init_global}
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            init_global_orgset.append({
+                "set_variable": [
+                    {"name": f"{root}_organization" },
+                    {"value": 20 }
+                ]
+            })
+        
+
+
+        return {
+            "ciso_init_civsoc_global": init_global + [{
+                "every_state": [
+                    {"limit": [ { "ciso_state_has_civil_society": "yes"}]}
+                ] + init_global_orgset
+            }]
+        }
 
     @handler(lambda c: c / "scripted_guis", "CISO_sguis.txt")
     def handle_sgui(self):
@@ -852,7 +950,7 @@ class MeasureHandler(BaseHandler):
         process_file_monthly.append({
             "if": [
                 {"limit": [
-                    {"is_player": "yes"}
+                    {"owner": [{ "is_player": "yes"}]}
                 ]},
                 { "ciso_update_ci_pop": "yes" }
             ]
@@ -945,6 +1043,13 @@ class MeasureHandler(BaseHandler):
             root = ParadoxHelper.get_root(tree)
             attraction = ParadoxHelper.get_script_block(tree, "pop_weights")
             script_value_file[f"{root}_pop_weights"] = attraction
+            script_value_file[f"{root}_efficiency"] = [
+                {"value": "ciso_B"},
+                {"divide": [
+                    {"value": f"{root}_investment"},
+                    {"add": "ciso_B"}
+                ]}
+            ]
 
             script_value_file[f"{root}_investment"] = [{
                 "if": [
