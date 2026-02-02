@@ -47,6 +47,14 @@ ciso_ci_heavy_industry_unions = {
 		}
 	}
 
+	# aggressivity 
+	# 0 = defensive
+	# >0 = aggressive
+	# <0 = cooperative
+	aggressivity = {
+		value = 0
+	}
+
 	social_impact = {
 		value = organization
 		multiply = size # the numbers of pops supporting the institution
