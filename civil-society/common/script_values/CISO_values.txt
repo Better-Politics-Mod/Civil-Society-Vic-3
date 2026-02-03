@@ -7,6 +7,9 @@ ciso_ci_tammany_hall_social_impact_base = {
 	divide = ciso_size_scaling_factor
 	round = yes
 }
+ciso_ci_tammany_hall_stance = {
+	value = 0
+}
 ciso_ci_tammany_hall_population = {
 	value = 0
 	if = {
@@ -136,6 +139,9 @@ ciso_ci_heavy_industry_unions_social_impact_base = {
 	divide = 10
 	round = yes
 }
+ciso_ci_heavy_industry_unions_stance = {
+	value = 0
+}
 ciso_ci_heavy_industry_unions_population = {
 	value = 0
 	if = {
@@ -260,6 +266,9 @@ ciso_ci_royal_court_social_impact_base = {
 	divide = ciso_size_scaling_factor
 	round = yes
 }
+ciso_ci_royal_court_stance = {
+	value = 0
+}
 ciso_ci_royal_court_population = {
 	value = 0
 	if = {
@@ -383,6 +392,9 @@ ciso_ci_manufacturing_corporations_social_impact_base = {
 	multiply = ciso_ci_manufacturing_corporations_population
 	divide = ciso_size_scaling_factor
 	round = yes
+}
+ciso_ci_manufacturing_corporations_stance = {
+	value = 1
 }
 ciso_ci_manufacturing_corporations_population = {
 	value = 0

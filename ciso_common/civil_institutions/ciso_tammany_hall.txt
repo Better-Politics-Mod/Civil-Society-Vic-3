@@ -41,11 +41,11 @@ ciso_ci_tammany_hall = {
 		round = yes
 	}
 
-	# aggressivity 
+	# stance 
 	# 0 = defensive
 	# >0 = aggressive
 	# <0 = cooperative
-	aggressivity = {
+	stance = {
 		value = 0
 	}
 

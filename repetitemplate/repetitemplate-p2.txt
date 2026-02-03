@@ -14,6 +14,25 @@ set_variable = {
 		multiply = local_var:ciso_raw_alloc_scale
 	}
 }
+if = {
+	limit = {
+		$ci$_is_aggro = yes
+	}
+	change_variable = {
+		name = <<root>>_aggr_alloc_total
+		add = var:<<root>>_$ci$_investment_alloc
+	}
+}
+if = {
+	limit = {
+		$ci$_is_coop = yes
+	}
+	change_variable = {
+		name = <<root>>_coop_alloc_total
+		add = var:<<root>>_$ci$_investment_alloc
+	}
+}
+
 
 if = {
 	limit = {

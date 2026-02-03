@@ -26,6 +26,54 @@ ciso_reset_all_measures_ci_invest = {
 		name = ciso_ms_health_center_ci_investment_var
 		value = 0
 	}
+	set_variable = {
+		name = ciso_ms_insurance_coop_alloc_total
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_insurance_aggr_alloc_total
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_soup_kitchen_coop_alloc_total
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_soup_kitchen_aggr_alloc_total
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_library_coop_alloc_total
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_library_aggr_alloc_total
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_schooling_coop_alloc_total
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_schooling_aggr_alloc_total
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_union_hall_coop_alloc_total
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_union_hall_aggr_alloc_total
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_health_center_coop_alloc_total
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_health_center_aggr_alloc_total
+		value = 0
+	}
 }
 ciso_update_cost = {
 	set_local_variable = {

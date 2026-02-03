@@ -564,6 +564,7 @@ class CivInstHandler(BaseHandler):
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
             ms_weights = ParadoxHelper.get_script_block(tree, "measure_weights")
+            stance = ParadoxHelper.get_script_block(tree, "stance")
             social_impact = ParadoxHelper.multi_replace_leaves(
                 ParadoxHelper.get_script_block(tree, "social_impact"),
                 [
@@ -571,10 +572,13 @@ class CivInstHandler(BaseHandler):
                     ("size", f"{root}_population"),
                 ]
             )
+            
+            
+            print(type(social_impact))            
 
 
             values_file[f"{root}_social_impact_base"] = social_impact
-
+            values_file[f"{root}_stance"] = stance
             values_file[f"{root}_population"] = ParadoxParser("""
                 value = 0
                 if = {
@@ -872,6 +876,12 @@ class CivInstHandler(BaseHandler):
             triggers_file[f"{root}_creation_trigger"] = possible
             triggers_file[f"{root}_is_radical"] = is_radical
             triggers_file[f"{root}_is_loyalist"] = is_loyalist
+            triggers_file[f"{root}_is_aggro"] = [
+                {f"{root}_stance > 0": True}
+            ]
+            triggers_file[f"{root}_is_coop"] = [
+                {f"{root}_stance < 0": True}
+            ]
         
         return triggers_file
 
@@ -890,7 +900,9 @@ class MeasureHandler(BaseHandler):
         import json
         with open(script_directory / "repetitemplate" / "repetitemplate-p2.txt") as f:
             p2 = f.read()
-            
+
+
+
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
             magic_file.append(ParadoxParser(p1.replace("<<root>>", root)).parse())
@@ -905,6 +917,7 @@ class MeasureHandler(BaseHandler):
         import json
         #print(json.dumps({"ciso_do_every_measure_with_ci": magic_file}, indent=4))
         return {"ciso_do_every_measure_with_ci": magic_file}
+
     @handler(lambda c: c / "scripted_effects", "CISO_measures_magic_values.txt")
     def handle_magic_values(self):
         trees = self.trees
@@ -1034,6 +1047,12 @@ class MeasureHandler(BaseHandler):
                 ]
                 }
             ])
+
+        with open(script_directory / "repetitemplate" / "repetires-p1.txt") as f:
+            ip1 = f.read()
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            reset.append(ParadoxParser(ip1.replace("<<root>>", root)).parse())
 
         return {
             "ciso_reset_all_measures_ci_invest": reset,

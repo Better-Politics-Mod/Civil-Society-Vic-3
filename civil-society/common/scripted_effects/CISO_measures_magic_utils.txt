@@ -274,6 +274,24 @@ ciso_do_every_measure_with_ci = {
 	}
 	if = {
 		limit = {
+			$ci$_is_aggro = yes
+		}
+		change_variable = {
+			name = ciso_ms_insurance_aggr_alloc_total
+			add = var:ciso_ms_insurance_$ci$_investment_alloc
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_coop = yes
+		}
+		change_variable = {
+			name = ciso_ms_insurance_coop_alloc_total
+			add = var:ciso_ms_insurance_$ci$_investment_alloc
+		}
+	}
+	if = {
+		limit = {
 			ciso_ms_insurance_investment > 0
 			NOT = {
 				is_target_in_variable_list = {
@@ -312,6 +330,24 @@ ciso_do_every_measure_with_ci = {
 		value = {
 			value = scope:ciso_raw_alloc_ciso_ms_soup_kitchen
 			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_aggro = yes
+		}
+		change_variable = {
+			name = ciso_ms_soup_kitchen_aggr_alloc_total
+			add = var:ciso_ms_soup_kitchen_$ci$_investment_alloc
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_coop = yes
+		}
+		change_variable = {
+			name = ciso_ms_soup_kitchen_coop_alloc_total
+			add = var:ciso_ms_soup_kitchen_$ci$_investment_alloc
 		}
 	}
 	if = {
@@ -358,6 +394,24 @@ ciso_do_every_measure_with_ci = {
 	}
 	if = {
 		limit = {
+			$ci$_is_aggro = yes
+		}
+		change_variable = {
+			name = ciso_ms_library_aggr_alloc_total
+			add = var:ciso_ms_library_$ci$_investment_alloc
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_coop = yes
+		}
+		change_variable = {
+			name = ciso_ms_library_coop_alloc_total
+			add = var:ciso_ms_library_$ci$_investment_alloc
+		}
+	}
+	if = {
+		limit = {
 			ciso_ms_library_investment > 0
 			NOT = {
 				is_target_in_variable_list = {
@@ -396,6 +450,24 @@ ciso_do_every_measure_with_ci = {
 		value = {
 			value = scope:ciso_raw_alloc_ciso_ms_schooling
 			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_aggro = yes
+		}
+		change_variable = {
+			name = ciso_ms_schooling_aggr_alloc_total
+			add = var:ciso_ms_schooling_$ci$_investment_alloc
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_coop = yes
+		}
+		change_variable = {
+			name = ciso_ms_schooling_coop_alloc_total
+			add = var:ciso_ms_schooling_$ci$_investment_alloc
 		}
 	}
 	if = {
@@ -442,6 +514,24 @@ ciso_do_every_measure_with_ci = {
 	}
 	if = {
 		limit = {
+			$ci$_is_aggro = yes
+		}
+		change_variable = {
+			name = ciso_ms_union_hall_aggr_alloc_total
+			add = var:ciso_ms_union_hall_$ci$_investment_alloc
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_coop = yes
+		}
+		change_variable = {
+			name = ciso_ms_union_hall_coop_alloc_total
+			add = var:ciso_ms_union_hall_$ci$_investment_alloc
+		}
+	}
+	if = {
+		limit = {
 			ciso_ms_union_hall_investment > 0
 			NOT = {
 				is_target_in_variable_list = {
@@ -480,6 +570,24 @@ ciso_do_every_measure_with_ci = {
 		value = {
 			value = scope:ciso_raw_alloc_ciso_ms_health_center
 			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_aggro = yes
+		}
+		change_variable = {
+			name = ciso_ms_health_center_aggr_alloc_total
+			add = var:ciso_ms_health_center_$ci$_investment_alloc
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_coop = yes
+		}
+		change_variable = {
+			name = ciso_ms_health_center_coop_alloc_total
+			add = var:ciso_ms_health_center_$ci$_investment_alloc
 		}
 	}
 	if = {

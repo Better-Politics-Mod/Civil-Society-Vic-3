@@ -45,12 +45,12 @@ ciso_ci_manufacturing_corporations = {
 		}
 	}
 
-	# aggressivity 
+	# stance 
 	# 0 = defensive
 	# >0 = aggressive
 	# <0 = cooperative
-	aggressivity = {
-		value = 0
+	stance = {
+		value = 1
 	}
 	
 	social_impact = {

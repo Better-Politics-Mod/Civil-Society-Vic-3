@@ -18,6 +18,12 @@ ciso_ci_tammany_hall_is_loyalist = {
 		has_law = law_type:law_guaranteed_liberties
 	}
 }
+ciso_ci_tammany_hall_is_aggro = {
+	ciso_ci_tammany_hall_stance > 0
+}
+ciso_ci_tammany_hall_is_coop = {
+	ciso_ci_tammany_hall_stance < 0
+}
 ciso_ci_heavy_industry_unions_creation_trigger = {
 	custom_tooltip = {
 		text = ciso_ci_heavy_industry_unions_creation_trigger_heavy_industry
@@ -48,6 +54,12 @@ ciso_ci_heavy_industry_unions_is_loyalist = {
 		}
 	}
 }
+ciso_ci_heavy_industry_unions_is_aggro = {
+	ciso_ci_heavy_industry_unions_stance > 0
+}
+ciso_ci_heavy_industry_unions_is_coop = {
+	ciso_ci_heavy_industry_unions_stance < 0
+}
 ciso_ci_royal_court_creation_trigger = {
 	custom_tooltip = {
 		text = ciso_ci_royal_court_creation_trigger_is_royal_capital
@@ -63,6 +75,12 @@ ciso_ci_royal_court_is_radical = {
 }
 ciso_ci_royal_court_is_loyalist = {
 	always = yes
+}
+ciso_ci_royal_court_is_aggro = {
+	ciso_ci_royal_court_stance > 0
+}
+ciso_ci_royal_court_is_coop = {
+	ciso_ci_royal_court_stance < 0
 }
 ciso_ci_manufacturing_corporations_creation_trigger = {
 	custom_tooltip = {
@@ -91,4 +109,10 @@ ciso_ci_manufacturing_corporations_is_loyalist = {
 	OWNER = {
 		has_law = law_type:law_laissez_faire
 	}
+}
+ciso_ci_manufacturing_corporations_is_aggro = {
+	ciso_ci_manufacturing_corporations_stance > 0
+}
+ciso_ci_manufacturing_corporations_is_coop = {
+	ciso_ci_manufacturing_corporations_stance < 0
 }

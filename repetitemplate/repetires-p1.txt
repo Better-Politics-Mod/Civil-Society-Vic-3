@@ -1,0 +1,9 @@
+set_variable = {
+	name = <<root>>_coop_alloc_total
+	value = 0
+}
+
+set_variable = {
+	name = <<root>>_aggr_alloc_total
+	value = 0
+}
