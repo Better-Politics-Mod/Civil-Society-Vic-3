@@ -27,6 +27,18 @@ ciso_civsoc_process_monthly = {
 	ciso_calculate_allocation = {
 		ci = ciso_ci_manufacturing_corporations
 	}
+	ciso_calculate_atmosphere_stuff = {
+		ci = ciso_ci_tammany_hall
+	}
+	ciso_calculate_atmosphere_stuff = {
+		ci = ciso_ci_heavy_industry_unions
+	}
+	ciso_calculate_atmosphere_stuff = {
+		ci = ciso_ci_royal_court
+	}
+	ciso_calculate_atmosphere_stuff = {
+		ci = ciso_ci_manufacturing_corporations
+	}
 }
 ciso_update_ci_pop = {
 	if = {

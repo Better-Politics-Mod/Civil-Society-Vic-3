@@ -1,0 +1,88 @@
+if = {
+	limit = {
+		$ci$_is_def = no
+		var:<<root>>_$ci$_investment_alloc > 0
+	}
+	# aggr investment <<root>>_aggr_alloc_total
+	# my investment <<root>>_$ci$_investment_alloc
+	# the higher the aggr investment the more negative si impact
+	# the higher my investment the more less negative si impact
+	#maxl = 0.1
+	save_scope_value_as = {
+		name = $ci$_aggrcoop_si_additive_factor
+		value = {
+			value = scope:$ci$_aggrcoop_si_additive_factor
+			add = {
+				# we have to remove your own investment from the aggr total to avoid double counting
+				value = {
+					value = var:<<root>>_aggr_alloc_total
+					if = {
+						limit = {
+							$ci$_is_aggro = yes
+						}
+						subtract = var:<<root>>_$ci$_investment_alloc
+					}
+				}
+				multiply = {
+					value = var:<<root>>_aggr_alloc_total
+					if = {
+						limit = {
+							$ci$_is_aggro = yes
+						}
+						subtract = var:<<root>>_$ci$_investment_alloc
+					}
+				}
+				divide = {
+					value = 10
+					multiply = var:<<root>>_$ci$_investment_alloc
+					multiply = var:<<root>>_$ci$_investment_alloc
+				}
+				max = 0.1
+				multiply = -1
+			}
+		}
+	}
+}
+if = {
+	limit = {
+		var:<<root>>_$ci$_investment_alloc > 0
+	}
+	# aggr investment <<root>>_aggr_alloc_total
+	# my investment <<root>>_$ci$_investment_alloc
+	# the higher the aggr investment the more negative si impact
+	# the higher my investment the more less negative si impact
+	#maxl = 0.1
+	save_scope_value_as = {
+		name = $ci$_aggrcoop_si_additive_factor
+		value = {
+			value = scope:$ci$_aggrcoop_si_additive_factor
+			add = {
+				# we have to remove your own investment from the coop total to avoid double counting
+				value = {
+					value = var:<<root>>_coop_alloc_total
+					if = {
+						limit = {
+							$ci$_is_coop = yes
+						}
+						subtract = var:<<root>>_$ci$_investment_alloc
+					}
+				}
+				multiply = {
+					value = var:<<root>>_coop_alloc_total
+					if = {
+						limit = {
+							$ci$_is_coop = yes
+						}
+						subtract = var:<<root>>_$ci$_investment_alloc
+					}
+				}
+				divide = {
+					value = 10
+					multiply = var:<<root>>_$ci$_investment_alloc
+					multiply = var:<<root>>_$ci$_investment_alloc
+				}
+				max = 0.1
+			}
+		}
+	}
+}

@@ -1,0 +1,10 @@
+set_variable = {
+	name = $ci$_atmospheric_si_modifier
+	value = scope:$ci$_aggrcoop_si_additive_factor
+}
+#clear_saved_scope = $ci$_aggrcoop_si_additive_factor
+clamp_variable = {
+	name = $ci$_atmospheric_si_modifier
+	min = -0.5
+	max = 0.5
+}

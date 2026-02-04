@@ -21,6 +21,9 @@ ciso_ci_tammany_hall_is_loyalist = {
 ciso_ci_tammany_hall_is_aggro = {
 	ciso_ci_tammany_hall_stance > 0
 }
+ciso_ci_tammany_hall_is_def = {
+	ciso_ci_tammany_hall_stance = 0
+}
 ciso_ci_tammany_hall_is_coop = {
 	ciso_ci_tammany_hall_stance < 0
 }
@@ -57,6 +60,9 @@ ciso_ci_heavy_industry_unions_is_loyalist = {
 ciso_ci_heavy_industry_unions_is_aggro = {
 	ciso_ci_heavy_industry_unions_stance > 0
 }
+ciso_ci_heavy_industry_unions_is_def = {
+	ciso_ci_heavy_industry_unions_stance = 0
+}
 ciso_ci_heavy_industry_unions_is_coop = {
 	ciso_ci_heavy_industry_unions_stance < 0
 }
@@ -78,6 +84,9 @@ ciso_ci_royal_court_is_loyalist = {
 }
 ciso_ci_royal_court_is_aggro = {
 	ciso_ci_royal_court_stance > 0
+}
+ciso_ci_royal_court_is_def = {
+	ciso_ci_royal_court_stance = 0
 }
 ciso_ci_royal_court_is_coop = {
 	ciso_ci_royal_court_stance < 0
@@ -112,6 +121,9 @@ ciso_ci_manufacturing_corporations_is_loyalist = {
 }
 ciso_ci_manufacturing_corporations_is_aggro = {
 	ciso_ci_manufacturing_corporations_stance > 0
+}
+ciso_ci_manufacturing_corporations_is_def = {
+	ciso_ci_manufacturing_corporations_stance = 0
 }
 ciso_ci_manufacturing_corporations_is_coop = {
 	ciso_ci_manufacturing_corporations_stance < 0

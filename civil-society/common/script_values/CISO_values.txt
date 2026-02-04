@@ -267,7 +267,7 @@ ciso_ci_royal_court_social_impact_base = {
 	round = yes
 }
 ciso_ci_royal_court_stance = {
-	value = 0
+	value = -1
 }
 ciso_ci_royal_court_population = {
 	value = 0
@@ -328,7 +328,7 @@ ciso_ci_royal_court_ms_weights = {
 	value = 0
 	if = {
 		limit = {
-			scope:measure = flag:ciso_ms_health_center
+			scope:measure = flag:ciso_ms_schooling
 		}
 		add = 1
 	}

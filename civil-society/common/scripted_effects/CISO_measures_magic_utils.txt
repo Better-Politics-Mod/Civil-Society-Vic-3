@@ -619,3 +619,474 @@ ciso_do_every_measure_with_ci = {
 		}
 	}
 }
+ciso_calculate_atmosphere_stuff = {
+	save_scope_value_as = {
+		name = $ci$_aggrcoop_si_additive_factor
+		value = 0
+	}
+	if = {
+		limit = {
+			$ci$_is_def = no
+			var:ciso_ms_insurance_$ci$_investment_alloc > 0
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				# add = {
+				# 	value = {
+				# 		value = var:ciso_ms_insurance_aggr_alloc_total
+				# 		if = {
+				# 			limit = {
+				# 				$ci$_is_aggro = yes
+				# 			}
+				# 			subtract = var:ciso_ms_insurance_$ci$_investment_alloc
+				# 		}
+				# 	}
+				# 	multiply = {
+				# 		value = var:ciso_ms_insurance_aggr_alloc_total
+				# 		if = {
+				# 			limit = {
+				# 				$ci$_is_aggro = yes
+				# 			}
+				# 			subtract = var:ciso_ms_insurance_$ci$_investment_alloc
+				# 		}
+				# 	}
+				# 	divide = {
+				# 		value = 10
+				# 		multiply = var:ciso_ms_insurance_$ci$_investment_alloc
+				# 		multiply = var:ciso_ms_insurance_$ci$_investment_alloc
+				# 	}
+				# 	max = 0.1
+				# 	multiply = -1
+				# }
+			}
+		}
+	}
+	if = {
+		limit = {
+			var:ciso_ms_insurance_$ci$_investment_alloc > 0
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_insurance_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_insurance_$ci$_investment_alloc
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_insurance_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_insurance_$ci$_investment_alloc
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_insurance_$ci$_investment_alloc
+						multiply = var:ciso_ms_insurance_$ci$_investment_alloc
+					}
+					max = 0.1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_def = no
+			var:ciso_ms_soup_kitchen_$ci$_investment_alloc > 0
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_soup_kitchen_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_soup_kitchen_$ci$_investment_alloc
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_soup_kitchen_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_soup_kitchen_$ci$_investment_alloc
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_soup_kitchen_$ci$_investment_alloc
+						multiply = var:ciso_ms_soup_kitchen_$ci$_investment_alloc
+					}
+					max = 0.1
+					multiply = -1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			var:ciso_ms_soup_kitchen_$ci$_investment_alloc > 0
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_soup_kitchen_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_soup_kitchen_$ci$_investment_alloc
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_soup_kitchen_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_soup_kitchen_$ci$_investment_alloc
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_soup_kitchen_$ci$_investment_alloc
+						multiply = var:ciso_ms_soup_kitchen_$ci$_investment_alloc
+					}
+					max = 0.1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_def = no
+			var:ciso_ms_library_$ci$_investment_alloc > 0
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_library_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_library_$ci$_investment_alloc
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_library_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_library_$ci$_investment_alloc
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_library_$ci$_investment_alloc
+						multiply = var:ciso_ms_library_$ci$_investment_alloc
+					}
+					max = 0.1
+					multiply = -1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			var:ciso_ms_library_$ci$_investment_alloc > 0
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_library_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_library_$ci$_investment_alloc
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_library_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_library_$ci$_investment_alloc
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_library_$ci$_investment_alloc
+						multiply = var:ciso_ms_library_$ci$_investment_alloc
+					}
+					max = 0.1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_def = no
+			var:ciso_ms_schooling_$ci$_investment_alloc > 0
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_schooling_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_schooling_$ci$_investment_alloc
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_schooling_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_schooling_$ci$_investment_alloc
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_schooling_$ci$_investment_alloc
+						multiply = var:ciso_ms_schooling_$ci$_investment_alloc
+					}
+					max = 0.1
+					multiply = -1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			var:ciso_ms_schooling_$ci$_investment_alloc > 0
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_schooling_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_schooling_$ci$_investment_alloc
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_schooling_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_schooling_$ci$_investment_alloc
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_schooling_$ci$_investment_alloc
+						multiply = var:ciso_ms_schooling_$ci$_investment_alloc
+					}
+					max = 0.1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_def = no
+			var:ciso_ms_union_hall_$ci$_investment_alloc > 0
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_union_hall_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_union_hall_$ci$_investment_alloc
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_union_hall_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_union_hall_$ci$_investment_alloc
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_union_hall_$ci$_investment_alloc
+						multiply = var:ciso_ms_union_hall_$ci$_investment_alloc
+					}
+					max = 0.1
+					multiply = -1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			var:ciso_ms_union_hall_$ci$_investment_alloc > 0
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_union_hall_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_union_hall_$ci$_investment_alloc
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_union_hall_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_union_hall_$ci$_investment_alloc
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_union_hall_$ci$_investment_alloc
+						multiply = var:ciso_ms_union_hall_$ci$_investment_alloc
+					}
+					max = 0.1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_def = no
+			var:ciso_ms_health_center_$ci$_investment_alloc > 0
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_health_center_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_health_center_$ci$_investment_alloc
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_health_center_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_health_center_$ci$_investment_alloc
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_health_center_$ci$_investment_alloc
+						multiply = var:ciso_ms_health_center_$ci$_investment_alloc
+					}
+					max = 0.1
+					multiply = -1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			var:ciso_ms_health_center_$ci$_investment_alloc > 0
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_health_center_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_health_center_$ci$_investment_alloc
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_health_center_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_health_center_$ci$_investment_alloc
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_health_center_$ci$_investment_alloc
+						multiply = var:ciso_ms_health_center_$ci$_investment_alloc
+					}
+					max = 0.1
+				}
+			}
+		}
+	}
+	set_variable = {
+		name = $ci$_atmospheric_si_modifier
+		value = scope:$ci$_aggrcoop_si_additive_factor
+	}
+	clamp_variable = {
+		name = $ci$_atmospheric_si_modifier
+		min = -0.5
+		max = 0.5
+	}
+}

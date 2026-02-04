@@ -19,7 +19,7 @@ ciso_ci_royal_court = {
 		value = 0
 		if = {
 			limit = {
-				scope:measure = flag:ciso_ms_health_center
+				scope:measure = flag:ciso_ms_schooling
 			}
 			add = 1
 		}
@@ -38,7 +38,7 @@ ciso_ci_royal_court = {
 	# >0 = aggressive
 	# <0 = cooperative
 	stance = {
-		value = 0
+		value = -1
 	}
 
 	social_impact = {

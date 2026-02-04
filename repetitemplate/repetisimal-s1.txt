@@ -1,0 +1,5 @@
+# for each ms we will apply a modifier to si based on investment and aggression
+save_scope_value_as = {
+	name = $ci$_aggrcoop_si_additive_factor
+	value = 0
+}

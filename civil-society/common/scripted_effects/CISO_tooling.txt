@@ -110,7 +110,6 @@ ciso_calculate_allocation = {
 	}
 }
 
-
 ciso_apply_ms_effect = {
 	if = {
 		limit = {

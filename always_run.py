@@ -572,10 +572,6 @@ class CivInstHandler(BaseHandler):
                     ("size", f"{root}_population"),
                 ]
             )
-            
-            
-            print(type(social_impact))            
-
 
             values_file[f"{root}_social_impact_base"] = social_impact
             values_file[f"{root}_stance"] = stance
@@ -765,6 +761,12 @@ class CivInstHandler(BaseHandler):
             process_file_monthly.append({
                 "ciso_calculate_allocation": [ { "ci": root } ]
             })
+        
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            process_file_monthly.append({
+                "ciso_calculate_atmosphere_stuff": [ { "ci": root } ]
+            })
 
 
         return {
@@ -879,6 +881,9 @@ class CivInstHandler(BaseHandler):
             triggers_file[f"{root}_is_aggro"] = [
                 {f"{root}_stance > 0": True}
             ]
+            triggers_file[f"{root}_is_def"] = [
+                {f"{root}_stance": 0}
+            ]
             triggers_file[f"{root}_is_coop"] = [
                 {f"{root}_stance < 0": True}
             ]
@@ -891,18 +896,15 @@ class MeasureHandler(BaseHandler):
     def handle_magic(self):
         trees = self.trees
         magic_file = []
+        imagic_file = []
 
         with open(script_directory / "repetitemplate" / "repetitemplate-s1.txt") as f:
             magic_file.append(ParadoxParser(f.read()).parse())
 
         with open(script_directory / "repetitemplate" / "repetitemplate-p1.txt") as f:
             p1 = f.read()
-        import json
         with open(script_directory / "repetitemplate" / "repetitemplate-p2.txt") as f:
             p2 = f.read()
-
-
-
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
             magic_file.append(ParadoxParser(p1.replace("<<root>>", root)).parse())
@@ -914,9 +916,23 @@ class MeasureHandler(BaseHandler):
             root = ParadoxHelper.get_root(tree)
             magic_file.append(ParadoxParser(p2.replace("<<root>>", root)).parse())
 
-        import json
-        #print(json.dumps({"ciso_do_every_measure_with_ci": magic_file}, indent=4))
-        return {"ciso_do_every_measure_with_ci": magic_file}
+
+        # repitisimal
+        with open(script_directory / "repetitemplate" / "repetisimal-s1.txt") as f:
+            imagic_file.append(ParadoxParser(f.read()).parse())
+
+        with open(script_directory / "repetitemplate" / "repetisimal-p1.txt") as f:
+            p1 = f.read()
+
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            imagic_file.append(ParadoxParser(p1.replace("<<root>>", root)).parse())
+    
+        with open(script_directory / "repetitemplate" / "repetisimal-s2.txt") as f:
+            imagic_file.append(ParadoxParser(f.read()).parse())
+
+
+        return {"ciso_do_every_measure_with_ci": magic_file, "ciso_calculate_atmosphere_stuff": imagic_file}
 
     @handler(lambda c: c / "scripted_effects", "CISO_measures_magic_values.txt")
     def handle_magic_values(self):
