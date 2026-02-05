@@ -832,7 +832,19 @@ class CivInstHandler(BaseHandler):
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
             visible = ParadoxHelper.get_script_block(tree, "visible")
-
+            sgui_file[f"{root}_is_aggro"] = [
+                {"scope": "state"},
+                {"is_shown": [{ f"{root}_is_aggro": "yes" }]},
+            ]
+            sgui_file[f"{root}_is_def"] = [
+                {"scope": "state"},
+                {"is_shown": [{ f"{root}_is_def": "yes" }]},
+            ]
+            sgui_file[f"{root}_is_coop"] = [
+                {"scope": "state"},
+                {"is_shown": [{ f"{root}_is_coop": "yes" }]},
+            ]
+        
             sgui_file[f"{root}_is_radical_trigger_sgui"] = [
                 {"scope": "state"},
                 {

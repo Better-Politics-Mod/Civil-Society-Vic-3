@@ -78,13 +78,13 @@ types CISO_civinst_types
 
 				hbox = {
 					block "right_text_max_width" {
-						max_width = 275
+						max_width = 225
 					}
 					layoutpolicy_horizontal = expanding
 					vbox = {
 						layoutpolicy_horizontal = preferred
 						layoutpolicy_vertical = preferred
-						margin_right = 75
+						margin_right = 15
 						hbox = {
 							layoutpolicy_horizontal = expanding
 
@@ -107,6 +107,33 @@ types CISO_civinst_types
 									text = "CISO_CIVINST_SI"
 								}
 							}
+
+							expand = {}
+						}
+					}
+					vbox = {
+						layoutpolicy_horizontal = preferred
+						layoutpolicy_vertical = preferred
+						margin_right = 10
+						hbox = {
+							layoutpolicy_horizontal = expanding
+
+							icon = {
+								size = { 32 32 }
+								texture = "gfx/interface/icons/commander_order_icons/move.dds"
+								visible = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_is_coop')).IsShown(GuiScope.SetRoot(State.MakeScope).End)]"
+							}
+							icon = {
+								size = { 32 32 }
+								texture = "gfx/interface/icons/commander_order_icons/defend.dds"
+								visible = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_is_def')).IsShown(GuiScope.SetRoot(State.MakeScope).End)]"
+							}
+							icon = {
+								size = { 32 32 }
+								texture = "gfx/interface/icons/commander_order_icons/advance.dds"
+								visible = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_is_aggro')).IsShown(GuiScope.SetRoot(State.MakeScope).End)]"
+							}
+							block "additional_support_label" {}
 
 							expand = {}
 						}
