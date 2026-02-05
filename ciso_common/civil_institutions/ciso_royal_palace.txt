@@ -45,6 +45,5 @@ ciso_ci_royal_court = {
 		value = organization
 		multiply = size # the numbers of pops supporting the institution
 		divide = ciso_size_scaling_factor # usu. 100,000
-		round = yes
 	}
 }

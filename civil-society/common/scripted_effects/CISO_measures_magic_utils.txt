@@ -633,39 +633,40 @@ ciso_calculate_atmosphere_stuff = {
 			name = $ci$_aggrcoop_si_additive_factor
 			value = {
 				value = scope:$ci$_aggrcoop_si_additive_factor
-				# add = {
-				# 	value = {
-				# 		value = var:ciso_ms_insurance_aggr_alloc_total
-				# 		if = {
-				# 			limit = {
-				# 				$ci$_is_aggro = yes
-				# 			}
-				# 			subtract = var:ciso_ms_insurance_$ci$_investment_alloc
-				# 		}
-				# 	}
-				# 	multiply = {
-				# 		value = var:ciso_ms_insurance_aggr_alloc_total
-				# 		if = {
-				# 			limit = {
-				# 				$ci$_is_aggro = yes
-				# 			}
-				# 			subtract = var:ciso_ms_insurance_$ci$_investment_alloc
-				# 		}
-				# 	}
-				# 	divide = {
-				# 		value = 10
-				# 		multiply = var:ciso_ms_insurance_$ci$_investment_alloc
-				# 		multiply = var:ciso_ms_insurance_$ci$_investment_alloc
-				# 	}
-				# 	max = 0.1
-				# 	multiply = -1
-				# }
+				add = {
+					value = {
+						value = var:ciso_ms_insurance_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_insurance_$ci$_investment_alloc
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_insurance_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_insurance_$ci$_investment_alloc
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_insurance_$ci$_investment_alloc
+						multiply = var:ciso_ms_insurance_$ci$_investment_alloc
+					}
+					max = 0.1
+					multiply = -1
+				}
 			}
 		}
 	}
 	if = {
 		limit = {
 			var:ciso_ms_insurance_$ci$_investment_alloc > 0
+			$ci$_is_aggro = no
 		}
 		save_scope_value_as = {
 			name = $ci$_aggrcoop_si_additive_factor
@@ -742,6 +743,7 @@ ciso_calculate_atmosphere_stuff = {
 	if = {
 		limit = {
 			var:ciso_ms_soup_kitchen_$ci$_investment_alloc > 0
+			$ci$_is_aggro = no
 		}
 		save_scope_value_as = {
 			name = $ci$_aggrcoop_si_additive_factor
@@ -818,6 +820,7 @@ ciso_calculate_atmosphere_stuff = {
 	if = {
 		limit = {
 			var:ciso_ms_library_$ci$_investment_alloc > 0
+			$ci$_is_aggro = no
 		}
 		save_scope_value_as = {
 			name = $ci$_aggrcoop_si_additive_factor
@@ -894,6 +897,7 @@ ciso_calculate_atmosphere_stuff = {
 	if = {
 		limit = {
 			var:ciso_ms_schooling_$ci$_investment_alloc > 0
+			$ci$_is_aggro = no
 		}
 		save_scope_value_as = {
 			name = $ci$_aggrcoop_si_additive_factor
@@ -970,6 +974,7 @@ ciso_calculate_atmosphere_stuff = {
 	if = {
 		limit = {
 			var:ciso_ms_union_hall_$ci$_investment_alloc > 0
+			$ci$_is_aggro = no
 		}
 		save_scope_value_as = {
 			name = $ci$_aggrcoop_si_additive_factor
@@ -1046,6 +1051,7 @@ ciso_calculate_atmosphere_stuff = {
 	if = {
 		limit = {
 			var:ciso_ms_health_center_$ci$_investment_alloc > 0
+			$ci$_is_aggro = no
 		}
 		save_scope_value_as = {
 			name = $ci$_aggrcoop_si_additive_factor

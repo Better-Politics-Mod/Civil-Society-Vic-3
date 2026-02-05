@@ -78,13 +78,17 @@ ciso_ci_tammany_hall_ms_weights = {
 	}
 }
 ciso_ci_tammany_hall_social_impact = {
-	value = 100
+	value = 0
 	if = {
 		limit = {
 			has_variable = ciso_ci_tammany_hall_social_impact
 		}
 		value = var:ciso_ci_tammany_hall_social_impact
-		min = 100
+	}
+	min = 100
+	multiply = {
+		value = var:ciso_ci_tammany_hall_atmospheric_si_modifier
+		add = 1
 	}
 }
 ciso_ci_tammany_hall_avg_sqrt_weight = {
@@ -207,13 +211,17 @@ ciso_ci_heavy_industry_unions_ms_weights = {
 	}
 }
 ciso_ci_heavy_industry_unions_social_impact = {
-	value = 100
+	value = 0
 	if = {
 		limit = {
 			has_variable = ciso_ci_heavy_industry_unions_social_impact
 		}
 		value = var:ciso_ci_heavy_industry_unions_social_impact
-		min = 100
+	}
+	min = 100
+	multiply = {
+		value = var:ciso_ci_heavy_industry_unions_atmospheric_si_modifier
+		add = 1
 	}
 }
 ciso_ci_heavy_industry_unions_avg_sqrt_weight = {
@@ -334,13 +342,17 @@ ciso_ci_royal_court_ms_weights = {
 	}
 }
 ciso_ci_royal_court_social_impact = {
-	value = 100
+	value = 0
 	if = {
 		limit = {
 			has_variable = ciso_ci_royal_court_social_impact
 		}
 		value = var:ciso_ci_royal_court_social_impact
-		min = 100
+	}
+	min = 100
+	multiply = {
+		value = var:ciso_ci_royal_court_atmospheric_si_modifier
+		add = 1
 	}
 }
 ciso_ci_royal_court_avg_sqrt_weight = {
@@ -461,13 +473,17 @@ ciso_ci_manufacturing_corporations_ms_weights = {
 	}
 }
 ciso_ci_manufacturing_corporations_social_impact = {
-	value = 100
+	value = 0
 	if = {
 		limit = {
 			has_variable = ciso_ci_manufacturing_corporations_social_impact
 		}
 		value = var:ciso_ci_manufacturing_corporations_social_impact
-		min = 100
+	}
+	min = 100
+	multiply = {
+		value = var:ciso_ci_manufacturing_corporations_atmospheric_si_modifier
+		add = 1
 	}
 }
 ciso_ci_manufacturing_corporations_avg_sqrt_weight = {

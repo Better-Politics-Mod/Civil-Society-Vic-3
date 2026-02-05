@@ -571,7 +571,9 @@ class CivInstHandler(BaseHandler):
                     ("organization", f"{root}_organization"),
                     ("size", f"{root}_population"),
                 ]
-            )
+            ) + [
+                {"round": True}
+            ]
 
             values_file[f"{root}_social_impact_base"] = social_impact
             values_file[f"{root}_stance"] = stance
@@ -645,13 +647,17 @@ class CivInstHandler(BaseHandler):
                 ]
             }] + ms_weights
             values_file[f"{root}_social_impact"] = ParadoxParser("""
-                value = 100
+                value = 0
                 if = {
                     limit = {
                         has_variable = <<root>>_social_impact
                     }
                     value = var:<<root>>_social_impact
-                    min = 100
+                }
+                min = 100
+                multiply = {
+                    value = var:<<root>>_atmospheric_si_modifier
+                    add = 1
                 }
             """.replace("<<root>>", root)).parse()
             values_file[f"{root}_avg_sqrt_weight"] = ParadoxParser("""

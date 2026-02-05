@@ -46,6 +46,7 @@ if = {
 if = {
 	limit = {
 		var:<<root>>_$ci$_investment_alloc > 0
+		$ci$_is_aggro = no
 	}
 	# aggr investment <<root>>_aggr_alloc_total
 	# my investment <<root>>_$ci$_investment_alloc
