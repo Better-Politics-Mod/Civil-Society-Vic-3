@@ -5,3 +5,13 @@ ciso_B = {
 ciso_size_scaling_factor = {
 	value = 10000
 }
+
+ciso_state_atmosphere_value = {
+	value = 0 
+	if = {
+		limit = {
+			has_variable = ciso_state_atmosphere_value
+		}
+		add = var:ciso_state_atmosphere_value
+	}
+}

@@ -774,6 +774,11 @@ class CivInstHandler(BaseHandler):
                 "ciso_calculate_atmosphere_stuff": [ { "ci": root } ]
             })
 
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            process_file_monthly.append({
+                "ciso_mv_atmosphere": [ { "ci": root } ]
+            })
 
         return {
             "ciso_civsoc_process_monthly": [

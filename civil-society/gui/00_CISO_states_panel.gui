@@ -730,7 +730,6 @@ types state_panel_types
 		}
         widget = {
             size = { @panel_width 50 }
-            tooltip = "TOOLTIP_STATE_POPULATION"
             onmousehierarchyenter = "[SetTempMapModeByKey('mm_population')]"
             onmousehierarchyleave = "[RemoveTempMapMode]"
             alwaystransparent = no
@@ -742,6 +741,7 @@ types state_panel_types
             hbox = {
                 margin = { 15 0 }
                 spacing = 10
+				datacontext = "[State]"
 
                 icon = {
                     texture = "gfx/interface/icons/harvest_condition_icons/torrential_rains.dds"
@@ -759,7 +759,7 @@ types state_panel_types
                 textbox = {
                     layoutpolicy_horizontal = expanding
                     layoutpolicy_vertical = expanding
-                    text = "#N Tense#!"
+                    text = "CISO_SOCIETY_SOCIAL_ATMOSPHERE_TEXT"
                     align = right|nobaseline
                 }
             }

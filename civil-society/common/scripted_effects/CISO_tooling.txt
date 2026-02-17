@@ -141,3 +141,47 @@ ciso_apply_ms_effect = {
 		}
 	}
 }
+
+ciso_mv_atmosphere = {
+	if = {
+		limit = {
+			NOT = { has_variable = ciso_state_atmosphere_value }
+		}
+		set_variable = {
+			name = ciso_state_atmosphere_value
+			value = 50
+		}
+	}
+	if = {
+		limit = {
+			is_target_in_variable_list = {
+				name = ciso_civil_institutions
+				target = flag:$ci$
+			}
+			NOT = { $ci$_stance = 0}
+		}
+		change_variable = {
+			name = ciso_state_atmosphere_value
+			add = {
+				value = $ci$_stance
+				multiply = $ci$_social_impact
+				round = yes
+				pow = 0.5
+				divide = 50
+				if = {
+					limit = {
+						$ci$_stance > 0
+					}
+					multiply = -1
+				}
+			}
+		}
+
+		clamp_variable = {
+			name = ciso_state_atmosphere_value
+			min = 0
+			max = 100
+		}
+	}
+
+}

@@ -1,0 +1,32 @@
+ciso_atmo_cusloc = {
+	type = state
+	random_valid = no
+
+	text = {
+		trigger = {
+			ciso_state_atmosphere_value <= 25
+		}
+		localization_key = ciso_atmo_chaos
+	}
+	text = {
+		trigger = {
+			ciso_state_atmosphere_value <= 50
+			ciso_state_atmosphere_value > 25
+		}
+		localization_key = ciso_atmo_tense
+	}
+	text = {
+		trigger = {
+			ciso_state_atmosphere_value <= 75
+			ciso_state_atmosphere_value > 50
+		}
+		localization_key = ciso_atmo_stable
+	}
+	text = {
+		trigger = {
+			ciso_state_atmosphere_value > 75
+		}
+		localization_key = ciso_atmo_optimistic
+	}
+}
+

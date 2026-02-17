@@ -18,3 +18,9 @@
  
 
   ciso_ne_welfare_name: "Welfare"
+
+  CISO_SOCIETY_SOCIAL_ATMOSPHERE_TEXT: "[State.GetCustom('ciso_atmo_cusloc')] ([State.MakeScope.ScriptValue('ciso_state_atmosphere_value')|v2])"
+  ciso_atmo_chaos: "#N;bold Chaos#!"
+  ciso_atmo_tense: "#N Tense#!"
+  ciso_atmo_stable: "#grey;bold Stable#!"
+  ciso_atmo_optimistic: "#green Optimistic#!"

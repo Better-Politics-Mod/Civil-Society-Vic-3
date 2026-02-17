@@ -39,6 +39,18 @@ ciso_civsoc_process_monthly = {
 	ciso_calculate_atmosphere_stuff = {
 		ci = ciso_ci_manufacturing_corporations
 	}
+	ciso_mv_atmosphere = {
+		ci = ciso_ci_tammany_hall
+	}
+	ciso_mv_atmosphere = {
+		ci = ciso_ci_heavy_industry_unions
+	}
+	ciso_mv_atmosphere = {
+		ci = ciso_ci_royal_court
+	}
+	ciso_mv_atmosphere = {
+		ci = ciso_ci_manufacturing_corporations
+	}
 }
 ciso_update_ci_pop = {
 	if = {
