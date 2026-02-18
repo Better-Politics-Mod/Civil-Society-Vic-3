@@ -120,16 +120,19 @@ types CISO_civinst_types
 
 							icon = {
 								size = { 32 32 }
+								tooltip = "CISO_SOCIETY_COOPERATE_TT"
 								texture = "gfx/interface/icons/commander_order_icons/move.dds"
 								visible = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_is_coop')).IsShown(GuiScope.SetRoot(State.MakeScope).End)]"
 							}
 							icon = {
 								size = { 32 32 }
+								tooltip = "CISO_SOCIETY_DEFENSIVE_TT"
 								texture = "gfx/interface/icons/commander_order_icons/defend.dds"
 								visible = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_is_def')).IsShown(GuiScope.SetRoot(State.MakeScope).End)]"
 							}
 							icon = {
 								size = { 32 32 }
+								tooltip = "CISO_SOCIETY_ATTACK_TT"
 								texture = "gfx/interface/icons/commander_order_icons/advance.dds"
 								visible = "[GetScriptedGui(Concatenate(Scope.GetFlagName, '_is_aggro')).IsShown(GuiScope.SetRoot(State.MakeScope).End)]"
 							}

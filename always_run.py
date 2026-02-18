@@ -564,7 +564,14 @@ class CivInstHandler(BaseHandler):
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
             ms_weights = ParadoxHelper.get_script_block(tree, "measure_weights")
-            stance = ParadoxHelper.get_script_block(tree, "stance")
+            stance = ParadoxHelper.get_script_block(tree, "stance") + [
+                {"subtract": [
+                    {"value": "ciso_state_atmosphere_value"},
+                    {"subtract": "50"},
+                    {"divide": "50"},
+                    {"round": True}
+                ]}
+            ]
             social_impact = ParadoxHelper.multi_replace_leaves(
                 ParadoxHelper.get_script_block(tree, "social_impact"),
                 [
