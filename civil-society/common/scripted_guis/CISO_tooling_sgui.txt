@@ -1,0 +1,23 @@
+ciso_state_set_aggro = {
+	scope = state
+	effect = {
+		remove_variable = ciso_coop_gov_in_state
+		set_variable = ciso_aggro_gov_in_state
+	}
+}
+
+ciso_state_set_coop = {
+	scope = state
+	effect = {
+		remove_variable = ciso_aggro_gov_in_state
+		set_variable = ciso_coop_gov_in_state
+	}
+}
+
+ciso_state_set_def = {
+	scope = state
+	effect = {
+		remove_variable = ciso_aggro_gov_in_state
+		remove_variable = ciso_coop_gov_in_state
+	}
+}

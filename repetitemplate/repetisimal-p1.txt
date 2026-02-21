@@ -22,6 +22,12 @@ if = {
 						}
 						subtract = var:<<root>>_$ci$_investment_alloc
 					}
+					if = {
+						limit = {
+							has_variable = ciso_aggro_gov_in_state
+						}
+						add = $ci$_investment_gov
+					}
 				}
 				multiply = {
 					value = var:<<root>>_aggr_alloc_total
@@ -30,6 +36,12 @@ if = {
 							$ci$_is_aggro = yes
 						}
 						subtract = var:<<root>>_$ci$_investment_alloc
+					}
+					if = {
+						limit = {
+							has_variable = ciso_aggro_gov_in_state
+						}
+						add = $ci$_investment_gov
 					}
 				}
 				divide = {
@@ -67,6 +79,12 @@ if = {
 						}
 						subtract = var:<<root>>_$ci$_investment_alloc
 					}
+					if = {
+						limit = {
+							has_variable = ciso_coop_gov_in_state
+						}
+						add = $ci$_investment_gov
+					}
 				}
 				multiply = {
 					value = var:<<root>>_coop_alloc_total
@@ -75,6 +93,12 @@ if = {
 							$ci$_is_coop = yes
 						}
 						subtract = var:<<root>>_$ci$_investment_alloc
+					}
+					if = {
+						limit = {
+							has_variable = ciso_coop_gov_in_state
+						}
+						add = $ci$_investment_gov
 					}
 				}
 				divide = {

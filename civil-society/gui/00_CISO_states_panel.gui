@@ -747,7 +747,6 @@ types state_panel_types
                     texture = "gfx/interface/icons/harvest_condition_icons/torrential_rains.dds"
                     size = { 40 40 }
                 }
-
                 textbox = {
                     layoutpolicy_horizontal = expanding
                     layoutpolicy_vertical = expanding
@@ -755,6 +754,65 @@ types state_panel_types
                     using = fontsize_xl
                     align = left|nobaseline
                 }
+				hbox = {
+					margin = { 10 0 }
+					set_level_bar_item = {
+						block "tooltip_2" {
+							tooltip = "[GetPlayer.GetTaxLevelDescLow]"
+						}
+						blockoverride "button_texture" {
+							texture = "gfx/interface/icons/commander_order_icons/defend.dds"
+						}
+						blockoverride "click" {
+							using = budget_coins_lvl_2_button_sound
+							block "button_2_click" {
+								onclick = "[GetScriptedGui('ciso_state_set_def').Execute(GuiScope.SetRoot(State.MakeScope).End)]"
+							}
+						}
+						blockoverride "is_selected_visibility" {
+							visible = "[And(Not(State.MakeScope.Var('ciso_aggro_gov_in_state').IsSet), Not(State.MakeScope.Var('ciso_coop_gov_in_state').IsSet))]"
+						}
+						blockoverride "is_clickable_alpha" {
+							visible = "[Or(State.MakeScope.Var('ciso_aggro_gov_in_state').IsSet, State.MakeScope.Var('ciso_coop_gov_in_state').IsSet)]"
+						}
+					}
+					set_level_bar_item = {
+						block "tooltip_2" {
+							tooltip = "[GetPlayer.GetTaxLevelDescLow]"
+						}
+						blockoverride "button_texture" {
+							texture = "gfx/interface/icons/commander_order_icons/move.dds"
+						}
+						blockoverride "click" {
+							onclick = "[GetScriptedGui('ciso_state_set_coop').Execute(GuiScope.SetRoot(State.MakeScope).End)]"
+						}
+						blockoverride "is_selected_visibility" {
+							visible = "[State.MakeScope.Var('ciso_coop_gov_in_state').IsSet]"
+						}
+						blockoverride "is_clickable_alpha" {
+							visible = "[Not(State.MakeScope.Var('ciso_coop_gov_in_state').IsSet)]"
+						}
+					}
+					set_level_bar_item = {
+						block "tooltip_2" {
+							tooltip = "[GetPlayer.GetTaxLevelDescLow]"
+						}
+						blockoverride "button_texture" {
+							texture = "gfx/interface/icons/commander_order_icons/advance.dds"
+						}
+						blockoverride "click" {
+							onclick = "[GetScriptedGui('ciso_state_set_aggro').Execute(GuiScope.SetRoot(State.MakeScope).End)]"
+						}
+						blockoverride "is_selected_visibility" {
+							visible = "[State.MakeScope.Var('ciso_aggro_gov_in_state').IsSet]"
+						}
+						blockoverride "is_clickable_alpha" {
+							visible = "[Not(State.MakeScope.Var('ciso_aggro_gov_in_state').IsSet)]"
+						}
+					}
+
+				}
+
 
                 textbox = {
                     layoutpolicy_horizontal = expanding
