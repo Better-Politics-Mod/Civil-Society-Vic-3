@@ -1,0 +1,3 @@
+INJECT:base_values = {
+	ciso_gov_investment_efficiency_add = 0.5
+}
