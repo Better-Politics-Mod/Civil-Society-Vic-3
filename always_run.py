@@ -610,6 +610,7 @@ class CivInstHandler(BaseHandler):
                     {"value": "ciso_total_unfulfilled_needs"},
                     {"divide": 10},
                 ]},
+                {"subtract": "devastation"},
                 {"if": [
                     {"limit": [
                         {"ciso_ci_is_radical": { "ci": root }}
@@ -661,7 +662,9 @@ class CivInstHandler(BaseHandler):
                     }
                     value = var:<<root>>_social_impact
                 }
-                min = 100
+                else = {
+                    value = 150
+                }
                 multiply = {
                     value = var:<<root>>_atmospheric_si_modifier
                     add = 1
@@ -752,7 +755,13 @@ class CivInstHandler(BaseHandler):
                 ]},
                 {"set_variable": [
                     {"name": f"{root}_social_impact" },
-                    {"value": f"{root}_social_impact_base" }
+                    {"value": [
+                        {"value": f"{root}_social_impact_base"},
+                        {"subtract": f"{root}_social_impact"},
+                        # it takes 2 years for the social impact to fully realize, so we divide by 24 (months)
+                        {"divide": "24"},
+                        {"add": f"{root}_social_impact"}
+                    ] }
                 ]},
                 {"set_variable": [
                     {"name": f"{root}_organization" },
@@ -1074,7 +1083,7 @@ class MeasureHandler(BaseHandler):
         calc = [
             {"set_local_variable": [
                 {"name": "temp"},
-                {"value": "ciso_total_government_investment"}
+                {"value": "ciso_total_government_investment_w"}
             ]},
             {"remove_building": "building_ciso_magic_building"},
             {"create_building": [

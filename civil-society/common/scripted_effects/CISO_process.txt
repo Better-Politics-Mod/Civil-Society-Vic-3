@@ -69,7 +69,12 @@ ciso_update_ci_pop = {
 		}
 		set_variable = {
 			name = ciso_ci_tammany_hall_social_impact
-			value = ciso_ci_tammany_hall_social_impact_base
+			value = {
+				value = ciso_ci_tammany_hall_social_impact_base
+				subtract = ciso_ci_tammany_hall_social_impact
+				divide = 24
+				add = ciso_ci_tammany_hall_social_impact
+			}
 		}
 		set_variable = {
 			name = ciso_ci_tammany_hall_organization
@@ -95,7 +100,12 @@ ciso_update_ci_pop = {
 		}
 		set_variable = {
 			name = ciso_ci_heavy_industry_unions_social_impact
-			value = ciso_ci_heavy_industry_unions_social_impact_base
+			value = {
+				value = ciso_ci_heavy_industry_unions_social_impact_base
+				subtract = ciso_ci_heavy_industry_unions_social_impact
+				divide = 24
+				add = ciso_ci_heavy_industry_unions_social_impact
+			}
 		}
 		set_variable = {
 			name = ciso_ci_heavy_industry_unions_organization
@@ -121,7 +131,12 @@ ciso_update_ci_pop = {
 		}
 		set_variable = {
 			name = ciso_ci_royal_court_social_impact
-			value = ciso_ci_royal_court_social_impact_base
+			value = {
+				value = ciso_ci_royal_court_social_impact_base
+				subtract = ciso_ci_royal_court_social_impact
+				divide = 24
+				add = ciso_ci_royal_court_social_impact
+			}
 		}
 		set_variable = {
 			name = ciso_ci_royal_court_organization
@@ -147,7 +162,12 @@ ciso_update_ci_pop = {
 		}
 		set_variable = {
 			name = ciso_ci_manufacturing_corporations_social_impact
-			value = ciso_ci_manufacturing_corporations_social_impact_base
+			value = {
+				value = ciso_ci_manufacturing_corporations_social_impact_base
+				subtract = ciso_ci_manufacturing_corporations_social_impact
+				divide = 24
+				add = ciso_ci_manufacturing_corporations_social_impact
+			}
 		}
 		set_variable = {
 			name = ciso_ci_manufacturing_corporations_organization

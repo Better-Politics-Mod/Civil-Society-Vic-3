@@ -642,6 +642,12 @@ ciso_calculate_atmosphere_stuff = {
 							}
 							subtract = var:ciso_ms_insurance_$ci$_investment_alloc
 						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_insurance_investment_gov
+						}
 					}
 					multiply = {
 						value = var:ciso_ms_insurance_aggr_alloc_total
@@ -650,6 +656,12 @@ ciso_calculate_atmosphere_stuff = {
 								$ci$_is_aggro = yes
 							}
 							subtract = var:ciso_ms_insurance_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_insurance_investment_gov
 						}
 					}
 					divide = {
@@ -681,6 +693,12 @@ ciso_calculate_atmosphere_stuff = {
 							}
 							subtract = var:ciso_ms_insurance_$ci$_investment_alloc
 						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_insurance_investment_gov
+						}
 					}
 					multiply = {
 						value = var:ciso_ms_insurance_coop_alloc_total
@@ -690,6 +708,12 @@ ciso_calculate_atmosphere_stuff = {
 							}
 							subtract = var:ciso_ms_insurance_$ci$_investment_alloc
 						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_insurance_investment_gov
+						}
 					}
 					divide = {
 						value = 10
@@ -719,6 +743,12 @@ ciso_calculate_atmosphere_stuff = {
 							}
 							subtract = var:ciso_ms_soup_kitchen_$ci$_investment_alloc
 						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_soup_kitchen_investment_gov
+						}
 					}
 					multiply = {
 						value = var:ciso_ms_soup_kitchen_aggr_alloc_total
@@ -727,6 +757,12 @@ ciso_calculate_atmosphere_stuff = {
 								$ci$_is_aggro = yes
 							}
 							subtract = var:ciso_ms_soup_kitchen_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_soup_kitchen_investment_gov
 						}
 					}
 					divide = {
@@ -758,6 +794,12 @@ ciso_calculate_atmosphere_stuff = {
 							}
 							subtract = var:ciso_ms_soup_kitchen_$ci$_investment_alloc
 						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_soup_kitchen_investment_gov
+						}
 					}
 					multiply = {
 						value = var:ciso_ms_soup_kitchen_coop_alloc_total
@@ -767,6 +809,12 @@ ciso_calculate_atmosphere_stuff = {
 							}
 							subtract = var:ciso_ms_soup_kitchen_$ci$_investment_alloc
 						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_soup_kitchen_investment_gov
+						}
 					}
 					divide = {
 						value = 10
@@ -796,6 +844,12 @@ ciso_calculate_atmosphere_stuff = {
 							}
 							subtract = var:ciso_ms_library_$ci$_investment_alloc
 						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_library_investment_gov
+						}
 					}
 					multiply = {
 						value = var:ciso_ms_library_aggr_alloc_total
@@ -804,6 +858,12 @@ ciso_calculate_atmosphere_stuff = {
 								$ci$_is_aggro = yes
 							}
 							subtract = var:ciso_ms_library_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_library_investment_gov
 						}
 					}
 					divide = {
@@ -835,6 +895,12 @@ ciso_calculate_atmosphere_stuff = {
 							}
 							subtract = var:ciso_ms_library_$ci$_investment_alloc
 						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_library_investment_gov
+						}
 					}
 					multiply = {
 						value = var:ciso_ms_library_coop_alloc_total
@@ -844,6 +910,12 @@ ciso_calculate_atmosphere_stuff = {
 							}
 							subtract = var:ciso_ms_library_$ci$_investment_alloc
 						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_library_investment_gov
+						}
 					}
 					divide = {
 						value = 10
@@ -873,6 +945,12 @@ ciso_calculate_atmosphere_stuff = {
 							}
 							subtract = var:ciso_ms_schooling_$ci$_investment_alloc
 						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_schooling_investment_gov
+						}
 					}
 					multiply = {
 						value = var:ciso_ms_schooling_aggr_alloc_total
@@ -881,6 +959,12 @@ ciso_calculate_atmosphere_stuff = {
 								$ci$_is_aggro = yes
 							}
 							subtract = var:ciso_ms_schooling_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_schooling_investment_gov
 						}
 					}
 					divide = {
@@ -912,6 +996,12 @@ ciso_calculate_atmosphere_stuff = {
 							}
 							subtract = var:ciso_ms_schooling_$ci$_investment_alloc
 						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_schooling_investment_gov
+						}
 					}
 					multiply = {
 						value = var:ciso_ms_schooling_coop_alloc_total
@@ -921,6 +1011,12 @@ ciso_calculate_atmosphere_stuff = {
 							}
 							subtract = var:ciso_ms_schooling_$ci$_investment_alloc
 						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_schooling_investment_gov
+						}
 					}
 					divide = {
 						value = 10
@@ -950,6 +1046,12 @@ ciso_calculate_atmosphere_stuff = {
 							}
 							subtract = var:ciso_ms_union_hall_$ci$_investment_alloc
 						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_union_hall_investment_gov
+						}
 					}
 					multiply = {
 						value = var:ciso_ms_union_hall_aggr_alloc_total
@@ -958,6 +1060,12 @@ ciso_calculate_atmosphere_stuff = {
 								$ci$_is_aggro = yes
 							}
 							subtract = var:ciso_ms_union_hall_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_union_hall_investment_gov
 						}
 					}
 					divide = {
@@ -989,6 +1097,12 @@ ciso_calculate_atmosphere_stuff = {
 							}
 							subtract = var:ciso_ms_union_hall_$ci$_investment_alloc
 						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_union_hall_investment_gov
+						}
 					}
 					multiply = {
 						value = var:ciso_ms_union_hall_coop_alloc_total
@@ -997,6 +1111,12 @@ ciso_calculate_atmosphere_stuff = {
 								$ci$_is_coop = yes
 							}
 							subtract = var:ciso_ms_union_hall_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_union_hall_investment_gov
 						}
 					}
 					divide = {
@@ -1027,6 +1147,12 @@ ciso_calculate_atmosphere_stuff = {
 							}
 							subtract = var:ciso_ms_health_center_$ci$_investment_alloc
 						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_health_center_investment_gov
+						}
 					}
 					multiply = {
 						value = var:ciso_ms_health_center_aggr_alloc_total
@@ -1035,6 +1161,12 @@ ciso_calculate_atmosphere_stuff = {
 								$ci$_is_aggro = yes
 							}
 							subtract = var:ciso_ms_health_center_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_health_center_investment_gov
 						}
 					}
 					divide = {
@@ -1066,6 +1198,12 @@ ciso_calculate_atmosphere_stuff = {
 							}
 							subtract = var:ciso_ms_health_center_$ci$_investment_alloc
 						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_health_center_investment_gov
+						}
 					}
 					multiply = {
 						value = var:ciso_ms_health_center_coop_alloc_total
@@ -1074,6 +1212,12 @@ ciso_calculate_atmosphere_stuff = {
 								$ci$_is_coop = yes
 							}
 							subtract = var:ciso_ms_health_center_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_health_center_investment_gov
 						}
 					}
 					divide = {

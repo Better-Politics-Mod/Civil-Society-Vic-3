@@ -1,0 +1,4 @@
+ciso_gov_investment_efficiency_add = {
+	decimals = 0
+	color = good
+}

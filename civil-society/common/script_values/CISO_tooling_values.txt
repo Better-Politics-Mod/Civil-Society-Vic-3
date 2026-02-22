@@ -15,3 +15,11 @@ ciso_state_atmosphere_value = {
 		add = var:ciso_state_atmosphere_value
 	}
 }
+
+ciso_total_government_investment_w = {
+	value = ciso_total_government_investment
+	divide = {
+		value = 0.5
+		add = modifier:ciso_gov_investment_efficiency_add
+	}
+}

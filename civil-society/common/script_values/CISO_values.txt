@@ -41,6 +41,7 @@ ciso_ci_tammany_hall_org_trend = {
 		value = ciso_total_unfulfilled_needs
 		divide = 10
 	}
+	subtract = devastation
 	if = {
 		limit = {
 			ciso_ci_is_radical = {
@@ -91,7 +92,9 @@ ciso_ci_tammany_hall_social_impact = {
 		}
 		value = var:ciso_ci_tammany_hall_social_impact
 	}
-	min = 100
+	else = {
+		value = 150
+	}
 	multiply = {
 		value = var:ciso_ci_tammany_hall_atmospheric_si_modifier
 		add = 1
@@ -183,6 +186,7 @@ ciso_ci_heavy_industry_unions_org_trend = {
 		value = ciso_total_unfulfilled_needs
 		divide = 10
 	}
+	subtract = devastation
 	if = {
 		limit = {
 			ciso_ci_is_radical = {
@@ -230,7 +234,9 @@ ciso_ci_heavy_industry_unions_social_impact = {
 		}
 		value = var:ciso_ci_heavy_industry_unions_social_impact
 	}
-	min = 100
+	else = {
+		value = 150
+	}
 	multiply = {
 		value = var:ciso_ci_heavy_industry_unions_atmospheric_si_modifier
 		add = 1
@@ -320,6 +326,7 @@ ciso_ci_royal_court_org_trend = {
 		value = ciso_total_unfulfilled_needs
 		divide = 10
 	}
+	subtract = devastation
 	if = {
 		limit = {
 			ciso_ci_is_radical = {
@@ -367,7 +374,9 @@ ciso_ci_royal_court_social_impact = {
 		}
 		value = var:ciso_ci_royal_court_social_impact
 	}
-	min = 100
+	else = {
+		value = 150
+	}
 	multiply = {
 		value = var:ciso_ci_royal_court_atmospheric_si_modifier
 		add = 1
@@ -457,6 +466,7 @@ ciso_ci_manufacturing_corporations_org_trend = {
 		value = ciso_total_unfulfilled_needs
 		divide = 10
 	}
+	subtract = devastation
 	if = {
 		limit = {
 			ciso_ci_is_radical = {
@@ -504,7 +514,9 @@ ciso_ci_manufacturing_corporations_social_impact = {
 		}
 		value = var:ciso_ci_manufacturing_corporations_social_impact
 	}
-	min = 100
+	else = {
+		value = 150
+	}
 	multiply = {
 		value = var:ciso_ci_manufacturing_corporations_atmospheric_si_modifier
 		add = 1
