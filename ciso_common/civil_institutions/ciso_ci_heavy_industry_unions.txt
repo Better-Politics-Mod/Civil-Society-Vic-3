@@ -62,4 +62,23 @@ ciso_ci_heavy_industry_unions = {
 		multiply = average_sol
 		divide = 10
 	}
+
+	# Can have 2 alignments
+	num_sites = {
+		value = 2
+	}
+
+	alignment = {
+		if = {
+			limit = {
+				scope:alignment = flag:ciso_al_proletarian
+			}
+			add = 2
+		}
+		if = {
+			limit = {
+				scope:alignment = flag:ciso_al_bourgeois_progressive
+			}
+		}
+	}
 }

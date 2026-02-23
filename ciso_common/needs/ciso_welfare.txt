@@ -10,5 +10,12 @@ ciso_ne_welfare = {
 		divide = 400000
 	}
 
+	# up to -1 to the SoL if the need is not fulfilled
+	# up to *1.05 to the mortality if the need is not fulfilled
+	unfulfilled = {
+		state_lower_strata_standard_of_living_add = -1
+		state_mortality_mult = 0.05
+	}
+
 	minimum = 5
 }

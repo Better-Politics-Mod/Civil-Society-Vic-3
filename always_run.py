@@ -929,6 +929,41 @@ class CivInstHandler(BaseHandler):
         
         return triggers_file
 
+class AlignmentHandler(BaseHandler):
+
+    @handler(lambda c: c / "scripted_effects", "CISO_alignment_setup.txt")
+    def handle_alignment_setup(self):
+        trees = self.trees
+        init_global = []
+        
+        for tree in trees:
+            for root in tree.keys():
+                init_global.append({
+                    "add_to_global_variable_list": [
+                        {"name": "ciso_alignment" },
+                        {"target": f"flag:{root}"}
+                    ]
+                })
+
+        return {"ciso_init_alignment_global": init_global}
+
+    @handler(lambda c: c / "modifier_type_definitions", "CISO_alignment_modifiers.txt")
+    def handle_modifier_type(self):
+        trees = self.trees
+        init_global = []
+        
+        for tree in trees:
+            for root in tree.keys():
+                init_global.append({
+                    f"{root}_attraction_mult": [
+                        {"decimals": "0" },
+                        {"percent": True },
+                        {"color": "neutral" }
+                    ]
+                })
+
+        return init_global
+
 class MeasureHandler(BaseHandler):
 
     @handler(lambda c: c / "scripted_effects", "CISO_measures_magic_utils.txt")
@@ -1329,7 +1364,24 @@ class MeasureHandler(BaseHandler):
             ]}
         ]
 class Needs(BaseHandler):
-    
+    @handler(lambda c: c / "static_modifiers", "CISO_needs_modifiers.txt")
+    def handle_modifiers(self):
+        trees = self.trees
+        modifiers_file = {}
+        
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            icon = tree[root].get("icon", None)
+            effects = ParadoxHelper.get_script_block(tree, "unfulfilled")
+            if icon:
+                modifiers_file[f"{root}_unfulfilled"] = [
+                    {"icon": f"\"{icon}\""}
+                ] + effects
+            else:
+                modifiers_file[f"{root}_unfulfilled"] = effects
+
+        return modifiers_file
+
     @handler(lambda c: c / "institutions", "CISO_needs.txt")
     def handle_institution_icon(self):
         trees = self.trees
@@ -1470,3 +1522,7 @@ if __name__ == "__main__":
     needs = ciso_common / "needs"
     need_files = list(needs.glob("*.txt"))
     Needs(need_files)
+
+
+    alignment_file = ciso_common / "alignments.txt"
+    AlignmentHandler([alignment_file])

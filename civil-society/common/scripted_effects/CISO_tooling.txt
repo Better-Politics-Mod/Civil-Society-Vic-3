@@ -46,6 +46,28 @@ ciso_need_process_tooling_handle_needs = {
 			target = flag:$ne$
 		}
 	}
+	remove_modifier = $ne$_unfulfilled
+	if = {
+		limit = {
+			is_target_in_variable_list = {
+				name = ciso_needs
+				target = flag:$ne$
+			}
+			$ne$_rfp > $ne$_fp
+		}
+		set_local_variable = {
+			name = unfulfilled_amount
+			value = {
+				value = $ne$_rfp
+				subtract = $ne$_fp
+				divide = $ne$_rfp
+			}
+		}
+		add_modifier = {
+			name = $ne$_unfulfilled
+			multiplier = local_var:unfulfilled_amount
+		}
+	}
 }
 
 

@@ -1,0 +1,2 @@
+ciso_al_proletarian = {}
+ciso_al_bourgeois_progressive = {}
