@@ -52,4 +52,17 @@ ciso_ci_tammany_hall = {
 	organization_trend_mult = {
 		value = 10
 	}
+
+	num_sites = {
+		value = 1
+	}
+
+	alignment = {
+		if = {
+			limit = {
+				scope:alignment = flag:ciso_al_liberal_democratic
+			}
+			add = 1
+		}
+	}
 }

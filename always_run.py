@@ -2,7 +2,7 @@ import pathlib
 
 script_directory = pathlib.Path(__file__).resolve().parent
 commons = script_directory / "civil-society" / "common"
-
+localization = script_directory / "civil-society" / "localization"  # ADD THIS
 
 ###################
 # PARADOX PARSER  #
@@ -453,65 +453,81 @@ class ParadoxHelper:
 from functools import wraps
 
 ###################
+# YAML WRITER     #
+###################
+class ParadoxLocWriter:
+    """Writer for Paradox localization .yml files."""
+
+    def write(self, obj, language='english'):
+        """
+        Convert a dict of key->value pairs to Paradox localization YAML format.
+        
+        The input should be a flat dict mapping loc keys to their display strings.
+        Nested dicts/lists are flattened by concatenating keys with underscores.
+        """
+        lines = [f"l_{language}:"]
+        self._write_obj(obj, lines, prefix="")
+        return '\n'.join(lines) + '\n'
+
+    def _write_obj(self, obj, lines, prefix):
+        if isinstance(obj, dict):
+            for key, value in obj.items():
+                full_key = f"{prefix}_{key}" if prefix else key
+                self._write_obj(value, lines, full_key)
+        elif isinstance(obj, list):
+            for item in obj:
+                self._write_obj(item, lines, prefix)
+        else:
+            # Leaf value — write as loc entry
+            value_str = str(obj) if not isinstance(obj, bool) else ("yes" if obj else "no")
+            lines.append(f' {prefix}:0 "{value_str}"')
+
+
+###################
 # BASE HANDLER    #
 ###################
-def handler(folder_path, filename):
-    """Decorator to register a handler method and its output configuration.
-    
-    Args:
-        folder_path: Path object or lambda that takes commons and returns path
-        filename: Name of the output file
-    """
+def handler(folder_path, filename, yml=False):
     def decorator(func):
         @wraps(func)
         def wrapper(self):
-            # Call the actual handler method
             content = func(self)
-            
-            # Resolve folder path (could be a lambda for dynamic paths)
-            folder = folder_path(commons) if callable(folder_path) else folder_path
-            
-            # Return the triple expected by write_handled_files
-            return [folder, content, filename]
+            # Use localization as base for yml handlers, commons for paradox script
+            base = localization if yml else commons
+            folder = folder_path(base) if callable(folder_path) else folder_path
+            return [folder, content, filename, yml]
         
-        # Store metadata for registration
         if not hasattr(func, '_is_handler'):
             func._is_handler = True
             func._wrapper = wrapper
             func._folder_path = folder_path
             func._filename = filename
+            func._yml = yml
         
         return func
     return decorator
+
 class HandlerMeta(type):
     """Metaclass to collect all handler methods and track output files globally."""
     
-    # Class-level registry to track all output files across ALL handler classes
     _global_file_registry = {}
     
     def __new__(mcs, name, bases, namespace):
         cls = super().__new__(mcs, name, bases, namespace)
         
-        # Collect all methods marked as handlers
         handlers = []
         for attr_name in dir(cls):
             attr = getattr(cls, attr_name)
             if hasattr(attr, '_is_handler') and hasattr(attr, '_wrapper'):
                 handlers.append(attr._wrapper)
                 
-                # Register this output file globally
                 folder_path = attr._folder_path
                 filename = attr._filename
                 
-                # Create a unique key for this file
-                # We'll resolve the path during class creation if possible
                 if callable(folder_path):
-                    # For lambdas, we can't resolve yet, use a placeholder
                     file_key = f"<dynamic>/{filename}"
                 else:
                     file_key = str(Path(folder_path) / filename)
                 
-                # Check for duplicates
                 if file_key in mcs._global_file_registry:
                     previous_class, previous_method = mcs._global_file_registry[file_key]
                     warnings.warn(
@@ -525,11 +541,12 @@ class HandlerMeta(type):
                         stacklevel=2
                     )
                 else:
-                    # Register this file
                     mcs._global_file_registry[file_key] = (name, attr_name)
         
         cls.handlers = handlers
         return cls
+
+
 class BaseHandler(metaclass=HandlerMeta):
     """Base class for all handlers with automatic handler registration."""
     
@@ -539,17 +556,36 @@ class BaseHandler(metaclass=HandlerMeta):
     def parse_and_update(self, files):
         self.trees = [ParadoxHelper.parse_file(file) for file in files]
         
-        # Collect all handler outputs
-        outputs = []
+        paradox_outputs = []
+        yml_outputs = []
+
         for handler_wrapper in self.handlers:
             result = handler_wrapper(self)
             if result:
-                outputs.append(result)
+                folder, content, filename, is_yml = result
+                if is_yml:
+                    yml_outputs.append((folder, content, filename))
+                else:
+                    paradox_outputs.append((folder, content, filename))
         
-        # Write all files
-        ParadoxHelper.write_handled_files(*outputs)
+        if paradox_outputs:
+            ParadoxHelper.write_handled_files(*paradox_outputs)
+        
+        if yml_outputs:
+            BaseHandler._write_yml_files(*yml_outputs)
 
-
+    @staticmethod
+    def _write_yml_files(*file_data):
+        writer = ParadoxLocWriter()
+        for folder, content, filename in file_data:
+            folder.mkdir(parents=True, exist_ok=True)
+            filepath = folder / filename
+            yml_text = writer.write(content)
+            with open(filepath, 'w', encoding='utf-8-sig') as f:
+                # utf-8-sig writes the BOM that Paradox loc files require
+                f.write("# This file is autogenerated by always_run.py\n")
+                f.write("# Do not edit this file directly\n\n")
+                f.write(yml_text)
 
 ###################
 # TYPE HANDLERS   #
@@ -564,6 +600,10 @@ class CivInstHandler(BaseHandler):
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
             ms_weights = ParadoxHelper.get_script_block(tree, "measure_weights")
+            alignment = [{"value": "0"}, {"save_temporary_scope_as": "alignment"} ] + [ 
+                {"owner": ParadoxHelper.get_script_block(tree, "alignment") }
+            ]
+            num_sites = [{"value": "0"}] + ParadoxHelper.get_script_block(tree, "num_sites")
             stance = ParadoxHelper.get_script_block(tree, "stance") + [
                 {"subtract": [
                     {"value": "ciso_state_atmosphere_value"},
@@ -581,7 +621,8 @@ class CivInstHandler(BaseHandler):
             ) + [
                 {"round": True}
             ]
-
+            values_file[f"{root}_num_sites"] = num_sites
+            values_file[f"{root}_alignment"] = alignment
             values_file[f"{root}_social_impact_base"] = social_impact
             values_file[f"{root}_stance"] = stance
             values_file[f"{root}_population"] = ParadoxParser("""
@@ -796,6 +837,12 @@ class CivInstHandler(BaseHandler):
                 "ciso_mv_atmosphere": [ { "ci": root } ]
             })
 
+        for tree in trees:
+            root = ParadoxHelper.get_root(tree)
+            process_file_monthly.append({
+                "ciso_align_ci": [ { "ci": root } ]
+            })
+
         return {
             "ciso_civsoc_process_monthly": [
                 {"ciso_reset_all_measures_ci_invest": "yes"}
@@ -963,6 +1010,59 @@ class AlignmentHandler(BaseHandler):
                 })
 
         return init_global
+
+    @handler(lambda c: c / "static_modifiers", "CISO_alignment_static_modifiers.txt")
+    def handle_static_modifiers(self):
+        trees = self.trees
+        modifiers_file = {}
+        
+        for tree in trees:
+            for root in tree.keys():
+                icon = tree[root].get("icon", None)
+                if icon:
+                    modifiers_file[f"{root}_boost_mod"] = [
+                        {"icon": f"\"{icon}\""},
+                        {f"{root}_attraction_mult": "1"}
+                    ] 
+                else:
+                    modifiers_file[f"{root}_boost_mod"] = [
+                        {f"{root}_attraction_mult": "1"}
+                    ]
+
+        return modifiers_file
+
+    @handler(lambda c: c / "scripted_effects", "CISO_alignment_process.txt")
+    def handle_alignment_process(self):
+        trees = self.trees
+        process_file = []
+        
+        for tree in trees:
+            for root in tree.keys():
+                process_file.extend([
+                {"if": [
+                    {"limit": [
+                        {"scope:alignment": f"flag:{root}"}
+                    ]},
+                    {"ciso_align_ci_tool": [ { "ci": "$ci$" }, {"modifier": f"{root}_boost_mod"} ] }
+                ]}
+                ])
+
+        return {"ciso_apply_alignment": process_file}
+
+    @handler(lambda l: l / "english", "CISO_alignment_l_english.yml",yml=True)
+    def handle_alignment_loc(self):
+        trees = self.trees
+        loc_file = {}
+        
+        for tree in trees:
+            for root in tree.keys():
+                rootw = root.replace("ciso_al_", "")
+                rootw = rootw.replace("_", " ")
+                loc_file[f"{root}"] = rootw.title() + " Alignment"
+                loc_file[f"{root}_boost_mod"] = rootw.title() + " Alignment"
+                loc_file[f"{root}_attraction_mult"] = f"{rootw.title()} Alignment Attraction Multiplier"
+
+        return loc_file
 
 class MeasureHandler(BaseHandler):
 

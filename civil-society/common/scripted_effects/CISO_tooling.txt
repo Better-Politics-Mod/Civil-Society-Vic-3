@@ -207,3 +207,61 @@ ciso_mv_atmosphere = {
 	}
 
 }
+
+ciso_align_ci = {
+	clear_variable_list = $ci$_aligned_groups
+	if = {
+		limit = {
+			is_target_in_variable_list = {
+				name = ciso_civil_institutions
+				target = flag:$ci$
+			}
+		}
+		ordered_in_global_list = {
+			variable = ciso_alignment
+			order_by = $ci$_alignment
+			max = {
+				value = $ci$_num_sites
+			}
+			prev = {
+				add_to_variable_list = {
+					name = $ci$_aligned_groups
+					target = prev
+				}
+			}
+		}
+		set_local_variable = {
+			name = counter
+			value = 1
+		}
+		ordered_in_list = {
+			variable = $ci$_aligned_groups
+			clear_saved_scope = alignment
+			save_scope_as = alignment
+			prev = { ciso_apply_alignment = {
+				ci = $ci$
+			} }
+			change_local_variable = {
+				name = counter
+				add = 1
+			}
+		}
+
+	}
+}
+
+ciso_align_ci_tool = {
+	set_local_variable = {
+		name = multiply_factor
+		value = {
+			value = $ci$_social_impact
+			divide = 1000
+			divide = local_var:counter
+		}
+	}
+	remove_modifier = $modifier$
+	add_modifier = {
+		name = $modifier$
+		multiplier = local_var:multiply_factor
+	}
+}

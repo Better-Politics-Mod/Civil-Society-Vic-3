@@ -6,7 +6,7 @@ ciso_al_proletarian_attraction_mult = {
 	percent = yes
 	color = neutral
 }
-ciso_al_bourgeois_progressive_attraction_mult = {
+ciso_al_liberal_democratic_attraction_mult = {
 	decimals = 0
 	percent = yes
 	color = neutral

@@ -46,4 +46,17 @@ ciso_ci_royal_court = {
 		multiply = size # the numbers of pops supporting the institution
 		divide = ciso_size_scaling_factor # usu. 100,000
 	}
+
+	num_sites = {
+		value = 0
+	}
+
+	alignment = {
+		if = {
+			limit = {
+				scope:alignment = flag:ciso_al_liberal_democratic
+			}
+			add = 1
+		}
+	}
 }

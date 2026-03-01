@@ -1,0 +1,86 @@
+@tooltip_max_width = 550 #copied from tooltip.gui
+
+@tooltip_fixed_width = 500 #for 2 column layouts etc, since max_width is quite wide
+@tooltip_fixed_column_width = 245 #tooltip_fixed_width/2 - 10/2
+@tooltip_fixed_column_width_minus_40 = 205
+@tooltip_fixed_column_width_minus_16 = 229
+
+types TooltipTypes
+{
+	type RegularTooltip_CISO_Influence = RegularTooltip {
+		blockoverride "tooltip_content_after" {
+			flowcontainer = {
+                datacontext = "[Scope]"
+				direction = vertical
+				flowcontainer = {
+					direction = vertical
+                    flowcontainer = {
+                        direction = horizontal
+                        margin = { 2 0 }
+                        textbox = {
+                            text = "CISO_influence_tooltip_effect"
+                            size = { 300 60 }
+                            maximumsize = { 300 120 }
+                            using = fontsize_medium
+                            autoresize = yes
+                            multiline = yes
+                        }
+                    }
+                    flowcontainer = {
+                        datacontext = "[Scope]"
+                        direction = horizontal
+                        background = { using = entry_bg_fancy_dark }
+                        margin = { 2 0 }
+                        minimumsize = { 235 30 }
+                        textbox = {
+                            margin_left = 10
+                            text = "Effect"
+                            size = { @tooltip_fixed_column_width_minus_40 30 }
+                        }
+                        expand = {}
+                        textbox = {
+                            text = "x[Divide_CFixedPoint(State.MakeScope.ScriptValue(Concatenate(Scope.GetFlagName, '_social_impact')), '(CFixedPoint)1000')|v%0]"
+                            size = { 60 30 }
+                        }
+                    }
+					flowcontainer = {
+                        direction = vertical
+						#spacing = 10
+                        datacontext = "[Scope]"
+						datamodel = "[State.MakeScope.GetList(Concatenate(Scope.GetFlagName, '_aligned_groups'))]"
+
+						item = {
+							ciso_aligned_group = {}
+						}
+					}
+					expand = {}
+				}
+			}
+		}
+	}
+
+    type ciso_aligned_group = widget {
+        # this just shows the name with a number
+        size = { 305 30 }
+        # simple background
+        background = {
+            using = entry_bg_simple
+        }
+
+        hbox = {
+            layoutpolicy_horizontal = expanding
+            margin = { 10 0 }
+            textbox = {
+                text = "[Localize(Scope.GetFlagName)]"
+                size = { @tooltip_fixed_column_width_minus_40 20 }
+            }
+            expand = {}
+            textbox = {
+                text = "/[Add_int32('(int32)1', PdxGuiWidget.GetIndexInDataModel)|v]"
+                size = { 30 20 }
+            }
+        }
+    }
+
+
+}

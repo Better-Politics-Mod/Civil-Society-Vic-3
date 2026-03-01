@@ -1,2 +1,6 @@
-ciso_al_proletarian = {}
-ciso_al_bourgeois_progressive = {}
+ciso_al_proletarian = {
+	icon = "gfx/interface/icons/ideology_icons/socialist.dds"
+}
+ciso_al_liberal_democratic = {
+	icon = "gfx/interface/icons/ideology_icons/liberal.dds"
+}

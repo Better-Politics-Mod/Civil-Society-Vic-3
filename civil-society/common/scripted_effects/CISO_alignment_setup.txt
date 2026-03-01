@@ -8,6 +8,6 @@ ciso_init_alignment_global = {
 	}
 	add_to_global_variable_list = {
 		name = ciso_alignment
-		target = flag:ciso_al_bourgeois_progressive
+		target = flag:ciso_al_liberal_democratic
 	}
 }

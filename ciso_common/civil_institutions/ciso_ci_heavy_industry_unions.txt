@@ -77,8 +77,9 @@ ciso_ci_heavy_industry_unions = {
 		}
 		if = {
 			limit = {
-				scope:alignment = flag:ciso_al_bourgeois_progressive
+				scope:alignment = flag:ciso_al_liberal_democratic
 			}
+			add = 1
 		}
 	}
 }

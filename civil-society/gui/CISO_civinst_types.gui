@@ -17,6 +17,7 @@ types CISO_civinst_types
 		block "button_size" {
 			size = { 500 60 }
 		}
+		
 
 		button = {
 			parentanchor = center
@@ -24,6 +25,10 @@ types CISO_civinst_types
 			#onclick = "[InformationPanelBar.OpenPoliticalMovementPanel(PoliticalMovement.AccessSelf)]"
 			#onrightclick = "[RightClickMenuManager.ShowForPoliticalMovement(PoliticalMovement.AccessSelf)]"
 			using = default_button
+
+			tooltipwidget = {
+				RegularTooltip_CISO_Influence = {}
+			}
 
 			hbox = {
 				layoutpolicy_horizontal = expanding
