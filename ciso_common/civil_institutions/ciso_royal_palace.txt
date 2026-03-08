@@ -15,6 +15,11 @@ ciso_ci_royal_court = {
 		}
 	}
 
+	# scales with SI
+	modifier = {
+
+	}
+	
 	measure_weights = {
 		value = 0
 		if = {

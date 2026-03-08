@@ -8,7 +8,10 @@ ciso_ci_tammany_hall = {
 	possible = {
 		always = yes
 	}
+	# scales with SI
+	modifier = {
 
+	}
 	measure_weights = {
 		value = 0
 		if = {

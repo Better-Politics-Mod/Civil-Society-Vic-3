@@ -5,6 +5,11 @@ ciso_ci_heavy_industry_unions = {
 		always = yes
 	}
 
+	# scales with SI
+	modifier = {
+
+	}
+
 	possible = {
 		custom_tooltip = {
 			text = "ciso_ci_heavy_industry_unions_creation_trigger_heavy_industry"

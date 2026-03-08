@@ -22,6 +22,11 @@ ciso_ci_manufacturing_corporations = {
 			}
 		}
 	}
+	
+	# scales with SI
+	modifier = {
+
+	}
 
 	measure_weights = {
 		value = 0
