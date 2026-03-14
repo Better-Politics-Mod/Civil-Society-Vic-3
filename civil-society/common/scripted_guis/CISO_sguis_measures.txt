@@ -270,6 +270,25 @@ ciso_ms_insurance_decrement_alittle_effect = {
 		}
 	}
 }
+ciso_ms_insurance_suppressed = {
+	scope = state
+	is_shown = {
+		has_variable = ciso_ms_insurance_is_suppressed
+	}
+	effect = {
+		if = {
+			limit = {
+				has_variable = ciso_ms_insurance_is_suppressed
+			}
+			remove_variable = ciso_ms_insurance_is_suppressed
+			ciso_update_cost = yes
+		}
+		else = {
+			set_variable = ciso_ms_insurance_is_suppressed
+			ciso_update_cost = yes
+		}
+	}
+}
 ciso_ms_soup_kitchen_conditions_effect = {
 	scope = state
 	is_shown = {
@@ -536,6 +555,25 @@ ciso_ms_soup_kitchen_decrement_alittle_effect = {
 		ciso_update_cost = yes
 		ciso_apply_ms_effect = {
 			ms = ciso_ms_soup_kitchen
+		}
+	}
+}
+ciso_ms_soup_kitchen_suppressed = {
+	scope = state
+	is_shown = {
+		has_variable = ciso_ms_soup_kitchen_is_suppressed
+	}
+	effect = {
+		if = {
+			limit = {
+				has_variable = ciso_ms_soup_kitchen_is_suppressed
+			}
+			remove_variable = ciso_ms_soup_kitchen_is_suppressed
+			ciso_update_cost = yes
+		}
+		else = {
+			set_variable = ciso_ms_soup_kitchen_is_suppressed
+			ciso_update_cost = yes
 		}
 	}
 }
@@ -808,6 +846,25 @@ ciso_ms_library_decrement_alittle_effect = {
 		}
 	}
 }
+ciso_ms_library_suppressed = {
+	scope = state
+	is_shown = {
+		has_variable = ciso_ms_library_is_suppressed
+	}
+	effect = {
+		if = {
+			limit = {
+				has_variable = ciso_ms_library_is_suppressed
+			}
+			remove_variable = ciso_ms_library_is_suppressed
+			ciso_update_cost = yes
+		}
+		else = {
+			set_variable = ciso_ms_library_is_suppressed
+			ciso_update_cost = yes
+		}
+	}
+}
 ciso_ms_schooling_conditions_effect = {
 	scope = state
 	is_shown = {
@@ -1074,6 +1131,25 @@ ciso_ms_schooling_decrement_alittle_effect = {
 		ciso_update_cost = yes
 		ciso_apply_ms_effect = {
 			ms = ciso_ms_schooling
+		}
+	}
+}
+ciso_ms_schooling_suppressed = {
+	scope = state
+	is_shown = {
+		has_variable = ciso_ms_schooling_is_suppressed
+	}
+	effect = {
+		if = {
+			limit = {
+				has_variable = ciso_ms_schooling_is_suppressed
+			}
+			remove_variable = ciso_ms_schooling_is_suppressed
+			ciso_update_cost = yes
+		}
+		else = {
+			set_variable = ciso_ms_schooling_is_suppressed
+			ciso_update_cost = yes
 		}
 	}
 }
@@ -1346,6 +1422,25 @@ ciso_ms_union_hall_decrement_alittle_effect = {
 		}
 	}
 }
+ciso_ms_union_hall_suppressed = {
+	scope = state
+	is_shown = {
+		has_variable = ciso_ms_union_hall_is_suppressed
+	}
+	effect = {
+		if = {
+			limit = {
+				has_variable = ciso_ms_union_hall_is_suppressed
+			}
+			remove_variable = ciso_ms_union_hall_is_suppressed
+			ciso_update_cost = yes
+		}
+		else = {
+			set_variable = ciso_ms_union_hall_is_suppressed
+			ciso_update_cost = yes
+		}
+	}
+}
 ciso_ms_health_center_conditions_effect = {
 	scope = state
 	is_shown = {
@@ -1612,6 +1707,25 @@ ciso_ms_health_center_decrement_alittle_effect = {
 		ciso_update_cost = yes
 		ciso_apply_ms_effect = {
 			ms = ciso_ms_health_center
+		}
+	}
+}
+ciso_ms_health_center_suppressed = {
+	scope = state
+	is_shown = {
+		has_variable = ciso_ms_health_center_is_suppressed
+	}
+	effect = {
+		if = {
+			limit = {
+				has_variable = ciso_ms_health_center_is_suppressed
+			}
+			remove_variable = ciso_ms_health_center_is_suppressed
+			ciso_update_cost = yes
+		}
+		else = {
+			set_variable = ciso_ms_health_center_is_suppressed
+			ciso_update_cost = yes
 		}
 	}
 }

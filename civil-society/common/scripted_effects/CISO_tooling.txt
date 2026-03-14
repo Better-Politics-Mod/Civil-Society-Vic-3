@@ -265,3 +265,8 @@ ciso_align_ci_tool = {
 		multiplier = local_var:multiply_factor
 	}
 }
+
+ciso_incur_extra_si_cost = {
+	# $ms$ is the measure in question
+	# $ci$
+}

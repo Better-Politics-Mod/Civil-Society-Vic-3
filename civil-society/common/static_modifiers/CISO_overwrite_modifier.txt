@@ -1,3 +1,11 @@
-INJECT:base_values = {
-	ciso_gov_investment_efficiency_add = 1.5
+INJECT:incorporated_state = {
+	state_ciso_gov_investment_efficiency_add = 1.5
+	state_ciso_suppression_efficiency_add = 0.1
+	state_ciso_suppression_efficiency_illegal_add = 0.25
+}
+
+INJECT:unincorporated_state = {
+	state_ciso_gov_investment_efficiency_add = 1.5
+	state_ciso_suppression_efficiency_add = 0.1
+	state_ciso_suppression_efficiency_illegal_add = 0.25
 }

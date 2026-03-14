@@ -238,6 +238,45 @@ ciso_total_government_investment = {
 	add = ciso_ms_union_hall_investment_gov
 	add = ciso_ms_health_center_investment_gov
 }
+ciso_total_government_suppression = {
+	value = 0
+	if = {
+		limit = {
+			has_variable = ciso_ms_insurance_is_suppressed
+		}
+		add = ciso_ms_insurance_investment
+	}
+	if = {
+		limit = {
+			has_variable = ciso_ms_soup_kitchen_is_suppressed
+		}
+		add = ciso_ms_soup_kitchen_investment
+	}
+	if = {
+		limit = {
+			has_variable = ciso_ms_library_is_suppressed
+		}
+		add = ciso_ms_library_investment
+	}
+	if = {
+		limit = {
+			has_variable = ciso_ms_schooling_is_suppressed
+		}
+		add = ciso_ms_schooling_investment
+	}
+	if = {
+		limit = {
+			has_variable = ciso_ms_union_hall_is_suppressed
+		}
+		add = ciso_ms_union_hall_investment
+	}
+	if = {
+		limit = {
+			has_variable = ciso_ms_health_center_is_suppressed
+		}
+		add = ciso_ms_health_center_investment
+	}
+}
 ciso_avg_already_allocated = {
 	value = 0
 	add = ciso_ms_insurance_investment

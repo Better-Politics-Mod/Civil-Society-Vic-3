@@ -1,4 +1,17 @@
-ciso_gov_investment_efficiency_add = {
+state_ciso_gov_investment_efficiency_add = {
 	decimals = 0
 	color = good
+	percent = yes
+}
+
+state_ciso_suppression_efficiency_add = {
+	decimals = 0
+	color = neutral
+	percent = yes
+}
+
+state_ciso_suppression_efficiency_illegal_add = {
+	decimals = 0
+	color = neutral
+	percent = yes
 }

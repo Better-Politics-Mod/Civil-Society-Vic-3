@@ -258,6 +258,21 @@ ciso_do_every_measure_with_ci = {
 			value = 0
 		}
 	}
+	change_local_variable = {
+		name = ciso_raw_alloc_scale
+		multiply = {
+			value = 1
+			if = {
+				limit = {
+					has_variable = ciso_ms_insurance_is_suppressed
+				}
+				divide = {
+					value = ciso_suppression_cost_mult
+					min = 1
+				}
+			}
+		}
+	}
 	change_variable = {
 		name = ciso_ms_insurance_ci_investment_var
 		add = {
@@ -316,6 +331,21 @@ ciso_do_every_measure_with_ci = {
 		remove_list_variable = {
 			name = ciso_society_measures
 			target = flag:ciso_ms_insurance
+		}
+	}
+	change_local_variable = {
+		name = ciso_raw_alloc_scale
+		multiply = {
+			value = 1
+			if = {
+				limit = {
+					has_variable = ciso_ms_soup_kitchen_is_suppressed
+				}
+				divide = {
+					value = ciso_suppression_cost_mult
+					min = 1
+				}
+			}
 		}
 	}
 	change_variable = {
@@ -378,6 +408,21 @@ ciso_do_every_measure_with_ci = {
 			target = flag:ciso_ms_soup_kitchen
 		}
 	}
+	change_local_variable = {
+		name = ciso_raw_alloc_scale
+		multiply = {
+			value = 1
+			if = {
+				limit = {
+					has_variable = ciso_ms_library_is_suppressed
+				}
+				divide = {
+					value = ciso_suppression_cost_mult
+					min = 1
+				}
+			}
+		}
+	}
 	change_variable = {
 		name = ciso_ms_library_ci_investment_var
 		add = {
@@ -436,6 +481,21 @@ ciso_do_every_measure_with_ci = {
 		remove_list_variable = {
 			name = ciso_society_measures
 			target = flag:ciso_ms_library
+		}
+	}
+	change_local_variable = {
+		name = ciso_raw_alloc_scale
+		multiply = {
+			value = 1
+			if = {
+				limit = {
+					has_variable = ciso_ms_schooling_is_suppressed
+				}
+				divide = {
+					value = ciso_suppression_cost_mult
+					min = 1
+				}
+			}
 		}
 	}
 	change_variable = {
@@ -498,6 +558,21 @@ ciso_do_every_measure_with_ci = {
 			target = flag:ciso_ms_schooling
 		}
 	}
+	change_local_variable = {
+		name = ciso_raw_alloc_scale
+		multiply = {
+			value = 1
+			if = {
+				limit = {
+					has_variable = ciso_ms_union_hall_is_suppressed
+				}
+				divide = {
+					value = ciso_suppression_cost_mult
+					min = 1
+				}
+			}
+		}
+	}
 	change_variable = {
 		name = ciso_ms_union_hall_ci_investment_var
 		add = {
@@ -556,6 +631,21 @@ ciso_do_every_measure_with_ci = {
 		remove_list_variable = {
 			name = ciso_society_measures
 			target = flag:ciso_ms_union_hall
+		}
+	}
+	change_local_variable = {
+		name = ciso_raw_alloc_scale
+		multiply = {
+			value = 1
+			if = {
+				limit = {
+					has_variable = ciso_ms_health_center_is_suppressed
+				}
+				divide = {
+					value = ciso_suppression_cost_mult
+					min = 1
+				}
+			}
 		}
 	}
 	change_variable = {

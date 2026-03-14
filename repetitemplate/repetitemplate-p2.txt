@@ -1,4 +1,20 @@
 
+change_local_variable = {
+	name = ciso_raw_alloc_scale
+	multiply = { 
+		value = 1 
+		if = {
+			limit = {
+				has_variable = <<root>>_is_suppressed
+			}
+			divide = {
+				value = ciso_suppression_cost_mult
+				min = 1
+			}
+		} 
+	}
+}
+
 change_variable = {
 	name = <<root>>_ci_investment_var
 	add = {
@@ -51,7 +67,7 @@ if = {
 }
 else_if = {
 	limit = {
-		<<root>>_investment == 0
+		<<root>>_investment = 0
 		is_target_in_variable_list = {
 			name = ciso_society_measures
 			target = flag:<<root>>

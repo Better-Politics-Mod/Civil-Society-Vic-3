@@ -1171,6 +1171,10 @@ class MeasureHandler(BaseHandler):
             "ciso_update_ci_pop": "yes"
         })
 
+        process_file_monthly.append({
+            "ciso_update_cost": True
+        })
+
         return {
             "ciso_measures_process_monthly": process_file_monthly,
             "ciso_measures_process_halfyearly": process_file_halfyearly
@@ -1218,7 +1222,10 @@ class MeasureHandler(BaseHandler):
         calc = [
             {"set_local_variable": [
                 {"name": "temp"},
-                {"value": "ciso_total_government_investment_w"}
+                {"value": [
+                    {"value": "ciso_total_government_investment_w"},
+                    {"add": "ciso_total_government_suppression"}
+                ]}
             ]},
             {"remove_building": "building_ciso_magic_building"},
             {"create_building": [
@@ -1255,6 +1262,7 @@ class MeasureHandler(BaseHandler):
         script_value_file = {}
         avg_alr_invested = [{"value": "0"}]
         total_gov_inv = [{"value": "0"}]
+        total_gov_sup = [{"value": "0"}]
         
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
@@ -1325,6 +1333,14 @@ class MeasureHandler(BaseHandler):
             total_gov_inv.append({
                 "add": f"{root}_investment_gov"
             })
+            total_gov_sup.append([
+                {"if": [
+                    {"limit": [ 
+                        {"has_variable": f"{root}_is_suppressed" }
+                    ]},
+                    {"add": f"{root}_investment"}
+                ]}
+            ])
 
         for tree in trees:
             root = ParadoxHelper.get_root(tree)
@@ -1339,6 +1355,8 @@ class MeasureHandler(BaseHandler):
         })
 
         script_value_file["ciso_total_government_investment"] = total_gov_inv
+        script_value_file["ciso_total_government_suppression"] = total_gov_sup
+
         script_value_file["ciso_avg_already_allocated"] = avg_alr_invested
         return script_value_file
 
@@ -1422,6 +1440,36 @@ class MeasureHandler(BaseHandler):
             sgui_file[f"{root}_decrement_alittle_effect"] = self.generate_incrdecr_effect(
                 root, increment="subtract", value="10"
             )
+
+            sgui_file[f"{root}_suppressed"] = [
+                {"scope": "state"},
+                {
+                    "is_shown": [{
+                        "has_variable": f"{root}_is_suppressed"
+                    }]
+                },
+                {
+                    "effect": [{
+                        "if": [
+
+                            {"limit": [{
+                                "has_variable": f"{root}_is_suppressed"
+                            }]},
+                            {
+                                "remove_variable": f"{root}_is_suppressed"
+                            },
+                            {"ciso_update_cost": "yes"}
+                        ]
+                    },
+                    {
+                        "else": [
+                            {"set_variable": f"{root}_is_suppressed"},
+                            {"ciso_update_cost": "yes"}
+                        ]
+                    }
+                    ]}
+            ]
+            
         
         return sgui_file
 

@@ -78,7 +78,10 @@ ciso_reset_all_measures_ci_invest = {
 ciso_update_cost = {
 	set_local_variable = {
 		name = temp
-		value = ciso_total_government_investment_w
+		value = {
+			value = ciso_total_government_investment_w
+			add = ciso_total_government_suppression
+		}
 	}
 	remove_building = building_ciso_magic_building
 	create_building = {

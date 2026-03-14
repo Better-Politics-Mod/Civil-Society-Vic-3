@@ -1,0 +1,25 @@
+INJECT:law_no_home_affairs = {
+	modifier = {
+		state_ciso_suppression_efficiency_add = -0.25
+		state_ciso_suppression_efficiency_illegal_add = -0.25
+	}
+}
+
+INJECT:law_national_guard = {
+	institution_modifier = {
+		state_ciso_suppression_efficiency_add = 0.1
+		state_ciso_suppression_efficiency_illegal_add = 0.1
+	}
+}
+
+INJECT:law_secret_police = {
+	institution_modifier = {
+		state_ciso_suppression_efficiency_add = 0.1
+	}
+}
+
+INJECT:law_guaranteed_liberties = {
+	institution_modifier = {
+		state_ciso_suppression_efficiency_illegal_add = 0.1
+	}
+}

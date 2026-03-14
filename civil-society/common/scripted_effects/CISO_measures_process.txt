@@ -28,6 +28,7 @@ ciso_measures_process_monthly = {
 		}
 		ciso_update_ci_pop = yes
 	}
+	ciso_update_cost = yes
 }
 ciso_measures_process_halfyearly = {
 	ciso_update_ci_pop = yes

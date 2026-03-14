@@ -30,3 +30,9 @@
   CISO_SOCIETY_ATTACK_TT: "#tooltip_header Aggressive Stance#!\n$TOOLTIP_DELIMITER$\nA #gold Civil Institution#! in an Aggressive Stance will focus on attacking other #gold Civil Institutions#!, reducing their #gold Social Impact#! and potentially taking over their #gold Measures#!. It will not gain #gold Social Impact#! from attacking, but it can drive out other #gold Civil Institutions#! and take over their #gold Measures#! if they are weakened enough."
 
   CISO_influence_tooltip_effect: "The lower on the alignment list a group is the less the support of this #gold Civil Institution#! will be applied to it.\n$TOOLTIP_DELIMITER$"
+
+  CISO_SUPPRESS_MEASURE: "#tooltip_header Suppress Measure#!\n$TOOLTIP_DELIMITER$\nSpend [concept_bureaucracy] to suppress a #gold Measure#!, increasing the #gold Social Impact#! cost it incurs on investing #gold Civil Institutions#!. The effectiveness of this action depends on the current #gold Social Atmosphere#!, as well as the [GetLawGroup('lawgroup_internal_security').GetName] [concept_law_group].\n\nLoyal #gold Civil Institutions#! will never invest in a suppressed #gold Measure#!, Neutral #gold Civil Institutions#! will invest at a reduced rate depending on the #gold Social Atmosphere#!, and Disloyal #gold Civil Institutions#! will invest as normal regardless of suppression.\n\nSuppression will incur a [concept_bureaucracy] cost equal to the total #gold Social Impact#! invested in the #gold Measure#!, multiplied by a factor depending on the #gold Social Atmosphere#!.\n\n#gold Civil Institution#! Suppression Cost Multiplier: x[State.MakeScope.ScriptValue('ciso_suppression_cost_mult')|v1]\n[State.MakeScope.GetScriptValueDesc('ciso_suppression_cost_mult')]"
+  ciso_base_suppression: "Base"
+  ciso_percent_add_format: "$VALUE|=v2$ from $KEY$"
+  ciso_base_suppression_efficiency: "Suppression Efficiency"
+  ciso_base_suppression_efficiency_illegal: "Illegal Measure Suppression Efficiency"
