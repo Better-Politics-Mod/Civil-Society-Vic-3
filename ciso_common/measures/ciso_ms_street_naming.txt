@@ -1,0 +1,25 @@
+ciso_ms_street_naming = {
+	icon = "gfx/interface/icons/measure_icons/street_naming.dds"
+	
+	visible = {
+		has_technology_researched = urban_planning
+	}
+
+	modifier = {
+		state_infrastructure_mult = 0.01
+	}
+
+	pop_weights = {
+		value = 0
+		add = {
+			value = state.state_urbanization_rate
+			multiply = 4
+		}
+		if = {
+			limit = {
+				is_pop_type = bureaucrats
+			}
+			add = 2
+		}
+	}
+}

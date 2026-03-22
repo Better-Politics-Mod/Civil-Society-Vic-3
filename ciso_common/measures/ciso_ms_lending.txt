@@ -1,0 +1,41 @@
+ciso_ms_capitalist_lending = {
+	icon = "gfx/interface/icons/measure_icons/lending.dds"
+	
+	visible = {
+		NOT = {
+			has_law = law_type:law_traditionalism
+			has_law = law_type:law_cooperative_ownership
+			has_law = law_type:law_command_economy
+		}
+	}
+
+	modifier = {
+		state_capitalists_investment_pool_efficiency_mult = 0.002
+		state_shopkeepers_investment_pool_efficiency_mult = 0.002
+		state_political_strength_from_wealth_mult         = 0.001
+	}
+
+	pop_weights = {
+		value = 0
+		if = {
+			limit = {
+				is_pop_type = capitalists 
+			}
+			add = 5
+		}
+		else_if = {
+			limit = {
+				is_pop_type = shopkeepers
+			}
+			add = 2
+		}
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_laissez_faire
+				}
+			}
+			multiply = 2
+		}
+	}
+}
