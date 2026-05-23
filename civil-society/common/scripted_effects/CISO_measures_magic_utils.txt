@@ -6,6 +6,45 @@ ciso_do_every_measure_with_ci = {
 		name = ciso_raw_alloc_total
 		value = 0
 	}
+	flag:ciso_ms_capitalist_lending = {
+		save_scope_as = ms
+	}
+	clear_saved_scope = measure
+	save_scope_value_as = {
+		name = ciso_raw_alloc_ciso_ms_capitalist_lending
+		value = {
+			value = {
+				value = $ci$_ms_weights
+				divide = scope:lambda
+				round_to = 0.1
+				pow = 0.5
+			}
+			multiply = ciso_B
+			subtract = ciso_B
+			subtract = var:ciso_ms_capitalist_lending_ci_investment_var
+			min = 0
+		}
+	}
+	change_local_variable = {
+		name = ciso_raw_alloc_total
+		add = scope:ciso_raw_alloc_ciso_ms_capitalist_lending
+	}
+	set_variable = {
+		name = ciso_ms_capitalist_lending_$ci$_investment_alloc
+		value = 0
+	}
+	add_to_variable_list = {
+		name = ciso_ms_capitalist_lending_PTRs
+		target = flag:ciso_ms_capitalist_lending_$ci$_ptr
+	}
+	set_variable = {
+		name = ciso_ms_capitalist_lending_$ci$_ptr_getci
+		value = flag:$ci$
+	}
+	set_variable = {
+		name = ciso_ms_capitalist_lending_$ci$_ptr_getms
+		value = flag:ciso_ms_capitalist_lending
+	}
 	flag:ciso_ms_insurance = {
 		save_scope_as = ms
 	}
@@ -83,45 +122,6 @@ ciso_do_every_measure_with_ci = {
 	set_variable = {
 		name = ciso_ms_soup_kitchen_$ci$_ptr_getms
 		value = flag:ciso_ms_soup_kitchen
-	}
-	flag:ciso_ms_library = {
-		save_scope_as = ms
-	}
-	clear_saved_scope = measure
-	save_scope_value_as = {
-		name = ciso_raw_alloc_ciso_ms_library
-		value = {
-			value = {
-				value = $ci$_ms_weights
-				divide = scope:lambda
-				round_to = 0.1
-				pow = 0.5
-			}
-			multiply = ciso_B
-			subtract = ciso_B
-			subtract = var:ciso_ms_library_ci_investment_var
-			min = 0
-		}
-	}
-	change_local_variable = {
-		name = ciso_raw_alloc_total
-		add = scope:ciso_raw_alloc_ciso_ms_library
-	}
-	set_variable = {
-		name = ciso_ms_library_$ci$_investment_alloc
-		value = 0
-	}
-	add_to_variable_list = {
-		name = ciso_ms_library_PTRs
-		target = flag:ciso_ms_library_$ci$_ptr
-	}
-	set_variable = {
-		name = ciso_ms_library_$ci$_ptr_getci
-		value = flag:$ci$
-	}
-	set_variable = {
-		name = ciso_ms_library_$ci$_ptr_getms
-		value = flag:ciso_ms_library
 	}
 	flag:ciso_ms_schooling = {
 		save_scope_as = ms
@@ -201,6 +201,45 @@ ciso_do_every_measure_with_ci = {
 		name = ciso_ms_union_hall_$ci$_ptr_getms
 		value = flag:ciso_ms_union_hall
 	}
+	flag:ciso_ms_street_naming = {
+		save_scope_as = ms
+	}
+	clear_saved_scope = measure
+	save_scope_value_as = {
+		name = ciso_raw_alloc_ciso_ms_street_naming
+		value = {
+			value = {
+				value = $ci$_ms_weights
+				divide = scope:lambda
+				round_to = 0.1
+				pow = 0.5
+			}
+			multiply = ciso_B
+			subtract = ciso_B
+			subtract = var:ciso_ms_street_naming_ci_investment_var
+			min = 0
+		}
+	}
+	change_local_variable = {
+		name = ciso_raw_alloc_total
+		add = scope:ciso_raw_alloc_ciso_ms_street_naming
+	}
+	set_variable = {
+		name = ciso_ms_street_naming_$ci$_investment_alloc
+		value = 0
+	}
+	add_to_variable_list = {
+		name = ciso_ms_street_naming_PTRs
+		target = flag:ciso_ms_street_naming_$ci$_ptr
+	}
+	set_variable = {
+		name = ciso_ms_street_naming_$ci$_ptr_getci
+		value = flag:$ci$
+	}
+	set_variable = {
+		name = ciso_ms_street_naming_$ci$_ptr_getms
+		value = flag:ciso_ms_street_naming
+	}
 	flag:ciso_ms_health_center = {
 		save_scope_as = ms
 	}
@@ -240,6 +279,45 @@ ciso_do_every_measure_with_ci = {
 		name = ciso_ms_health_center_$ci$_ptr_getms
 		value = flag:ciso_ms_health_center
 	}
+	flag:ciso_ms_library = {
+		save_scope_as = ms
+	}
+	clear_saved_scope = measure
+	save_scope_value_as = {
+		name = ciso_raw_alloc_ciso_ms_library
+		value = {
+			value = {
+				value = $ci$_ms_weights
+				divide = scope:lambda
+				round_to = 0.1
+				pow = 0.5
+			}
+			multiply = ciso_B
+			subtract = ciso_B
+			subtract = var:ciso_ms_library_ci_investment_var
+			min = 0
+		}
+	}
+	change_local_variable = {
+		name = ciso_raw_alloc_total
+		add = scope:ciso_raw_alloc_ciso_ms_library
+	}
+	set_variable = {
+		name = ciso_ms_library_$ci$_investment_alloc
+		value = 0
+	}
+	add_to_variable_list = {
+		name = ciso_ms_library_PTRs
+		target = flag:ciso_ms_library_$ci$_ptr
+	}
+	set_variable = {
+		name = ciso_ms_library_$ci$_ptr_getci
+		value = flag:$ci$
+	}
+	set_variable = {
+		name = ciso_ms_library_$ci$_ptr_getms
+		value = flag:ciso_ms_library
+	}
 	if = {
 		limit = {
 			local_var:ciso_raw_alloc_total > 0
@@ -256,6 +334,81 @@ ciso_do_every_measure_with_ci = {
 		set_local_variable = {
 			name = ciso_raw_alloc_scale
 			value = 0
+		}
+	}
+	change_local_variable = {
+		name = ciso_raw_alloc_scale
+		multiply = {
+			value = 1
+			if = {
+				limit = {
+					has_variable = ciso_ms_capitalist_lending_is_suppressed
+				}
+				divide = {
+					value = ciso_suppression_cost_mult
+					min = 1
+				}
+			}
+		}
+	}
+	change_variable = {
+		name = ciso_ms_capitalist_lending_ci_investment_var
+		add = {
+			value = scope:ciso_raw_alloc_ciso_ms_capitalist_lending
+			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	set_variable = {
+		name = ciso_ms_capitalist_lending_$ci$_investment_alloc
+		value = {
+			value = scope:ciso_raw_alloc_ciso_ms_capitalist_lending
+			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_aggro = yes
+		}
+		change_variable = {
+			name = ciso_ms_capitalist_lending_aggr_alloc_total
+			add = var:ciso_ms_capitalist_lending_$ci$_investment_alloc
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_coop = yes
+		}
+		change_variable = {
+			name = ciso_ms_capitalist_lending_coop_alloc_total
+			add = var:ciso_ms_capitalist_lending_$ci$_investment_alloc
+		}
+	}
+	if = {
+		limit = {
+			ciso_ms_capitalist_lending_investment > 0
+			NOT = {
+				is_target_in_variable_list = {
+					name = ciso_society_measures
+					target = flag:ciso_ms_capitalist_lending
+				}
+			}
+		}
+		add_to_variable_list = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_capitalist_lending
+		}
+	}
+	else_if = {
+		limit = {
+			ciso_ms_capitalist_lending_investment = 0
+			is_target_in_variable_list = {
+				name = ciso_society_measures
+				target = flag:ciso_ms_capitalist_lending
+			}
+		}
+		remove_list_variable = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_capitalist_lending
 		}
 	}
 	change_local_variable = {
@@ -414,81 +567,6 @@ ciso_do_every_measure_with_ci = {
 			value = 1
 			if = {
 				limit = {
-					has_variable = ciso_ms_library_is_suppressed
-				}
-				divide = {
-					value = ciso_suppression_cost_mult
-					min = 1
-				}
-			}
-		}
-	}
-	change_variable = {
-		name = ciso_ms_library_ci_investment_var
-		add = {
-			value = scope:ciso_raw_alloc_ciso_ms_library
-			multiply = local_var:ciso_raw_alloc_scale
-		}
-	}
-	set_variable = {
-		name = ciso_ms_library_$ci$_investment_alloc
-		value = {
-			value = scope:ciso_raw_alloc_ciso_ms_library
-			multiply = local_var:ciso_raw_alloc_scale
-		}
-	}
-	if = {
-		limit = {
-			$ci$_is_aggro = yes
-		}
-		change_variable = {
-			name = ciso_ms_library_aggr_alloc_total
-			add = var:ciso_ms_library_$ci$_investment_alloc
-		}
-	}
-	if = {
-		limit = {
-			$ci$_is_coop = yes
-		}
-		change_variable = {
-			name = ciso_ms_library_coop_alloc_total
-			add = var:ciso_ms_library_$ci$_investment_alloc
-		}
-	}
-	if = {
-		limit = {
-			ciso_ms_library_investment > 0
-			NOT = {
-				is_target_in_variable_list = {
-					name = ciso_society_measures
-					target = flag:ciso_ms_library
-				}
-			}
-		}
-		add_to_variable_list = {
-			name = ciso_society_measures
-			target = flag:ciso_ms_library
-		}
-	}
-	else_if = {
-		limit = {
-			ciso_ms_library_investment = 0
-			is_target_in_variable_list = {
-				name = ciso_society_measures
-				target = flag:ciso_ms_library
-			}
-		}
-		remove_list_variable = {
-			name = ciso_society_measures
-			target = flag:ciso_ms_library
-		}
-	}
-	change_local_variable = {
-		name = ciso_raw_alloc_scale
-		multiply = {
-			value = 1
-			if = {
-				limit = {
 					has_variable = ciso_ms_schooling_is_suppressed
 				}
 				divide = {
@@ -639,6 +717,81 @@ ciso_do_every_measure_with_ci = {
 			value = 1
 			if = {
 				limit = {
+					has_variable = ciso_ms_street_naming_is_suppressed
+				}
+				divide = {
+					value = ciso_suppression_cost_mult
+					min = 1
+				}
+			}
+		}
+	}
+	change_variable = {
+		name = ciso_ms_street_naming_ci_investment_var
+		add = {
+			value = scope:ciso_raw_alloc_ciso_ms_street_naming
+			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	set_variable = {
+		name = ciso_ms_street_naming_$ci$_investment_alloc
+		value = {
+			value = scope:ciso_raw_alloc_ciso_ms_street_naming
+			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_aggro = yes
+		}
+		change_variable = {
+			name = ciso_ms_street_naming_aggr_alloc_total
+			add = var:ciso_ms_street_naming_$ci$_investment_alloc
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_coop = yes
+		}
+		change_variable = {
+			name = ciso_ms_street_naming_coop_alloc_total
+			add = var:ciso_ms_street_naming_$ci$_investment_alloc
+		}
+	}
+	if = {
+		limit = {
+			ciso_ms_street_naming_investment > 0
+			NOT = {
+				is_target_in_variable_list = {
+					name = ciso_society_measures
+					target = flag:ciso_ms_street_naming
+				}
+			}
+		}
+		add_to_variable_list = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_street_naming
+		}
+	}
+	else_if = {
+		limit = {
+			ciso_ms_street_naming_investment = 0
+			is_target_in_variable_list = {
+				name = ciso_society_measures
+				target = flag:ciso_ms_street_naming
+			}
+		}
+		remove_list_variable = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_street_naming
+		}
+	}
+	change_local_variable = {
+		name = ciso_raw_alloc_scale
+		multiply = {
+			value = 1
+			if = {
+				limit = {
 					has_variable = ciso_ms_health_center_is_suppressed
 				}
 				divide = {
@@ -708,6 +861,81 @@ ciso_do_every_measure_with_ci = {
 			target = flag:ciso_ms_health_center
 		}
 	}
+	change_local_variable = {
+		name = ciso_raw_alloc_scale
+		multiply = {
+			value = 1
+			if = {
+				limit = {
+					has_variable = ciso_ms_library_is_suppressed
+				}
+				divide = {
+					value = ciso_suppression_cost_mult
+					min = 1
+				}
+			}
+		}
+	}
+	change_variable = {
+		name = ciso_ms_library_ci_investment_var
+		add = {
+			value = scope:ciso_raw_alloc_ciso_ms_library
+			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	set_variable = {
+		name = ciso_ms_library_$ci$_investment_alloc
+		value = {
+			value = scope:ciso_raw_alloc_ciso_ms_library
+			multiply = local_var:ciso_raw_alloc_scale
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_aggro = yes
+		}
+		change_variable = {
+			name = ciso_ms_library_aggr_alloc_total
+			add = var:ciso_ms_library_$ci$_investment_alloc
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_coop = yes
+		}
+		change_variable = {
+			name = ciso_ms_library_coop_alloc_total
+			add = var:ciso_ms_library_$ci$_investment_alloc
+		}
+	}
+	if = {
+		limit = {
+			ciso_ms_library_investment > 0
+			NOT = {
+				is_target_in_variable_list = {
+					name = ciso_society_measures
+					target = flag:ciso_ms_library
+				}
+			}
+		}
+		add_to_variable_list = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_library
+		}
+	}
+	else_if = {
+		limit = {
+			ciso_ms_library_investment = 0
+			is_target_in_variable_list = {
+				name = ciso_society_measures
+				target = flag:ciso_ms_library
+			}
+		}
+		remove_list_variable = {
+			name = ciso_society_measures
+			target = flag:ciso_ms_library
+		}
+	}
 }
 ciso_calculate_atmosphere_stuff = {
 	save_scope_value_as = {
@@ -717,6 +945,107 @@ ciso_calculate_atmosphere_stuff = {
 	if = {
 		limit = {
 			$ci$_is_def = no
+			var:ciso_ms_capitalist_lending_$ci$_investment_alloc > 0
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_capitalist_lending_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_capitalist_lending_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_capitalist_lending_investment_gov
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_capitalist_lending_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_capitalist_lending_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_capitalist_lending_investment_gov
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_capitalist_lending_$ci$_investment_alloc
+						multiply = var:ciso_ms_capitalist_lending_$ci$_investment_alloc
+					}
+					max = 0.1
+					multiply = -1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			var:ciso_ms_capitalist_lending_$ci$_investment_alloc > 0
+			$ci$_is_aggro = no
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_capitalist_lending_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_capitalist_lending_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_capitalist_lending_investment_gov
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_capitalist_lending_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_capitalist_lending_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_capitalist_lending_investment_gov
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_capitalist_lending_$ci$_investment_alloc
+						multiply = var:ciso_ms_capitalist_lending_$ci$_investment_alloc
+					}
+					max = 0.1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_def = no
 			var:ciso_ms_insurance_$ci$_investment_alloc > 0
 		}
 		save_scope_value_as = {
@@ -910,107 +1239,6 @@ ciso_calculate_atmosphere_stuff = {
 						value = 10
 						multiply = var:ciso_ms_soup_kitchen_$ci$_investment_alloc
 						multiply = var:ciso_ms_soup_kitchen_$ci$_investment_alloc
-					}
-					max = 0.1
-				}
-			}
-		}
-	}
-	if = {
-		limit = {
-			$ci$_is_def = no
-			var:ciso_ms_library_$ci$_investment_alloc > 0
-		}
-		save_scope_value_as = {
-			name = $ci$_aggrcoop_si_additive_factor
-			value = {
-				value = scope:$ci$_aggrcoop_si_additive_factor
-				add = {
-					value = {
-						value = var:ciso_ms_library_aggr_alloc_total
-						if = {
-							limit = {
-								$ci$_is_aggro = yes
-							}
-							subtract = var:ciso_ms_library_$ci$_investment_alloc
-						}
-						if = {
-							limit = {
-								has_variable = ciso_aggro_gov_in_state
-							}
-							add = ciso_ms_library_investment_gov
-						}
-					}
-					multiply = {
-						value = var:ciso_ms_library_aggr_alloc_total
-						if = {
-							limit = {
-								$ci$_is_aggro = yes
-							}
-							subtract = var:ciso_ms_library_$ci$_investment_alloc
-						}
-						if = {
-							limit = {
-								has_variable = ciso_aggro_gov_in_state
-							}
-							add = ciso_ms_library_investment_gov
-						}
-					}
-					divide = {
-						value = 10
-						multiply = var:ciso_ms_library_$ci$_investment_alloc
-						multiply = var:ciso_ms_library_$ci$_investment_alloc
-					}
-					max = 0.1
-					multiply = -1
-				}
-			}
-		}
-	}
-	if = {
-		limit = {
-			var:ciso_ms_library_$ci$_investment_alloc > 0
-			$ci$_is_aggro = no
-		}
-		save_scope_value_as = {
-			name = $ci$_aggrcoop_si_additive_factor
-			value = {
-				value = scope:$ci$_aggrcoop_si_additive_factor
-				add = {
-					value = {
-						value = var:ciso_ms_library_coop_alloc_total
-						if = {
-							limit = {
-								$ci$_is_coop = yes
-							}
-							subtract = var:ciso_ms_library_$ci$_investment_alloc
-						}
-						if = {
-							limit = {
-								has_variable = ciso_coop_gov_in_state
-							}
-							add = ciso_ms_library_investment_gov
-						}
-					}
-					multiply = {
-						value = var:ciso_ms_library_coop_alloc_total
-						if = {
-							limit = {
-								$ci$_is_coop = yes
-							}
-							subtract = var:ciso_ms_library_$ci$_investment_alloc
-						}
-						if = {
-							limit = {
-								has_variable = ciso_coop_gov_in_state
-							}
-							add = ciso_ms_library_investment_gov
-						}
-					}
-					divide = {
-						value = 10
-						multiply = var:ciso_ms_library_$ci$_investment_alloc
-						multiply = var:ciso_ms_library_$ci$_investment_alloc
 					}
 					max = 0.1
 				}
@@ -1222,6 +1450,107 @@ ciso_calculate_atmosphere_stuff = {
 	if = {
 		limit = {
 			$ci$_is_def = no
+			var:ciso_ms_street_naming_$ci$_investment_alloc > 0
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_street_naming_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_street_naming_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_street_naming_investment_gov
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_street_naming_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_street_naming_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_street_naming_investment_gov
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_street_naming_$ci$_investment_alloc
+						multiply = var:ciso_ms_street_naming_$ci$_investment_alloc
+					}
+					max = 0.1
+					multiply = -1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			var:ciso_ms_street_naming_$ci$_investment_alloc > 0
+			$ci$_is_aggro = no
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_street_naming_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_street_naming_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_street_naming_investment_gov
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_street_naming_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_street_naming_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_street_naming_investment_gov
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_street_naming_$ci$_investment_alloc
+						multiply = var:ciso_ms_street_naming_$ci$_investment_alloc
+					}
+					max = 0.1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_def = no
 			var:ciso_ms_health_center_$ci$_investment_alloc > 0
 		}
 		save_scope_value_as = {
@@ -1314,6 +1643,107 @@ ciso_calculate_atmosphere_stuff = {
 						value = 10
 						multiply = var:ciso_ms_health_center_$ci$_investment_alloc
 						multiply = var:ciso_ms_health_center_$ci$_investment_alloc
+					}
+					max = 0.1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			$ci$_is_def = no
+			var:ciso_ms_library_$ci$_investment_alloc > 0
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_library_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_library_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_library_investment_gov
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_library_aggr_alloc_total
+						if = {
+							limit = {
+								$ci$_is_aggro = yes
+							}
+							subtract = var:ciso_ms_library_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_aggro_gov_in_state
+							}
+							add = ciso_ms_library_investment_gov
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_library_$ci$_investment_alloc
+						multiply = var:ciso_ms_library_$ci$_investment_alloc
+					}
+					max = 0.1
+					multiply = -1
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			var:ciso_ms_library_$ci$_investment_alloc > 0
+			$ci$_is_aggro = no
+		}
+		save_scope_value_as = {
+			name = $ci$_aggrcoop_si_additive_factor
+			value = {
+				value = scope:$ci$_aggrcoop_si_additive_factor
+				add = {
+					value = {
+						value = var:ciso_ms_library_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_library_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_library_investment_gov
+						}
+					}
+					multiply = {
+						value = var:ciso_ms_library_coop_alloc_total
+						if = {
+							limit = {
+								$ci$_is_coop = yes
+							}
+							subtract = var:ciso_ms_library_$ci$_investment_alloc
+						}
+						if = {
+							limit = {
+								has_variable = ciso_coop_gov_in_state
+							}
+							add = ciso_ms_library_investment_gov
+						}
+					}
+					divide = {
+						value = 10
+						multiply = var:ciso_ms_library_$ci$_investment_alloc
+						multiply = var:ciso_ms_library_$ci$_investment_alloc
 					}
 					max = 0.1
 				}

@@ -3,15 +3,15 @@
 
 ciso_reset_all_measures_ci_invest = {
 	set_variable = {
+		name = ciso_ms_capitalist_lending_ci_investment_var
+		value = 0
+	}
+	set_variable = {
 		name = ciso_ms_insurance_ci_investment_var
 		value = 0
 	}
 	set_variable = {
 		name = ciso_ms_soup_kitchen_ci_investment_var
-		value = 0
-	}
-	set_variable = {
-		name = ciso_ms_library_ci_investment_var
 		value = 0
 	}
 	set_variable = {
@@ -23,7 +23,23 @@ ciso_reset_all_measures_ci_invest = {
 		value = 0
 	}
 	set_variable = {
+		name = ciso_ms_street_naming_ci_investment_var
+		value = 0
+	}
+	set_variable = {
 		name = ciso_ms_health_center_ci_investment_var
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_library_ci_investment_var
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_capitalist_lending_coop_alloc_total
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_capitalist_lending_aggr_alloc_total
 		value = 0
 	}
 	set_variable = {
@@ -43,14 +59,6 @@ ciso_reset_all_measures_ci_invest = {
 		value = 0
 	}
 	set_variable = {
-		name = ciso_ms_library_coop_alloc_total
-		value = 0
-	}
-	set_variable = {
-		name = ciso_ms_library_aggr_alloc_total
-		value = 0
-	}
-	set_variable = {
 		name = ciso_ms_schooling_coop_alloc_total
 		value = 0
 	}
@@ -67,11 +75,27 @@ ciso_reset_all_measures_ci_invest = {
 		value = 0
 	}
 	set_variable = {
+		name = ciso_ms_street_naming_coop_alloc_total
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_street_naming_aggr_alloc_total
+		value = 0
+	}
+	set_variable = {
 		name = ciso_ms_health_center_coop_alloc_total
 		value = 0
 	}
 	set_variable = {
 		name = ciso_ms_health_center_aggr_alloc_total
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_library_coop_alloc_total
+		value = 0
+	}
+	set_variable = {
+		name = ciso_ms_library_aggr_alloc_total
 		value = 0
 	}
 }

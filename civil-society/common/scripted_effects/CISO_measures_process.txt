@@ -3,13 +3,13 @@
 
 ciso_measures_process_monthly = {
 	ciso_apply_ms_effect = {
+		ms = ciso_ms_capitalist_lending
+	}
+	ciso_apply_ms_effect = {
 		ms = ciso_ms_insurance
 	}
 	ciso_apply_ms_effect = {
 		ms = ciso_ms_soup_kitchen
-	}
-	ciso_apply_ms_effect = {
-		ms = ciso_ms_library
 	}
 	ciso_apply_ms_effect = {
 		ms = ciso_ms_schooling
@@ -18,7 +18,13 @@ ciso_measures_process_monthly = {
 		ms = ciso_ms_union_hall
 	}
 	ciso_apply_ms_effect = {
+		ms = ciso_ms_street_naming
+	}
+	ciso_apply_ms_effect = {
 		ms = ciso_ms_health_center
+	}
+	ciso_apply_ms_effect = {
+		ms = ciso_ms_library
 	}
 	if = {
 		limit = {
