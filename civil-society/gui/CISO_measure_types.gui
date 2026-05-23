@@ -90,14 +90,14 @@ types CISO_measures_types
                 texture = "[GetInstitutionType(Concatenate(Scope.GetFlagName, '_icon')).GetIcon]"
             }
 
-            vbox = {
-                ### DOWNSIZE / EXPAND
-                ciso_measure_investment_control = {
-                    blockoverride "controller_size" {
-                        size = { 115 35 }
-                    }
-                }
-            }
+            # vbox = {
+            #     ### DOWNSIZE / EXPAND
+            #     ciso_measure_investment_control = {
+            #         blockoverride "controller_size" {
+            #             size = { 115 35 }
+            #         }
+            #     }
+            # }
 
             button = {
                 using = set_level_bar_background
